@@ -1,12 +1,11 @@
 <?php
 $questionFile = $_GET["id"];
-$questionFilePath = "../content/".$_GET["id"].".txt";
+$questionFilePath = "../content/".$questionfile.".txt";
 
-{
 $name = trim($_POST['name']); //not used
 $email = trim($_POST['email']); //not used
-$subject = "Test-Question " . $_GET["id"];
-$msg = <?php echo nl2br( file_get_contents($GLOBALS["questionFilePath"]) ); ?>;
+$subject = "Test-Question " . $_GET["id"]."!";
+$msg = "abc"; //trim(nl2br( file_get_contents($GLOBALS["questionFilePath"]) ) );
 
 //mail settings
 $apperson_address = "testing@amored-police.org";
