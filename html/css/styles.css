@@ -1,0 +1,9 @@
+html,
+button,
+input,
+select,
+textarea {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%;
+}
