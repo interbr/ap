@@ -15,7 +15,7 @@ $agent1 = $agentrow["email"];
 }
 $dbhandle->close();
 
-$subject = "Test-Question: ".$_GET["id"]." Subject:".$questionSubject;
+$subject = "Test-Question: ".$_GET["id"]." Subject: ".$questionSubject;
 $msg = file_get_contents($questionfile);
 
 // mail settings
@@ -23,10 +23,10 @@ $agent_address = $agent1;
 $headers = "From: no-reply@amored-police.org\r\n" .
 	"Reply-To: no-reply@amored-police.org\r\n" .
     "Content-type:  text/plain; charset=utf-8";
-$message = "You just received a question\n\n
-It has the subject: $questionSubject\n\n
-It is files in the following categories: $categories\n\n
-The Question is:\n\n $msg";
+$message = "You just received a question\n
+It has the subject: $questionSubject\n
+It is files in the following categories: $categories\n
+The Question is:\n\n$msg";
 // send mail
 mail($agent_address, $subject, $message, $headers);
 ?>
