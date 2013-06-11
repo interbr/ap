@@ -1,19 +1,24 @@
 <?php 
 $fy = "../content/".$_GET["id"].".txt"; //questionfile
 ?>
+<div id="previewQuestionInfo">Your question will be:</div>
+<div id="previewQuestionText">
 <br /><?php echo nl2br( file_get_contents($GLOBALS["fy"]) ); ?> <!-- preview questionfile-content with linebreaks -->
 <br /><br />
 ID is: <?php echo $_GET["id"]; ?>
 <br />
-<button id="clickSendquestion">Send Question</button>
+</div>
+<div id="buttonCategorizeQuestion">
+<button id="clickCategorizeQuestion">Categorize Question</button>
+</div>
+
 <script type="text/javascript">
-$(function(){ /* send question-ID to "sendquestion.php" and load result-message */
-		$('#clickSendquestion').click(function(){
- 			$.ajax({
-      			type: "POST",
-      			url: "sendquestion.php?id=<?php echo $_GET["id"]; ?>",
-				});
-		$('#questionSent').load('/questionsent.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+$(function(){ 
+		$('#clickCategorizeQuestion').click(function(){
+		$('#categorizeQuestion').load('/categorizequestion.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+		$('#writeQuestionTextarea').slideUp(1000);
+		$('#previewQuestionInfo').slideDown(1000);
+		$('#buttonCategorizeQuestion').slideUp(1000);
 		return false; });
 		});
 </script>

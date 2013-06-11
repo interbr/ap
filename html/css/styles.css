@@ -7,3 +7,13 @@ textarea {
 	font-size: 100%;
 	-webkit-text-size-adjust: 100%;
 }
+body { margin:20px 0px; padding:0px; text-align:center; }
+#page { width: 1000px; }
+#categorizeQuestion ul{
+    width:400px;
+    margin:0px auto;
+	text-align: left;
+	list-style: none;
+}
+#previewQuestionInfo { display: none; }
+#buttonCategorizeQuestion_2 { display: none; }

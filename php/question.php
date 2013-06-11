@@ -5,7 +5,8 @@ $randomString = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGH
 $idNum = $randomString; //generate 12-digit-random-ID that will be assigned to question
 }
 
-$fn = "../content/".$_GET["id"].".txt"; // questionfile
+$fn = "../content/".$GLOBALS["idNum"].".txt"; // questionfile
+
 function questionOpen () { // read questionfile-content ..
 if (file_exists($GLOBALS["fn"])) {
 	readfile($GLOBALS["fn"]);

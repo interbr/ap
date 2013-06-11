@@ -28,6 +28,7 @@ require_once(__ROOT__.'/php/question.php'); // a functions file
 		<div id="openQuestion">&nbsp;</div>
 		<div id="writeQuestion">&nbsp;</div>
 		<div id="previewQuestion">&nbsp;</div>
+		<div id="categorizeQuestion">&nbsp;</div>
 		<div id="questionSent">&nbsp;</div>
         </div>
     </body>
