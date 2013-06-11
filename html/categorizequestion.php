@@ -44,7 +44,6 @@ Categories for your question (up to three):<br /><br />
 <button id="clickChangeQuestion">Change Question</button>
 </form>
 </div>
-<div id="savedQuestionPreview"></div>
 <script type="text/javascript">
 $("input[type=checkbox][name='questionCategories[]']").click(function() {
 
@@ -62,10 +61,10 @@ $.ajax({
     type:'POST',
     url:'categorizeQuestionToDatabase.php',
     data: dataString,
-    success: function(data){
-        $('#savedQuestionPreview').html(data);
-
-
+    success: function(){
+        $('#savedQuestionPrepare').load('/savedquestionpreparetosend.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+		$('#categorizeQuestion').slideUp(1000);
+		$('#previewQuestionSlide').slideUp(1000);
     }
 });
 return false;

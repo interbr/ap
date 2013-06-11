@@ -1,6 +1,7 @@
 <?php 
 $fy = "../content/".$_GET["id"].".txt"; //questionfile
 ?>
+<div id="previewQuestionSlide">
 <div id="previewQuestionInfo">Your question will be:</div>
 <div id="previewQuestionText">
 <br /><?php echo nl2br( file_get_contents($GLOBALS["fy"]) ); ?> <!-- preview questionfile-content with linebreaks -->
@@ -10,6 +11,7 @@ ID is: <?php echo $_GET["id"]; ?>
 </div>
 <div id="buttonCategorizeQuestion">
 <button id="clickCategorizeQuestion">Categorize Question</button>
+</div>
 </div>
 
 <script type="text/javascript">
