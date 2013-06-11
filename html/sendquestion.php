@@ -25,7 +25,7 @@ $headers = "From: no-reply@amored-police.org\r\n" .
     "Content-type:  text/plain; charset=utf-8";
 $message = "You just received a question\n
 It has the subject: $questionSubject\n
-It is files in the following categories: $categories\n
+It is sorted to the following categories: $categories\n
 The Question is:\n\n$msg";
 // send mail
 mail($agent_address, $subject, $message, $headers);

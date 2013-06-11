@@ -1,7 +1,7 @@
 <?php
 if (empty($idNum)) {
 $length = 12;
-$randomString = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+$randomString = substr(str_shuffle("123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ"), 0, $length);
 $idNum = $randomString; //generate 12-digit-random-ID that will be assigned to question
 }
 
