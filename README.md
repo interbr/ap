@@ -8,4 +8,4 @@ If there is no answer by ~six hours, the question is ~forwarded to three other p
 unless the former three marked it as spam.
 
 Status:
-Help me coding this beast! Try it at http://testing.amored-police.org - just ask for a test-account.
+Help me coding this beast! Try it at http://testing.amored-police.org - just ask for a test-account, i.e. at felix_longolius@amored-police.org
