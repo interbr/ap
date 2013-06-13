@@ -15,5 +15,14 @@ body { margin:20px 0px; padding:0px; text-align:center; }
 	text-align: left;
 	list-style: none;
 }
+#signupFormDiv ul{
+    width:400px;
+    margin:0px auto;
+	text-align: left;
+	list-style: none;
+}
 #previewQuestionInfo { display: none; }
 #buttonCategorizeQuestion_2 { display: none; }
+
+#answerSystemDiv { margin: 0 auto; width: 500px; height: 400px; display: none; }
+#answerPad { width: 500px; height: 400px; }
