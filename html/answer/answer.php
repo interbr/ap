@@ -25,7 +25,7 @@ $dbhandle->close();
 		<script type="text/javascript" src="/js/etherpad-ap.js"></script>
 		<script type="text/javascript">
 			$(function(){
-			$('#answerPad').pad({'padId':'<?php echo $_GET["id"]; ?>'}); // sets the pad id and puts the pad in the div
+			$('#answerPad').pad({'padId':'<?php echo $_GET["id"]; ?>', 'host':'<?php echo $GLOBALS["etherpadhost"]; ?>'}); // sets the pad id and puts the pad in the div
 			$('#clickOpenAnswerSystem').click(function(){
 			$('#openAnswerSystemButton').slideUp(1000);
 			$('#answerSystemDiv').fadeIn(1000);

@@ -1,4 +1,6 @@
 <?php
+define('__ROOT__', dirname(dirname(__FILE__))); 
+require_once(__ROOT__.'configuration.php'); //a file with configurations
 class EtherpadLiteClient {
 
   const API_VERSION             = '1.1';
@@ -9,8 +11,8 @@ class EtherpadLiteClient {
   const CODE_INVALID_FUNCTION   = 3;
   const CODE_INVALID_API_KEY    = 4;
 
-  protected $apiKey = "uWCqxbEXfd9ujGzinDcY4kagzgshEV9h";
-  protected $baseUrl = "http://localhost:9001/api";
+  protected $apiKey = $GLOBALS["etherpadapikey"];
+  protected $baseUrl = $GLOBALS["etherpadhost"];
   
   public function __construct($apiKey, $baseUrl = null){
     if (strlen($apiKey) < 1){
