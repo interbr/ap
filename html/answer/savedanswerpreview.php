@@ -1,7 +1,8 @@
 <?php 
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-api-class
-$instance = new EtherpadLiteClient('uWCqxbEXfd9ujGzinDcY4kagzgshEV9h', 'http://localhost:9001/api');
+require_once(__ROOT__.'/../php/configuration.php');
+$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
 try {
   $padContents = $instance->getText($_GET["id"]);
   $answerPreview = nl2br( $padContents->text );

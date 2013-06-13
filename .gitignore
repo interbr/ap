@@ -1,5 +1,6 @@
 # Credentials
 php/configuration.php
 html/misc/.auth.conf
+# Etherpad
 etherpad
 
