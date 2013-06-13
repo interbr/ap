@@ -5,13 +5,13 @@ $instance = new EtherpadLiteClient('uWCqxbEXfd9ujGzinDcY4kagzgshEV9h', 'http://l
 try {
   $padContents = $instance->getText($_GET["id"]);
   $answerPreview = nl2br( $padContents->text );
-  echo "The Answer is as follows:<br /><br />$answerPreview<br /><br />";
+  echo "<div class=\"textdiv\">The Answer is as follows:<br /><br />$answerPreview<br /></div>";
 } catch (Exception $e) {
   // the pad already exists or something else went wrong
-  echo "\n\ngetText Failed with message ". $e->getMessage();
+  echo "<div class=\"textdiv\">getText Failed with message ". $e->getMessage()."</div>";
 }
 ?>
-<div id="sendAnswerButton"><button id="clickSendAnswer">Send Answer</button></div>
+<div class="textdiv" id="sendAnswerButton"><button id="clickSendAnswer">Send Answer</button></div>
 <div id="answerSentResult"></div>
 <script type="text/javascript">
 $(function(){ 

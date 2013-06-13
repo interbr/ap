@@ -1,4 +1,4 @@
-<div id="categorizeQuestion">
+<div class="textdiv" id="categorizeQuestion">
 <br />
 <form id="categorizeQuestion" name="categorizeQuestion" class="categorizeQuestion" method="post">
 Subject for your question: <input name="subject" type="text" id="subject" /><br /><br />

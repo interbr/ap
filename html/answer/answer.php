@@ -29,30 +29,33 @@ $dbhandle->close();
 			$('#clickOpenAnswerSystem').click(function(){
 			$('#openAnswerSystemButton').slideUp(1000);
 			$('#answerSystemDiv').fadeIn(1000);
+			$('#saveAnswerButton').fadeIn(1000);
 				return false; });
 			$('#clickSaveAnswerPrepareToSend').click(function(){
 			$('#answerSystemDiv').slideUp(1000);
+			$('#saveAnswerButton').slideUp(1000);
 			$('#savedAnswerPreview').load('savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
 				return false; });
 				});
 		</script>
 		</head>
 		<body> 
+		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
-		<div id="start">
+		<div class="textdiv" id="start">
 Your question you were asked randomly has the ID: <?php echo $questionIDfromDB ?><br /><br />
 It has the subject:<br /><br />
 <?php echo $subject ?><br /><br />
 It has the Content:<br /><br />
 <?php echo nl2br( file_get_contents($questionfile) ); ?><br /><br />
-It's sorted to the Categories:<br /><br />
-<?php echo $categories ?><br /><br />
-		<div id="openAnswerSystemButton"><button id="clickOpenAnswerSystem">Open Answer-System</button></div>
+<!--It's sorted to the Categories:<br /><br />
+<?php echo $categories ?><br /><br /> -->
+		<div class="textdiv" id="openAnswerSystemButton"><button id="clickOpenAnswerSystem">Open Answer-System</button></div>
 		</div>
-		<div id="answerSystemDiv">
+		<div class="textdiv" id="answerSystemDiv">
 		<div id="answerPad"></div>
-		<div id="saveAnswerButton"><button id="clickSaveAnswerPrepareToSend">Save and prepare to send</button></div>
 		</div>
+		<div class="textdiv" id="saveAnswerButton"><button id="clickSaveAnswerPrepareToSend">Save and prepare to send</button><br /></div>
 		<div id="savedAnswerPreview"></div>
         </div>
     </body>

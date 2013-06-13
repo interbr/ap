@@ -7,8 +7,23 @@ textarea {
 	font-size: 100%;
 	-webkit-text-size-adjust: 100%;
 }
-body { margin:20px 0px; padding:0px; text-align:center; }
-#page { width: 1000px; }
+body { margin:20px 0px; padding:0px; text-align:center; background: #000; font-size: 14px; }
+.page { 
+	margin: 0 auto; 
+	padding: 20px 10px 20px 10px; 
+	width: 600px; 
+	background: #ddd;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+.textdiv {
+	background: #fff;
+	margin: 10px 20px 10px 20px;
+	padding: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	max-width: 540px;
+}
 #categorizeQuestion ul{
     width:400px;
     margin:0px auto;
@@ -22,7 +37,7 @@ body { margin:20px 0px; padding:0px; text-align:center; }
 	list-style: none;
 }
 #previewQuestionInfo { display: none; }
-#buttonCategorizeQuestion_2 { display: none; }
+#saveAnswerButton { display: none; }
 
-#answerSystemDiv { margin: 0 auto; width: 500px; height: 400px; display: none; }
-#answerPad { width: 500px; height: 400px; }
+#answerSystemDiv { margin: 0 auto; width: 540px; height: 400px; display: none; }
+#answerPad { width: 540px; height: 300px; }

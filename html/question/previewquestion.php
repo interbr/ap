@@ -2,14 +2,14 @@
 $fy = "../../content/".$_GET["id"].".txt"; //questionfile
 ?>
 <div id="previewQuestionSlide">
-<div id="previewQuestionInfo">Your question will be:</div>
-<div id="previewQuestionText">
+<div class="textdiv" id="previewQuestionInfo">Your question will be:</div>
+<div class="textdiv" id="previewQuestionText">
 <br /><?php echo nl2br( file_get_contents($GLOBALS["fy"]) ); ?> <!-- preview questionfile-content with linebreaks -->
 <br /><br />
 ID is: <?php echo $_GET["id"]; ?>
 <br />
 </div>
-<div id="buttonCategorizeQuestion">
+<div class="textdiv" id="buttonCategorizeQuestion">
 <button id="clickCategorizeQuestion">Categorize Question</button>
 </div>
 </div>

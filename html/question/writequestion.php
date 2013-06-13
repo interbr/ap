@@ -2,13 +2,14 @@
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/question.php'); //a file with functions
 ?>
-<div id="writeQuestionIDInfo">
-Your Question has the ID: <?php echo $_GET["id"]; ?>
+<div class="textdiv" id="writeQuestionIDInfo">
+Your Question has the ID: <?php echo $_GET["id"]; ?><br /><br />
+Now write your question:
 </div>
-<div id="writeQuestionTextarea">
+<div class="textdiv" id="writeQuestionTextarea">
 <br />
 			<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
-			<textarea id="content" rows="12" cols="30" name="content"><?php questionOpen(); ?></textarea><br />
+			<textarea id="content" rows="12" cols="70" name="content"><?php questionOpen(); ?></textarea><br />
 			<input id="clickPreviewquestion" type="submit" value="Preview">
 			</form>	
 </div>			

@@ -23,14 +23,15 @@ require_once(__ROOT__.'/../php/question.php'); // a functions file
 		</script>
 		</head>
 		<body> 
+		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
-		<div id="start"><button id="clickOpenquestion">Open Question</button></div> <!-- get random ID from "question.php", preview ID and show button to write to .txt-file ID.txt -->
-		<div id="openQuestion">&nbsp;</div>
-		<div id="writeQuestion">&nbsp;</div>
-		<div id="previewQuestion">&nbsp;</div>
-		<div id="categorizeQuestion">&nbsp;</div>
-		<div id="savedQuestionPrepare">&nbsp;</div>
-		<div id="questionSentResult">&nbsp;</div>
+		<div id="start" class="textdiv"><button id="clickOpenquestion">Open Question</button></div> <!-- get random ID from "question.php", preview ID and show button to write to .txt-file ID.txt -->
+		<div id="openQuestion"></div>
+		<div id="writeQuestion"></div>
+		<div id="previewQuestion"></div>
+		<div id="categorizeQuestion"></div>
+		<div id="savedQuestionPrepare"></div>
+		<div id="questionSentResult"></div>
         </div>
     </body>
 </html>

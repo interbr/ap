@@ -12,7 +12,7 @@ $questionaddress = $row['email'];
 };
 $dbhandle->close();
 ?>
-<div id="savedQuestionPrepareToSend">
+<div class="textdiv" id="savedQuestionPrepareToSend">
 Your question is saved on server. Don't forget to send it.<br /><br />
 Your question is saved with ID: <?php echo $_GET["id"]; ?><br /><br />
 It has the subject:<br /><br />

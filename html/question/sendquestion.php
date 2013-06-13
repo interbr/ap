@@ -22,19 +22,22 @@ extract($agentsresult);
 
 $subject = "Test-Question: ".$_GET["id"]." Subject: ".$questionSubject;
 $msg = file_get_contents($questionfile);
+$receipients = array($agent1,$agent2,$agent3);
 
 // mail settings
 $headers = "From: no-reply@amored-police.org\r\n" .
 	"Reply-To: no-reply@amored-police.org\r\n" .
-    "Content-type:  text/plain; charset=utf-8\r\n" .
-	"Bcc: ".$agent1."\r\n" .
-	"Bcc: ".$agent2."\r\n" .
-	"Bcc: ".$agent3."\r\n" ;
+    "Content-type:  text/plain; charset=utf-8\r\n" ;
 $message = "You just received a question\n
 It has the subject: $questionSubject\n
 It is sorted to the following categories: $categories\n
 The Question is:\n\n$msg\n
-Follow this link to answer the question: http://localhost/answer/answer.php?id=$questionIDfromDB";
+Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/answer.php?id=$questionIDfromDB";
 // send mail
-mail('no-reply@amored-police.org', $subject, $message, $headers);
+foreach ($receipients as $receipient) {
+mail($receipient, $subject, $message, $headers);
+}
+echo $agent1."<br />";
+echo $agent2."<br />";
+echo $agent3."<br />";
 ?>
