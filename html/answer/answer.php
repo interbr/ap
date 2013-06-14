@@ -29,19 +29,38 @@ $dbhandle->close();
 			$('#clickOpenAnswerSystem').click(function(){
 			$('#openAnswerSystemButton').slideUp(1000);
 			$('#answerSystemDiv').fadeIn(1000);
-			$('#saveAnswerButton').fadeIn(1000);
-				return false; });
-			$('#clickSaveAnswerPrepareToSend').click(function(){
-			$('#answerSystemDiv').slideUp(1000);
-			$('#saveAnswerButton').slideUp(1000);
-			$('#savedAnswerPreview').load('savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
-				return false; });
+			$('#whopper').fadeIn(1000);
+			$('#saveAnswerButton').fadeIn(1000);		
+			$.ajax({
+      			type: "POST",
+      			url: "savedInitialAnswerToDatabaseWait.php?id=<?php echo $_GET["id"]; ?>",
 				});
+			function update() {	
+			$.ajax({
+				type: 'GET',
+				url: 'answerwhopper.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>',
+				timeout: 2000,
+				success: function(data) {
+				  $("#savedAnswerWait").html(data);
+				  window.setTimeout(update, 4000);
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+				  $("#savedAnswerWait").html('<div class="textdiv">Timeout contacting server..</div>');
+				  window.setTimeout(update, 8000);
+				}
+			});
+			}
+			$(document).ready(function() {
+				update();
+			});
+				return false; });
+			});
 		</script>
 		</head>
 		<body> 
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
+		<div id="answerdiv">
 		<div class="textdiv" id="start">
 Your question you were asked randomly has the ID: <?php echo $questionIDfromDB ?><br /><br />
 It has the subject:<br /><br />
@@ -55,8 +74,11 @@ It has the Content:<br /><br />
 		<div class="textdiv" id="answerSystemDiv">
 		<div id="answerPad"></div>
 		</div>
-		<div class="textdiv" id="saveAnswerButton"><button id="clickSaveAnswerPrepareToSend">Save and prepare to send</button><br /></div>
-		<div id="savedAnswerPreview"></div>
+		<div id="whopper">
+		<div id="savedAnswerWait"></div>
+		<div id="notice"></div>
+		</div>
         </div>
+		</div>
     </body>
 </html>

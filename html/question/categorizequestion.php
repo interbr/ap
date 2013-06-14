@@ -39,7 +39,8 @@ Categories for your question (up to three):<br /><br />
     </li>
 	<input type="hidden" name="question-id" value="<?php  echo $_GET["id"]; ?>" />
 </ul>
-The email to send an answer to: <input name="questionaddress" type="email" id="questionaddress" /><br /><br />
+<br />
+The email to send an answer to: <input name="questionaddress" type="email" id="questionaddress" /><br />
 <br />
 <input id="submit" type="submit" name="submit" value="Save question" onclick="return submitForm()" />
 <button id="clickChangeQuestion">Change Question</button>
@@ -73,6 +74,7 @@ return false;
 $(function(){ 
 		$('#clickChangeQuestion').click(function(){
 		$('#writeQuestionTextarea').slideDown(1000);
+		$('#buttonCategorizeQuestion_2').slideDown(1000);
 		$('#previewQuestionInfo').slideUp(1000);
 		$('#previewQuestionText').slideUp(1000);
 		$('#categorizeQuestion').slideUp(1000);

@@ -12,6 +12,9 @@ ID is: <?php echo $_GET["id"]; ?>
 <div class="textdiv" id="buttonCategorizeQuestion">
 <button id="clickCategorizeQuestion">Categorize Question</button>
 </div>
+<div class="textdiv" id="buttonCategorizeQuestion_2">
+<button id="clickCategorizeQuestion_2">Categorize Question</button>
+</div>
 </div>
 
 <script type="text/javascript">
@@ -21,6 +24,14 @@ $(function(){
 		$('#writeQuestionTextarea').slideUp(1000);
 		$('#previewQuestionInfo').slideDown(1000);
 		$('#buttonCategorizeQuestion').slideUp(1000);
+		return false; });
+		});
+$(function(){ 
+		$('#clickCategorizeQuestion_2').click(function(){
+		$('#categorizeQuestion').slideDown(1000);
+		$('#writeQuestionTextarea').slideUp(1000);
+		$('#previewQuestionInfo').slideDown(1000);
+		$('#buttonCategorizeQuestion_2').slideUp(1000);
 		return false; });
 		});
 </script>

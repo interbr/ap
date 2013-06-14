@@ -13,6 +13,7 @@ if (file_exists($GLOBALS["fn"])) {
 }
 else { // .. or create questionfile and read (empty) content
 	$touch = fopen($GLOBALS["fn"], "w");
+	file_put_contents($GLOBALS["fn"], 'This is my question: ');
 	fclose($touch);
 	readfile($GLOBALS["fn"]);
 }
