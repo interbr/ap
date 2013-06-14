@@ -12,7 +12,7 @@ $questionIDfromDB = $questionrow['questionID'];
 $question_address = $questionrow['email'];
 };
 $dbhandle->close();
-$instance = new EtherpadLiteClient('uWCqxbEXfd9ujGzinDcY4kagzgshEV9h', 'http://localhost:9001/api');
+$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
 try {
   $padContents = $instance->getText($_GET["id"]);
   $answer = $padContents->text;
