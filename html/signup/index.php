@@ -14,10 +14,10 @@
         <div class="page">
 		<div id="signupFormDiv">
 		<form id="signup" name="signup" class="signup" method="post">
-Why do you want to answer anonymous questions on a regular basis:<br /><br />
+<div class="textdiv">Why do you want to answer anonymous questions on a regular basis:</div><br />
 <textarea name="whyAgent" cols="50" rows="8" maxlength="2000"></textarea>
 <br /><br />
-Which Continent are you from:<br /><br />
+<div class="textdiv">Which Continent are you from:</div><br />
 <ul>        
     <li>
         <div><input type="radio" name="agentContinent" value="Africa" id="Africa" required /><label for="Africa">Africa</label></div>
@@ -38,7 +38,7 @@ Which Continent are you from:<br /><br />
         <div><input type="radio" name="agentContinent" value="North-America" id="North-America"  required /><label for="North-America">North-America</label></div>
     </li>
 </ul><br />
-Categories you are good in (Up to three):<br /><br />
+<div class="textdiv">Categories you are good in (Up to three):</div><br />
 <ul>        
     <li>
         <div><input type="checkbox" name="agentWantedCategories[]" value="Planet" id="Planet" /><label for="Planet">Planet</label></div>
@@ -74,7 +74,7 @@ Categories you are good in (Up to three):<br /><br />
         <div><input type="checkbox" name="agentWantedCategories[]" value="Freedom" id="Freedom" /><label for="Freedom">Freedom</label></div>
     </li>
 </ul><br />
-Categories you don't want to answer (Up to three):<br /><br />
+<div class="textdiv">Categories you don't want to answer (Up to three):</div><br />
 <ul>        
     <li>
         <div><input type="checkbox" name="agentUnwantedCategories[]" value="Planet" id="Planet" /><label for="Planet">Planet</label></div>
@@ -111,10 +111,9 @@ Categories you don't want to answer (Up to three):<br /><br />
     </li>
 </ul>
 <br />
-The email to send the question to (Your email): <input name="agentaddress" type="email" id="agentaddress" required /><br /><br />
+<div class="textdiv">The email to send the question to (Your email): <input name="agentaddress" type="email" id="agentaddress" required /></div>
 <br />
-<input id="submit" type="submit" name="submit" value="Signup" />
-<button id="clickChangeQuestion">Change Question</button>
+<div class="textdiv"><input id="submit" type="submit" name="submit" value="Signup" /></div>
 </form>
 </div>
 <div id="signupResult"></div>
