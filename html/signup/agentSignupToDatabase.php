@@ -7,7 +7,7 @@ $agentcontinent = $_POST["agentContinent"];
 $wantedCategories =  implode(",",$_POST["agentWantedCategories"]);
 $unwantedCategories =  implode(",",$_POST["agentUnwantedCategories"]);
 $agentemail = $_POST["agentaddress"];
-$query = "INSERT INTO agents (whyAgent, continent, wanted, unwanted, email) VALUES ('".$whyAgent."', '".$agentcontinent."', '".$wantedCategories."', '".$unwantedCategories."', '".$agentemail."')";
+$query = "INSERT INTO agents (whyAgent, continent, wanted, unwanted, email, active) VALUES ('".$whyAgent."', '".$agentcontinent."', '".$wantedCategories."', '".$unwantedCategories."', '".$agentemail."', '1')";
 $dbhandle->query($query);
 if (mysql_errno() == 1062) {       
     print "<script type=\"text/javascript\">"; 
