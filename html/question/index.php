@@ -11,7 +11,7 @@ require_once(__ROOT__.'/../php/question.php'); // a functions file
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		<script type="text/javascript">
 		$(function(){
