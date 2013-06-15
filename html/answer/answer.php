@@ -71,7 +71,13 @@ $dbhandle->close();
         <div class="page">
 		<div id="answerdiv">
 		<div class="textdiv" id="start">
-	
+Your question you were asked randomly has the ID: <?php echo $questionIDfromDB ?><br /><br />
+It has the subject:<br /><br />
+<?php echo $subject ?><br /><br />
+It has the Content:<br /><br />
+<?php echo nl2br( file_get_contents($questionfile) ); ?><br /><br />
+<!--It's sorted to the Categories:<br /><br />
+<?php echo $categories ?><br /><br /> -->
 		<div class="textdiv" id="openAnswerSystemButton"><button id="clickOpenAnswerSystem">Open Answer-System</button></div>
 		</div>
 		<div class="textdiv" id="answerSystemDiv">
