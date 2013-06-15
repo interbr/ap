@@ -21,9 +21,6 @@ class EtherpadLiteClient {
     if (isset($baseUrl)){
       $this->baseUrl = $baseUrl;
     }
-    if (!filter_var($this->baseUrl, FILTER_VALIDATE_URL)){
-      throw new InvalidArgumentException("[{$this->baseUrl}] is not a valid URL");
-    }
   }
 
   protected function get($function, array $arguments = array()){
