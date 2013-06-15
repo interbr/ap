@@ -8,5 +8,5 @@ $validUntil = mktime(date("H")+3, 0, 0, date("m"), date("d"), date("y")); // One
 $sessionID = $instance->createSession($_GET["groupID"], $_GET["authorID"], $validUntil);
 echo "New Session ID is $sessionID->sessionID\n\n";
 $value = $sessionID->sessionID;
-setcookie("sessionID", $value, time()+3600, "/", ".".$GLOBALS["etherpadhost"]);
+setcookie("sessionID", $value, time()+3600, "/", $GLOBALS["etherpadhost"]);
 ?>
