@@ -1,6 +1,8 @@
 <?php 
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/configuration.php'); //a file with configurations
+require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-api-class
+$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $questionPreview = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$_GET["id"]."'");
 while($row = $questionPreview->fetch_assoc()) {
@@ -8,6 +10,13 @@ $questionfile = "../../content/".$row['questionID'].".txt"; //questionfile
 $subject = $row['subject'];
 $categories = $row['questionCategories'];
 $questionIDfromDB = $row['questionID'];
+};
+$padAuthorAccess = $dbhandle->query("SELECT * FROM answer_access WHERE questionID='".$_GET["id"]."'");
+while($row = $padAuthorAccess->fetch_assoc()) {
+$groupID = $row['groupID'];
+$padID = $row['padID'];
+$authorIDGET = $_GET["agentcode"];
+$authorID = $row["".$authorIDGET.""];
 };
 $dbhandle->close();
 ?>
@@ -25,7 +34,7 @@ $dbhandle->close();
 		<script type="text/javascript" src="/js/etherpad-ap.js"></script>
 		<script type="text/javascript">
 			$(function(){
-			$('#answerPad').pad({'padId':'<?php echo $_GET["id"]; ?>', 'host':'<?php echo $GLOBALS["etherpadhost"]; ?>'}); // sets the pad id and puts the pad in the div
+			$('#answerPad').pad({'padId':'<?php echo $padID; ?>', 'host':'<?php echo $GLOBALS["etherpadhost"]; ?>'}); // sets the pad id and puts the pad in the div
 			$('#clickOpenAnswerSystem').click(function(){
 			$('#openAnswerSystemButton').slideUp(1000);
 			$('#answerSystemDiv').fadeIn(1000);
@@ -62,6 +71,21 @@ $dbhandle->close();
         <div class="page">
 		<div id="answerdiv">
 		<div class="textdiv" id="start">
+	<!-- Debugging	<?php echo $padID; ?><br />
+		<?php 
+		echo "Session info:\n\n";
+$sessioninfo = $instance->getSessionInfo($_COOKIE["sessionID"]);
+var_dump($sessioninfo);
+echo "\n"; ?><br /><br />
+		<?php
+		try {
+  $padList = $instance->listPads($groupID); 
+  echo "Available pads for this group:\n";
+  var_dump($padList->padIDs);
+  echo "\n";
+} catch (Exception $e) {
+  echo "\n\nlistPads Failed: ". $e->getMessage();
+} ?><br /><br /> -->
 Your question you were asked randomly has the ID: <?php echo $questionIDfromDB ?><br /><br />
 It has the subject:<br /><br />
 <?php echo $subject ?><br /><br />

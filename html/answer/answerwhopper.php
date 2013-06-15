@@ -48,7 +48,7 @@ echo "Not satisfied yet ..."; }; ?>
 			$('#clickPreviewAnswer').click(function(){
  			$.ajax({
       			type: "POST",
-      			url: "savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>",
+      			url: "savedAnswerProtect.php?id=<?php echo $_GET["id"]; ?>",
 				});
 			$('#answerdiv').load('savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>').fadeIn(1000);
 							return false; });

@@ -1,6 +1,7 @@
 <?php
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/configuration.php'); //a file with configurations
+require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-api-class
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $questionToSend = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$_GET["id"]."'");
 while($questionrow = $questionToSend->fetch_assoc()) {
@@ -10,8 +11,7 @@ $categories = $questionrow['questionCategories'];
 $questionIDfromDB = $questionrow['questionID'];
 $timeofsending = $questionrow['time-of-sending'];
 };
-$agentspool = $dbhandle->query("SELECT * FROM agents WHERE active='1' ORDER BY RAND() LIMIT 0,3");
-$dbhandle->close();
+$agentspool = $dbhandle->query("SELECT * FROM agents WHERE active='1' ORDER BY RAND() LIMIT 0,5");
 $agentsresult = array();
 $counter = 1;
 while ($agentrow = mysqli_fetch_array($agentspool)) {
@@ -28,26 +28,62 @@ $msg = file_get_contents($questionfile);
 $receipients = array(
 	'agent1' => $agent1,
     'agent2' => $agent2,
-	'agent3' => $agent3);
+	'agent3' => $agent3,
+	'agent4' => $agent4,
+	'agent5' => $agent5);
+
+///////////////////////////////////////////////// ETHERPAD
+
+$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
+try {
+  $createGroup = $instance->createGroup();
+  $groupID = $createGroup->groupID;
+  echo "New GroupID is $groupID\n\n";
+} catch (Exception $e) {
+  // the pad already exists or something else went wrong
+  echo "\n\ncreateGroup Failed with message ". $e->getMessage();
+}
+
+/* Example: Create Group Pad */
+try {
+  $newPad = $instance->createGroupPad($groupID,$_GET["id"],'This is our Answer: '); 
+  $padID = $newPad->padID;
+  echo "Created new pad with padID: $padID\n\n";
+} catch (Exception $e) {
+  // the pad already exists or something else went wrong
+  echo "\n\ncreateGroupPad Failed with message ". $e->getMessage();
+}
+
+$writePadData = "INSERT INTO answer_access (questionID, groupID, padID) VALUES ('".$_GET["id"]."','".$groupID."','".$padID."') ON DUPLICATE KEY UPDATE groupID=VALUES(groupID), padID=VALUES(padID)";
+$dbhandle->query($writePadData);
+echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
 // mail settings
 $headers = "From: no-reply@amored-police.org\r\n" .
 	"Reply-To: no-reply@amored-police.org\r\n" .
     "Content-type:  text/plain; charset=utf-8\r\n" ;
 foreach ($receipients as $agentcode => $agentaddress) {
+try {
+  $author = $instance->createAuthor($agentaddress); // This really needs explaining..
+  $authorID = $author->authorID;
+echo "The AuthorID is now $authorID\n\n";
+} catch (Exception $e) {
+  // the pad already exists or something else went wrong
+  echo "\n\ncreateAuthor Failed with message ". $e->getMessage();
+}
+
 $message = "You just received a question\n
 It has the subject: $questionSubject\n
 It is sorted to the following categories: $categories\n
 The Question is:\n\n$msg\n
 15 Minutes to answer this question with the other agents will start in UTC $timetoanswer\n 
-Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/answer.php?id=$questionIDfromDB&agentcode=$agentcode\n
-Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/answer.php?id=$questionIDfromDB\n
-Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/answer.php?id=$questionIDfromDB\n
-Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/answer.php?id=$questionIDfromDB";
+Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/index.php?id=$questionIDfromDB&agentcode=$agentcode&authorID=$authorID\n";
 // send mail
 mail($agentaddress, $subject, $message, $headers);
+$writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$authorID."' WHERE questionID = '".$_GET["id"]."'";
+$dbhandle->query($writePadDataAgents);
+echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 }
-echo $agent1."<br />";
-echo $agent2."<br />";
-echo $agent3."<br />";
+
+$dbhandle->close();
 ?>
