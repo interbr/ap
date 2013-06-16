@@ -34,16 +34,8 @@ $dbhandle->close();
 		<script type="text/javascript" src="/js/etherpad-ap.js"></script>
 		<script type="text/javascript">
 			$(function(){
-			$('#answerPad').pad({'padId':'<?php echo $padID; ?>', 'host':'<?php echo $GLOBALS["etherpadhost"]; ?>'}); // sets the pad id and puts the pad in the div
-			$('#clickOpenAnswerSystem').click(function(){
-			$('#openAnswerSystemButton').slideUp(1000);
-			$('#answerSystemDiv').fadeIn(1000);
-			$('#whopper').fadeIn(1000);
-			$('#saveAnswerButton').fadeIn(1000);		
-			$.ajax({
-      			type: "POST",
-      			url: "savedInitialAnswerToDatabaseWait.php?id=<?php echo $_GET["id"]; ?>",
-				});
+					
+			
 			function update() {	
 			$.ajax({
 				type: 'GET',
@@ -60,10 +52,15 @@ $dbhandle->close();
 			});
 			}
 			$(document).ready(function() {
+				$('#answerPad').pad({'padId':'<?php echo $padID; ?>', 'host':'<?php echo $GLOBALS["etherpadhost"]; ?>'}); // sets the pad id and puts the pad in the div
+				$.ajax({
+      			type: "POST",
+      			url: "savedInitialAnswerToDatabaseWait.php?id=<?php echo $_GET["id"]; ?>",
+				});
 				update();
 			});
 				return false; });
-			});
+			
 		</script>
 		</head>
 		<body> 
@@ -71,14 +68,12 @@ $dbhandle->close();
         <div class="page">
 		<div id="answerdiv">
 		<div class="textdiv" id="start">
-Your question you were asked randomly has the ID: <?php echo $questionIDfromDB ?><br /><br />
-It has the subject:<br /><br />
+Your question you were asked randomly has the subject:<br /><br />
 <?php echo $subject ?><br /><br />
 It has the Content:<br /><br />
 <?php echo nl2br( file_get_contents($questionfile) ); ?><br /><br />
 <!--It's sorted to the Categories:<br /><br />
 <?php echo $categories ?><br /><br /> -->
-		<div class="textdiv" id="openAnswerSystemButton"><button id="clickOpenAnswerSystem">Open Answer-System</button></div>
 		</div>
 		<div class="textdiv" id="answerSystemDiv">
 		<div id="answerPad"></div>

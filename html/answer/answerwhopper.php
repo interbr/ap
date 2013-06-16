@@ -18,11 +18,15 @@ $status = array($agent1Status,$agent2Status,$agent3Status,$agent4Status,$agent5S
 $satisfaction = array_sum($status);
 ?>
 <div class="textdiv">
-Agent1 = <?php echo $agent1Status; if ( $agentcode == "agent1" ) { echo " You!"; }; ?><br />
-Agent2 = <?php echo $agent2Status; if ( $agentcode == "agent2" ) { echo " You!"; }; ?><br />
-Agent3 = <?php echo $agent3Status; if ( $agentcode == "agent3" ) { echo " You!"; }; ?><br />
-Agent4 = <?php echo $agent4Status; if ( $agentcode == "agent4" ) { echo " You!"; }; ?><br />
-Agent5 = <?php echo $agent5Status; if ( $agentcode == "agent5" ) { echo " You!"; }; ?><br /><br />
+<center>
+<table>
+<tr><td>Agent1 = </td><td><?php echo $agent1Status; ?></td><td><?php if ( $agentcode == "agent1" ) { echo " You!"; }; ?></td></tr>
+<tr><td>Agent2 = </td><td><?php echo $agent2Status; ?></td><td><?php if ( $agentcode == "agent2" ) { echo " You!"; }; ?></td></tr>
+<tr><td>Agent3 = </td><td><?php echo $agent3Status; ?></td><td><?php if ( $agentcode == "agent3" ) { echo " You!"; }; ?></td></tr>
+<tr><td>Agent4 = </td><td><?php echo $agent4Status; ?></td><td><?php if ( $agentcode == "agent4" ) { echo " You!"; }; ?></td></tr>
+<tr><td>Agent5 = </td><td><?php echo $agent5Status; ?></td><td><?php if ( $agentcode == "agent5" ) { echo " You!"; }; ?></td></tr>
+</table>
+</center><br />
 <?php if ( $currentAgentStatus != "1" ) {
 echo "<div id=\"satisfiedAnswerButton\"><button id=\"clickSatisfiedAnswer_".$_GET["agentcode"]."\">".$_GET["agentcode"].": Satisfied?</button><br /></div><br />"; }
 else {

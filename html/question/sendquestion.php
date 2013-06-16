@@ -18,8 +18,8 @@ while ($agentrow = mysqli_fetch_array($agentspool)) {
     $agentsresult["agent".$counter] =  $agentrow["email"];
     $counter = $counter + 1;
 }
-date_default_timezone_set("UTC");
-$timetoanswer = date( "Y-m-d H:i:s", strtotime( "$timeofsending + 4 hours" ) );
+$timetoanswer = time() + 3600;
+$timedisplay = date('c',$timetoanswer);
 
 extract($agentsresult);
 
@@ -54,7 +54,7 @@ try {
   echo "\n\ncreateGroupPad Failed with message ". $e->getMessage();
 }
 
-$writePadData = "INSERT INTO answer_access (questionID, groupID, padID) VALUES ('".$_GET["id"]."','".$groupID."','".$padID."') ON DUPLICATE KEY UPDATE groupID=VALUES(groupID), padID=VALUES(padID)";
+$writePadData = "INSERT INTO answer_access (questionID, groupID, padID, timetoanswerSession) VALUES ('".$_GET["id"]."','".$groupID."','".$padID."','".$timetoanswer."') ON DUPLICATE KEY UPDATE groupID=VALUES(groupID), padID=VALUES(padID), timetoanswerSession=VALUES(timetoanswerSession)";
 $dbhandle->query($writePadData);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
@@ -71,16 +71,19 @@ echo "The AuthorID is now $authorID\n\n";
   // the pad already exists or something else went wrong
   echo "\n\ncreateAuthor Failed with message ". $e->getMessage();
 }
+$sessionID = $instance->createSession($groupID, $authorID, $timetoanswer);
+echo "New Session ID is $sessionID->sessionID\n\n";
+$agentsessionID = $sessionID->sessionID;
 
 $message = "You just received a question\n
 It has the subject: $questionSubject\n
 It is sorted to the following categories: $categories\n
 The Question is:\n\n$msg\n
-15 Minutes to answer this question with the other agents will start in UTC $timetoanswer\n 
+15 Minutes to answer this question with the other agents will start in UTC $timedisplay\n 
 Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/index.php?id=$questionIDfromDB&agentcode=$agentcode&authorID=$authorID\n";
 // send mail
 mail($agentaddress, $subject, $message, $headers);
-$writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$authorID."' WHERE questionID = '".$_GET["id"]."'";
+$writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$authorID."', ".$agentcode."sessionID = '".$agentsessionID."' WHERE questionID = '".$_GET["id"]."'";
 $dbhandle->query($writePadDataAgents);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 }

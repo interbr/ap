@@ -40,5 +40,5 @@ body { margin:20px 0px; padding:0px; text-align:center; background: #000; font-s
 #saveAnswerButton {  }
 #buttonCategorizeQuestion_2 { display: none; }
 
-#answerSystemDiv { margin: 0 auto; width: 540px; height: 400px; display: none; }
+#answerSystemDiv { margin: 0 auto; width: 540px; height: 400px; }
 #answerPad { width: 540px; height: 300px; }
