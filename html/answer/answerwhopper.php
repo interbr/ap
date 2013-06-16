@@ -54,6 +54,6 @@ echo "Not satisfied yet ..."; }; ?>
       			type: "POST",
       			url: "savedAnswerProtect.php?id=<?php echo $_GET["id"]; ?>",
 				});
-			$('#answerdiv').load('savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>').fadeIn(1000);
+			$('#answerdiv').load('savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>').fadeIn(1000);
 							return false; });
 		</script>

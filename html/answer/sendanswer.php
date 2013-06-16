@@ -14,7 +14,7 @@ $question_address = $questionrow['email'];
 $dbhandle->close();
 $instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
 try {
-  $padContents = $instance->getText($_GET["id"]);
+  $padContents = $instance->getText($_GET["pad"]);
   $answer = $padContents->text;
 } catch (Exception $e) {
   $answer = 'Error in answering system';

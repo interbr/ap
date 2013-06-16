@@ -34,12 +34,18 @@ $dbhandle->close();
 		<script type="text/javascript" src="/js/etherpad-ap.js"></script>
 		<script type="text/javascript">
 			$(function(){
-					
-			
+			$(document).ready(function() {
+				$('#answerPad').pad({'padId':'<?php echo $padID; ?>', 'host':'<?php echo $GLOBALS["etherpadhost"]; ?>'}); // sets the pad id and puts the pad in the div
+				$.ajax({
+      			type: "POST",
+      			url: "savedInitialAnswerToDatabaseWait.php?id=<?php echo $_GET["id"]; ?>",
+				});
+			});
+			});
 			function update() {	
 			$.ajax({
 				type: 'GET',
-				url: 'answerwhopper.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>',
+				url: 'answerwhopper.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&pad=<?php echo $padID; ?>',
 				timeout: 2000,
 				success: function(data) {
 				  $("#savedAnswerWait").html(data);
@@ -52,14 +58,9 @@ $dbhandle->close();
 			});
 			}
 			$(document).ready(function() {
-				$('#answerPad').pad({'padId':'<?php echo $padID; ?>', 'host':'<?php echo $GLOBALS["etherpadhost"]; ?>'}); // sets the pad id and puts the pad in the div
-				$.ajax({
-      			type: "POST",
-      			url: "savedInitialAnswerToDatabaseWait.php?id=<?php echo $_GET["id"]; ?>",
-				});
 				update();
 			});
-				return false; });
+			
 			
 		</script>
 		</head>
