@@ -12,6 +12,7 @@ $agent3Status = $row['agent3'];
 $agent4Status = $row['agent4'];
 $agent5Status = $row['agent5'];
 $currentAgentStatus = $row[$agentcode];
+$answered = $row['answered'];
 };
 $dbhandle->close();
 $status = array($agent1Status,$agent2Status,$agent3Status,$agent4Status,$agent5Status);
@@ -37,6 +38,13 @@ else {
 echo "Not satisfied yet ..."; }; ?>
 </div>
 		<script type="text/javascript">
+		function closequestion() {
+			var loadlink = 'savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>';
+			$("#answerdiv").load(loadlink).fadeIn(1000);
+			}			
+		<?php if ( $answered == "1" ) { 
+				echo "$(document).ready(function() { closequestion(); });"; }; ?>
+				
 			$('#clickSatisfiedAnswer_<?php echo $_GET["agentcode"]; ?>').click(function(){
 			$.ajax({
       			type: "POST",

@@ -10,6 +10,8 @@ $padToClose = $row['padID'];
 };
 $queryPassword = "UPDATE answer_access SET padPassword = '88888888' WHERE questionID = '".$_GET["id"]."'";
 $dbhandle->query($queryPassword);
+$queryAnswered = "UPDATE answer_whopper SET answered = '1' WHERE questionID = '".$_GET["id"]."'";
+$dbhandle->query($queryAnswered);
 $dbhandle->close();
 try {
   $instance->setPassword($padToClose,'88888888');
