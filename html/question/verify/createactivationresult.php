@@ -1,1 +1,1 @@
-Thank You!
+<div class="textdiv">Thank You!</div>

@@ -11,8 +11,13 @@ $categories = $questionrow['questionCategories'];
 $questionIDfromDB = $questionrow['questionID'];
 $timeofsending = $questionrow['time-of-sending'];
 $questionverified = $questionrow['active'];
+$questionsent = $questionrow['sent'];
 };
 if ( $questionverified == '1' ) {
+if ( $questionsent != '1') {
+$writeSent = "UPDATE questions SET sent = '1' WHERE questionID = '".$_GET["id"]."'";
+$dbhandle->query($writeSent);
+echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 $agentspool = $dbhandle->query("SELECT * FROM agents WHERE active='1' ORDER BY RAND() LIMIT 0,5");
 $agentsresult = array();
 $counter = 1;
@@ -60,6 +65,7 @@ $writePadData = "INSERT INTO answer_access (questionID, groupID, padID, timetoan
 $dbhandle->query($writePadData);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
+
 // mail settings
 $headers = "From: no-reply@amored-police.org\r\n" .
 	"Reply-To: no-reply@amored-police.org\r\n" .
@@ -89,6 +95,9 @@ $writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$authorID."', ".
 $dbhandle->query($writePadDataAgents);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 }
+}
+else {
+echo "Already sent"; };
 }
 else {
 echo "Not varified"; };

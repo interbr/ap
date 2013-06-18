@@ -18,13 +18,29 @@ if (isset($email) && isset($key)) {
 
  $query_activate_question = "UPDATE question_verify SET activationkey=NULL WHERE(email ='$email' AND activationkey='$key')LIMIT 1";
  $dbhandle->query($query_activate_question);
-
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		<head>
+		<title>Help Desk for Earth' Peoples Problems (except IT) - github-project - amored-police</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="description" content="Platform for people to write to and get questions answered by other people.">
+		<link rel="stylesheet" href="/css/styles.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		</head>
+		<body>
+		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
+        <div class="page">
+<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div><br />
+<div class="textdiv"><?php
+		
  // Print a customized message:
  if (mysqli_affected_rows($dbhandle) == 1) //if update query was successfull
  {
  $query_activate_question2 = "UPDATE questions SET active='1' WHERE(questionID ='$questionID')LIMIT 1";
  $dbhandle->query($query_activate_question2);
- echo '<div>Your account is now active. You may now <a href="/question/verifiedquestion.php?id='.$questionID.'">Log in</a></div>';
+ echo 'Your question is now active. You may now <br /><br /><a href="/question/verifiedquestion.php?id='.$questionID.'"><button>Send your question</button></a><br /><br />on the next page ..</div>';
 
  } else {
  echo '<div>'.$email.' and '.$key.' Oops !Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
@@ -34,6 +50,10 @@ if (isset($email) && isset($key)) {
  mysqli_close($dbhandle);
 
 } else {
- echo '<div>Error Occured .</div>';
+ echo '<div>Error Occured.</div>';
 }
 ?>
+</div>
+</div>
+		</body>
+</html>
