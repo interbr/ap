@@ -46,6 +46,7 @@ echo "<button id=\"clickSendQuestion\">Send Question</button>"; }
 else {
 echo "Not varified"; }; ?>
 </div>
+</div>
 <script type="text/javascript">
 $('#clickSendQuestion').click(function(){
  			$.ajax({
@@ -56,6 +57,5 @@ $('#clickSendQuestion').click(function(){
 		return false; 
 		});
 </script>
-</div>
     </body>
 </html>

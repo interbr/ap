@@ -24,24 +24,30 @@ $dbhandle->close();
 		<script type="text/javascript" src="/js/custom.js"></script>
 		<script type="text/javascript" src="/js/etherpad-ap.js"></script>
 		<script type="text/javascript">
-			$(function(){
-			$('#clickAuthorize').click(function(){	
+			function update() {	
 			$.ajax({
-      			type: "POST",
-      			url: "setSessionCookie.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"]; ?>&groupID=<?php echo $groupID; ?>",
-				});
-			document.location.href="/answer/answer.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"] ?>"; 
-				return false; });
+				type: 'GET',
+				url: 'agentOnline.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"]; ?>&groupID=<?php echo $groupID; ?>',
+				timeout: 2000,
+				success: function(data) {
+				  $("#online_status").html(data);
+				  window.setTimeout(update, 4000);
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+				  $("#online_status").html('<div class="textdiv">Timeout contacting server..</div>');
+				  window.setTimeout(update, 8000);
+				}
+			});
+			}
+			$(document).ready(function() {
+				update();
 			});
 		</script>
 		</head>
 		<body> 
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
-		<div class="textdiv" id="authorize">
-		<button id="clickAuthorize">Authorize and continue to answer</button><br /><br />
-		(Cookies have to be enabled from this point)<br />
-		</div>
+		<div id="answerdiv"><div class="textdiv" id="online_status"></div></div>
         </div>
     </body>
 </html>

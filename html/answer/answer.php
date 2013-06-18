@@ -20,18 +20,6 @@ $authorID = $row["".$authorIDGET.""];
 };
 $dbhandle->close();
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-		<head>
-		<title>Help Desk for Earth' Peoples Problems (except IT) - github-project - amored-police</title>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="description" content="Platform for people to write to and get questions answered by other people.">
-		<link rel="stylesheet" href="/css/styles.css">
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
-		<script type="text/javascript" src="/js/custom.js"></script>
-		<script type="text/javascript" src="/js/etherpad-ap.js"></script>
 		<script type="text/javascript">
 			$(function(){
 			$(document).ready(function() {
@@ -63,11 +51,7 @@ $dbhandle->close();
 			
 			
 		</script>
-		</head>
-		<body> 
-		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
-        <div class="page">
-		<div id="answerdiv">
+
 		<div class="textdiv" id="start">
 Your question you were asked randomly has the subject:<br /><br />
 <?php echo $subject ?><br /><br />
@@ -83,7 +67,4 @@ It has the Content:<br /><br />
 		<div id="savedAnswerWait"></div>
 		<div id="notice"></div>
 		</div>
-        </div>
-		</div>
-    </body>
-</html>
+        

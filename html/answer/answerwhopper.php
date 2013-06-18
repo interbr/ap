@@ -43,7 +43,7 @@ echo "Not satisfied yet ..."; }; ?>
 			$("#answerdiv").load(loadlink).fadeIn(1000);
 			}			
 		<?php if ( $answered == "1" ) { 
-				echo "$(document).ready(function() { closequestion(); });"; }; ?>
+				echo "$(document).ready(function() { closequestion(); });"; } else { echo ";"; }; ?>
 				
 			$('#clickSatisfiedAnswer_<?php echo $_GET["agentcode"]; ?>').click(function(){
 			$.ajax({

@@ -64,6 +64,9 @@ try {
 $writePadData = "INSERT INTO answer_access (questionID, groupID, padID, timetoanswerSession) VALUES ('".$_GET["id"]."','".$groupID."','".$padID."','".$timetoanswer."') ON DUPLICATE KEY UPDATE groupID=VALUES(groupID), padID=VALUES(padID), timetoanswerSession=VALUES(timetoanswerSession)";
 $dbhandle->query($writePadData);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
+$writeAnswerSystemData = "INSERT INTO answer_start_system (questionID) VALUES ('".$_GET["id"]."')";
+$dbhandle->query($writeAnswerSystemData);
+echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
 
 // mail settings
