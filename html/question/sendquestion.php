@@ -10,7 +10,9 @@ $questionSubject = $questionrow['subject'];
 $categories = $questionrow['questionCategories'];
 $questionIDfromDB = $questionrow['questionID'];
 $timeofsending = $questionrow['time-of-sending'];
+$questionverified = $questionrow['active'];
 };
+if ( $questionverified == '1' ) {
 $agentspool = $dbhandle->query("SELECT * FROM agents WHERE active='1' ORDER BY RAND() LIMIT 0,5");
 $agentsresult = array();
 $counter = 1;
@@ -87,6 +89,8 @@ $writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$authorID."', ".
 $dbhandle->query($writePadDataAgents);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 }
-
+}
+else {
+echo "Not varified"; };
 $dbhandle->close();
 ?>

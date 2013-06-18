@@ -64,7 +64,7 @@ $.ajax({
     url:'categorizeQuestionToDatabase.php',
     data: dataString,
     success: function(){
-        $('#savedQuestionPrepare').load('savedquestionpreparetosend.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+        $('#savedQuestionPrepare').load('savedquestionpreparetoverify.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
 		$('#categorizeQuestion').slideUp(1000);
 		$('#previewQuestionSlide').slideUp(1000);
     }

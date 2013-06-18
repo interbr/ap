@@ -31,7 +31,7 @@ require_once(__ROOT__.'/../php/question.php'); // a functions file
 		<div id="previewQuestion"></div>
 		<div id="categorizeQuestion"></div>
 		<div id="savedQuestionPrepare"></div>
-		<div id="questionSentResult"></div>
+		<div id="createActivationResult"></div>
         </div>
     </body>
 </html>

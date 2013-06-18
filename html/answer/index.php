@@ -30,6 +30,7 @@ $dbhandle->close();
       			type: "POST",
       			url: "setSessionCookie.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"]; ?>&groupID=<?php echo $groupID; ?>",
 				});
+			document.location.href="/answer/answer.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"] ?>"; 
 				return false; });
 			});
 		</script>
@@ -38,9 +39,8 @@ $dbhandle->close();
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
 		<div class="textdiv" id="authorize">
-		<button id="clickAuthorize">Authorize with url-Data</button><br />
-		(Cookies have to be enabled from this point)<br /><br />
-		<a href="/answer/answer.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"]; ?>"><button>Continue</button></a>
+		<button id="clickAuthorize">Authorize and continue to answer</button><br /><br />
+		(Cookies have to be enabled from this point)<br />
 		</div>
         </div>
     </body>
