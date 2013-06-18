@@ -21,7 +21,7 @@ $questionSubjectToVerify = $questionverifyrow['subject'];
 				"Reply-To: no-reply@amored-police.org\r\n" .
 				"Content-type:  text/plain; charset=utf-8\r\n" ;
                 $message = "To activate and send your question, please click on this link:\n\n";
-                $message .= $GLOBALS["aphost"].'/verify/verify.php?email=' . urlencode($emailToVerify) . "&key=$activation&id=".$_GET["id"]."";
+                $message .= $GLOBALS["aphost"].'/question/verify/verify.php?email=' . urlencode($emailToVerify) . "&key=$activation&id=".$_GET["id"]."";
                 mail($emailToVerify, 'Question Confirmation', $message, $headers);
 			
      
