@@ -25,7 +25,7 @@ It will be send with the following ID:<br /><br />
 <?php echo $questionIDfromDB ?><br /><br />
 The answer will be send to the following address:<br /><br />
 <?php echo $questionaddress ?><br /><br />
-<button id="clickSendQuestion">Send Question</button>
+<button id="clickSendQuestion">Verify Question</button>
 </div>
 <script type="text/javascript">
 $('#clickSendQuestion').click(function(){

@@ -10,8 +10,11 @@ $questionSubject = $questionrow['subject'];
 $categories = $questionrow['questionCategories'];
 $questionIDfromDB = $questionrow['questionID'];
 $question_address = $questionrow['email'];
+$answersent = $questionrow['answer_sent'];
 };
-$dbhandle->close();
+if ( $answersent != '1') {
+$writeSent = "UPDATE questions SET answer_sent = '1' WHERE questionID = '".$_GET["id"]."'";
+$dbhandle->query($writeSent);
 $instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
 try {
   $padContents = $instance->getText($_GET["pad"]);
@@ -34,4 +37,8 @@ The Question was:\n\n$msg\n
 The answer is:\n\n$answer";
 // send mail
 mail($question_address, $subject, $message, $headers);
+}
+else {
+echo "Already sent"; };
+$dbhandle->close();
 ?>
