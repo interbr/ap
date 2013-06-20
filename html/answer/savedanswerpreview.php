@@ -19,22 +19,24 @@ try {
   echo "<div class=\"textdiv\">getText Failed with message ". $e->getMessage()."</div>";
 }
 ?>
-<div class="textdiv" id="sendAnswerButton"><button id="clickSendAnswer">Send Answer</button></div>
+<div class="textdiv" id="sendAnswer"></div>
 <div id="answerSentResult"></div>
 <script type="text/javascript">
-$(function(){ 
-		$('#clickSendAnswer').click(function(){
- 			$.ajax({
-      			type: "POST",
-      			url: "sendanswer.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>",
-				complete: function() {
-				$('#answerSentResult').load('answersentresult.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
-				$('#sendAnswerButton').slideUp(1000);
-				}
-				});
-						return false; });
-		});
 		function update() {	
+			$.ajax({
+				cache: false,
+				type: 'GET',
+				url: 'questionSent.php?id=<?php echo $_GET["id"]; ?>',
+				timeout: 2000,
+				success: function(data) {
+				  $("#sendAnswer").html(data);
+				  window.setTimeout(update, 4000);
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+				  $("#sendAnswer").html('<div class="textdiv">Timeout contacting server..</div>');
+				  window.setTimeout(update, 8000);
+				}
+			});
 			}
 			$(document).ready(function() {
 				update();
