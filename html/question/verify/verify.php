@@ -16,7 +16,7 @@ if (isset($email) && isset($key)) {
 
  // Update the database to set the "activation" field to null
 
- $query_activate_question = "UPDATE question_verify SET activationkey=NULL WHERE(email ='$email' AND activationkey='$key')LIMIT 1";
+ $query_activate_question = "SELECT * FROM question_verify WHERE(email ='$email' AND activationkey='$key')LIMIT 1";
  $dbhandle->query($query_activate_question);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -32,7 +32,7 @@ if (isset($email) && isset($key)) {
 		<body>
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
-<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div><br />
+<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 <div class="textdiv"><?php
 		
  // Print a customized message:
@@ -43,7 +43,7 @@ if (isset($email) && isset($key)) {
  echo 'Your question is now active. You may now <br /><br /><a href="/question/verifiedquestion.php?id='.$questionID.'"><button>Send your question</button></a><br /><br />on the next page ..</div>';
 
  } else {
- echo '<div>'.$email.' and '.$key.' Oops !Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
+ echo 'Oops! Your question could not be activated. Please recheck the link or contact the system administrator.';
 
  }
 
