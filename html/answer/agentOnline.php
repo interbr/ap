@@ -47,12 +47,13 @@ echo "Not ready yet ..."; }; ?>
 			$.ajax({
       			type: "POST",
       			url: "setSessionCookie.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"]; ?>&groupID=<?php $_GET["groupID"]; ?>",
+				complete: function() {
+				$("#answerdiv").load(loadlink).fadeIn(1000);
+				}
 				});
-			$("#answerdiv").load(loadlink).fadeIn(1000);
-			}			
+				}
 				<?php if ( $ready == "1" ) { 
-				echo "$(document).ready(function() { startquestion(); });"; } else { echo ";"; }; ?>
-				
+				echo "$(document).ready(function() { startquestion(); });"; }; ?>				
 			$("#clickReady_<?php echo $_GET["agentcode"]; ?>").click(function(){
 			$.ajax({
       			type: "POST",
@@ -67,10 +68,12 @@ echo "Not ready yet ..."; }; ?>
 					$.ajax ({  
 					type: 'POST',
 					url: "startAnswerAll.php?id=<?php echo $_GET["id"]; ?>",
+					complete: function() {
+					$('#answerdiv').load('/answer/answer.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"] ?>').fadeIn(1000).clearTimeout(updateonlinetimer);
+				}
 				});
 				}
 				});
-			$('#answerdiv').load('/answer/answer.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"] ?>').fadeIn(1000);
 							return false; });
 							
 		</script>

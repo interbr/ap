@@ -18,6 +18,7 @@ ID is: <?php echo $_GET["id"]; ?>
 </div>
 
 <script type="text/javascript">
+
 $(function(){ 
 		$('#clickCategorizeQuestion').click(function(){
 		$('#categorizeQuestion').load('categorizequestion.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);

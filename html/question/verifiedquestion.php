@@ -50,10 +50,13 @@ echo "Not varified"; }; ?>
 <script type="text/javascript">
 $('#clickSendQuestion').click(function(){
  			$.ajax({
+				cache: false,
       			type: "POST",
       			url: "sendquestion.php?id=<?php echo $_GET["id"]; ?>",
-				});
+				complete: function() {
 		$('#savedQuestionPrepareToSend').load('questionsentresult.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+		}
+		});
 		return false; 
 		});
 </script>

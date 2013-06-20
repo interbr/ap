@@ -1,4 +1,11 @@
 <?php 
+$fy = "../../content/".$_GET["id"].".txt"; //questionfile
+?>
+<div class="textdiv">
+Question was:<br /><br />
+<?php echo nl2br( file_get_contents($GLOBALS["fy"]) ); ?>
+</div>
+<?php 
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-api-class
 require_once(__ROOT__.'/../php/configuration.php');
@@ -20,9 +27,16 @@ $(function(){
  			$.ajax({
       			type: "POST",
       			url: "sendanswer.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>",
+				complete: function() {
+				$('#answerSentResult').load('answersentresult.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+				$('#sendAnswerButton').slideUp(1000);
+				}
 				});
-		$('#answerSentResult').load('answersentresult.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
-		$('#sendAnswerButton').slideUp(1000);
 						return false; });
 		});
+		function update() {	
+			}
+			$(document).ready(function() {
+				update();
+			});
 </script>

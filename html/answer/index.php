@@ -17,6 +17,9 @@ $dbhandle->close();
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="description" content="Platform for people to write to and get questions answered by other people.">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="-1">
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -26,6 +29,7 @@ $dbhandle->close();
 		<script type="text/javascript">
 			function update() {	
 			$.ajax({
+				cache: false,
 				type: 'GET',
 				url: 'agentOnline.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"]; ?>&groupID=<?php echo $groupID; ?>',
 				timeout: 2000,

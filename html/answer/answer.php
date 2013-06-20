@@ -32,6 +32,7 @@ $dbhandle->close();
 			});
 			function update() {	
 			$.ajax({
+				cache: false,
 				type: 'GET',
 				url: 'answerwhopper.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&pad=<?php echo $padID; ?>',
 				timeout: 2000,
@@ -48,8 +49,6 @@ $dbhandle->close();
 			$(document).ready(function() {
 				update();
 			});
-			
-			
 		</script>
 
 		<div class="textdiv" id="start">

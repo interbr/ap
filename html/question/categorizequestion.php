@@ -3,39 +3,42 @@
 <form id="categorizeQuestion" name="categorizeQuestion" class="categorizeQuestion" method="post">
 Subject for your question: <input name="subject" type="text" id="subject" /><br /><br />
 Categories for your question (up to three):<br /><br />
-<ul>        
+<ul>
+	<li>
+		<div><input type="radio" name="questionCategories[]" value="none" id="none" checked="checked" /><label for="none">None</label></div>
+	</li>
     <li>
-        <div><input type="checkbox" name="questionCategories[]" value="Planet" id="Planet" /><label for="Planet">Planet</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Planet" id="Planet" class="boxchecked" /><label for="Planet">Planet</label></div>
     </li>
     <li>
-        <div><input type="checkbox" name="questionCategories[]" value="World" id="World" /><label for="World">World</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="World" id="World" class="boxchecked" /><label for="World">World</label></div>
     </li>
 	<li>
-        <div><input type="checkbox" name="questionCategories[]" value="Hygiene" id="Hygiene" /><label for="Hygiene">Hygiene</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Hygiene" id="Hygiene" class="boxchecked" /><label for="Hygiene">Hygiene</label></div>
     </li>
     <li>
-        <div><input type="checkbox" name="questionCategories[]" value="Philosophy" id="Philosophy" /><label for="Philosophy">Philosophy</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Philosophy" id="Philosophy" class="boxchecked" /><label for="Philosophy">Philosophy</label></div>
     </li>
 	<li>
-        <div><input type="checkbox" name="questionCategories[]" value="Psychology" id="Psychology" /><label for="Psychology">Psychology</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Psychology" id="Psychology" class="boxchecked" /><label for="Psychology">Psychology</label></div>
     </li>
     <li>
-        <div><input type="checkbox" name="questionCategories[]" value="Food" id="Food"  /><label for="Food">Food</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Food" id="Food" class="boxchecked" /><label for="Food">Food</label></div>
     </li>
 	<li>
-        <div><input type="checkbox" name="questionCategories[]" value="Gardening-and-Agriculture" id="Gardening-and-Agriculture" /><label for="Gardening-and-Agriculture">Gardening and Agriculture</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Gardening-and-Agriculture" id="Gardening-and-Agriculture" class="boxchecked" /><label for="Gardening-and-Agriculture">Gardening and Agriculture</label></div>
     </li>
     <li>
-        <div><input type="checkbox" name="questionCategories[]" value="Occupation" id="Occupation" /><label for="Occupation">Occupation</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Occupation" id="Occupation" class="boxchecked" /><label for="Occupation">Occupation</label></div>
     </li>
 	<li>
-        <div><input type="checkbox" name="questionCategories[]" value="Flowers" id="Flowers" /><label for="Flowers">Flowers</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Flowers" id="Flowers" class="boxchecked" /><label for="Flowers">Flowers</label></div>
     </li>
     <li>
-        <div><input type="checkbox" name="questionCategories[]" value="Peace" id="Peace" /><label for="Peace">Peace</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Peace" id="Peace" class="boxchecked" /><label for="Peace">Peace</label></div>
     </li>
 	<li>
-        <div><input type="checkbox" name="questionCategories[]" value="Freedom" id="Freedom" /><label for="Freedom">Freedom</label></div>
+        <div><input type="checkbox" name="questionCategories[]" value="Freedom" id="Freedom" class="boxchecked" /><label for="Freedom">Freedom</label></div>
     </li>
 	<input type="hidden" name="question-id" value="<?php  echo $_GET["id"]; ?>" />
 </ul>
@@ -47,6 +50,31 @@ The email to send an answer to: <input name="questionaddress" type="email" id="q
 </form>
 </div>
 <script type="text/javascript">
+$.ajaxSetup ({
+    cache: false
+});
+$(document).ready(function(){
+   $('.boxchecked').click(function () {
+   var x = $('.boxchecked:checked').length;
+      if (x > 0){
+      $('#none').removeAttr("checked");
+      }
+   });
+
+ $('body').click(function () {
+    var x = $('.boxchecked:checked').length;
+     if (x == 0){
+     $('#none').attr("checked","checked");
+     }
+   });
+   $('body').click(function () {
+    var x = $('#none:checked').length;
+     if (x > 0){
+     $("input[type=checkbox][name='questionCategories[]']").removeAttr("checked").removeAttr("disabled");
+     }
+   });
+
+});
 $("input[type=checkbox][name='questionCategories[]']").click(function() {
 
     var bol = $("input[type=checkbox][name='questionCategories[]']:checked").length >= 3;     
@@ -60,6 +88,7 @@ var dataString = $(form).serialize();
 
 
 $.ajax({
+	cache: false,
     type:'POST',
     url:'categorizeQuestionToDatabase.php',
     data: dataString,

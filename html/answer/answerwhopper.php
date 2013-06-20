@@ -61,7 +61,9 @@ echo "Not satisfied yet ..."; }; ?>
  			$.ajax({
       			type: "POST",
       			url: "savedAnswerProtect.php?id=<?php echo $_GET["id"]; ?>",
+				complete: function() {
+				$('#answerdiv').load('savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>').fadeIn(1000);
+				}
 				});
-			$('#answerdiv').load('savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>').fadeIn(1000);
 							return false; });
 		</script>

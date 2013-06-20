@@ -32,9 +32,11 @@ $('#clickSendQuestion').click(function(){
  			$.ajax({
       			type: "POST",
       			url: "verify/createactivation.php?id=<?php echo $_GET["id"]; ?>",
-				});
+				complete: function () {
 		$('#createActivationResult').load('verify/createactivationresult.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
 		$('#savedQuestionPrepareToSend').slideUp(1000);
+		}
+		});
 		return false; 
 		});
 </script>

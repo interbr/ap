@@ -21,10 +21,12 @@ $(function(){ /* Send Question-ID and Question to "savequestion.php" ans preview
  			$.ajax({
       			type: "POST",
       			url: "savequestion.php?id=<?php echo $_GET["id"]; ?>",
-				data: dataString
-				});
+				data: dataString,
+				complete: function () {				
 		$('#previewQuestion').load('previewquestion.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
 		$('#writeQuestionIDInfo').slideUp(1000);
+		}
+		});
 		return false; });
 		});
 </script>
