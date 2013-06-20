@@ -19,9 +19,8 @@ $(function(){
  			$.ajax({
       			type: "POST",
       			url: "sendanswer.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>",
-				complete: function() {
-				$('#answerSentResult').load('answersentresult.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
-				$('#sendAnswerButton').slideUp(1000);
+				success: function() {
+				$("#sendAnswer").load('questionSent.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
 				}
 				});
 						return false; });

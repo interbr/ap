@@ -26,7 +26,7 @@ try {
 			$.ajax({
 				cache: false,
 				type: 'GET',
-				url: 'questionSent.php?id=<?php echo $_GET["id"]; ?>',
+				url: 'questionSent.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>',
 				timeout: 2000,
 				success: function(data) {
 				  $("#sendAnswer").html(data);
