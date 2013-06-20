@@ -10,7 +10,7 @@ $sentStatus = $row['answer_sent'];
 $dbhandle->close();
 ?>
 <?php if ( $sentStatus != "1" ) {
-echo "<div id=\"sendAnswerButton\"><button id=\"clickSendAnswer\">Send Answer</button></div><br />"; }
+echo "<div id=\"sendAnswerButton\"><button id=\"clickSendAnswer\">Send Answer</button></div>"; }
 else {
 echo "Answer has been sent!"; }; ?>
 <script type="text/javascript">
@@ -20,15 +20,9 @@ $(function(){
       			type: "POST",
       			url: "sendanswer.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>",
 				success: function() {
-				$("#sendAnswer").load('questionSent.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+				$("#sendAnswer").load('answerSent.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
 				}
 				});
 						return false; });
 		});
-		<?php if ( $sentStatus != "1" ) {
-		echo "function update() {	
-		}
-			$(document).ready(function() {
-				update();
-			});"; } ?>
 </script>

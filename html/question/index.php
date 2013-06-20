@@ -15,6 +15,7 @@ require_once(__ROOT__.'/../php/question.php'); // a functions file
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		<script type="text/javascript">
 		$(function(){
@@ -32,7 +33,7 @@ require_once(__ROOT__.'/../php/question.php'); // a functions file
 		<div id="openQuestion"></div>
 		<div id="writeQuestion"></div>
 		<div id="previewQuestion"></div>
-		<div id="categorizeQuestion"></div>
+		<div id="categorizeQuestionDiv"></div>
 		<div id="savedQuestionPrepare"></div>
 		<div id="createActivationResult"></div>
         </div>

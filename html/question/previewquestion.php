@@ -21,7 +21,7 @@ ID is: <?php echo $_GET["id"]; ?>
 
 $(function(){ 
 		$('#clickCategorizeQuestion').click(function(){
-		$('#categorizeQuestion').load('categorizequestion.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+		$('#categorizeQuestionDiv').load('categorizequestion.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
 		$('#writeQuestionTextarea').slideUp(1000);
 		$('#previewQuestionInfo').slideDown(1000);
 		$('#buttonCategorizeQuestion').slideUp(1000);
@@ -29,7 +29,7 @@ $(function(){
 		});
 $(function(){ 
 		$('#clickCategorizeQuestion_2').click(function(){
-		$('#categorizeQuestion').slideDown(1000);
+		$('#categorizeQuestionDiv').slideDown(1000);
 		$('#writeQuestionTextarea').slideUp(1000);
 		$('#previewQuestionInfo').slideDown(1000);
 		$('#buttonCategorizeQuestion_2').slideUp(1000);

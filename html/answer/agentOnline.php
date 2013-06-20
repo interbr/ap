@@ -69,7 +69,7 @@ echo "Not ready yet ..."; }; ?>
 					type: 'POST',
 					url: "startAnswerAll.php?id=<?php echo $_GET["id"]; ?>",
 					complete: function() {
-					$('#answerdiv').load('/answer/answer.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"] ?>').fadeIn(1000).clearTimeout(updateonlinetimer);
+					$('#answerdiv').load('/answer/answer.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"] ?>').fadeIn(1000);
 				}
 				});
 				}

@@ -1,4 +1,4 @@
-<div class="textdiv" id="categorizeQuestion">
+<div class="textdiv" id="categorizeQuestionDiv">
 <br />
 <form id="categorizeQuestion" name="categorizeQuestion" class="categorizeQuestion" method="post">
 Subject for your question: <input name="subject" type="text" id="subject" /><br /><br />
@@ -43,9 +43,9 @@ Categories for your question (up to three):<br /><br />
 	<input type="hidden" name="question-id" value="<?php  echo $_GET["id"]; ?>" />
 </ul>
 <br />
-The email to send an answer to: <input name="questionaddress" type="email" id="questionaddress" /><br />
+The email to send an answer to: <input name="questionaddress" type="email" id="questionaddress" required /><br />
 <br />
-<input id="submit" type="submit" name="submit" value="Save question" onclick="return submitForm()" />
+<input id="submit" type="submit" name="submit" value="Save question" />
 <button id="clickChangeQuestion">Change Question</button>
 </form>
 </div>
@@ -81,32 +81,34 @@ $("input[type=checkbox][name='questionCategories[]']").click(function() {
     $("input[type=checkbox][name='questionCategories[]']").not(":checked").attr("disabled",bol);
 
 });
-function submitForm() {
-var form = document.categorizeQuestion;
-
-var dataString = $(form).serialize();
-
-
-$.ajax({
-	cache: false,
-    type:'POST',
-    url:'categorizeQuestionToDatabase.php',
-    data: dataString,
-    success: function(){
-        $('#savedQuestionPrepare').load('savedquestionpreparetoverify.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
-		$('#categorizeQuestion').slideUp(1000);
-		$('#previewQuestionSlide').slideUp(1000);
-    }
-});
+$('#submit').click(function () {
+    $("#categorizeQuestion").validate({
+        submitHandler: function(form) {
+            var form = document.categorizeQuestion;
+			var dataString = $(form).serialize();
+			$.ajax({
+			cache: false,
+			type:'POST',
+			url:'categorizeQuestionToDatabase.php',
+			data: dataString,
+			success: function(){
+				$('#savedQuestionPrepare').load('savedquestionpreparetoverify.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+				$('#categorizeQuestionDiv').slideUp(1000);
+				$('#previewQuestionSlide').slideUp(1000);
+			}
+		});
 return false;
-}
+
+        }
+    });
+});
 $(function(){ 
 		$('#clickChangeQuestion').click(function(){
 		$('#writeQuestionTextarea').slideDown(1000);
 		$('#buttonCategorizeQuestion_2').slideDown(1000);
 		$('#previewQuestionInfo').slideUp(1000);
 		$('#previewQuestionText').slideUp(1000);
-		$('#categorizeQuestion').slideUp(1000);
+		$('#categorizeQuestionDiv').slideUp(1000);
 		return false; });
 		});
 </script>
