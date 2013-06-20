@@ -4,8 +4,8 @@ require_once(__ROOT__.'/../php/configuration.php'); //a file with configurations
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $whyAgent = mysqli_real_escape_string($dbhandle,$_POST["whyAgent"]);
 $agentcontinent = $_POST["agentContinent"];
-$wantedCategories =  implode(",",$_POST["agentWantedCategories"]);
-$unwantedCategories =  implode(",",$_POST["agentUnwantedCategories"]);
+$wantedCategories =  $_POST["agentWantedCategories"];
+$unwantedCategories =  $_POST["agentUnwantedCategories"];
 $agentemail = $_POST["agentaddress"];
 $query = "INSERT INTO agents (whyAgent, continent, wanted, unwanted, email, active) VALUES ('".$whyAgent."', '".$agentcontinent."', '".$wantedCategories."', '".$unwantedCategories."', '".$agentemail."', '1')";
 $dbhandle->query($query);

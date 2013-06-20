@@ -1,1 +1,1 @@
-<div class="textdiv">Thank You!</div> <!-- placeholder -->
+Thank You! <!-- placeholder -->
