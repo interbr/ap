@@ -4,7 +4,7 @@ $fy = "../../content/".$_GET["id"].".txt"; //questionfile
 <div id="previewQuestionSlide">
 <div class="textdiv" id="previewQuestionInfo">Your question will be:</div>
 <div class="textdiv" id="previewQuestionText">
-<?php echo nl2br( file_get_contents($GLOBALS["fy"]) ); ?> <!-- preview questionfile-content with linebreaks -->
+<?php echo strip_tags(nl2br( file_get_contents($GLOBALS["fy"]) ) ); ?> <!-- preview questionfile-content with linebreaks -->
 <br /><br />
 ID is: <?php echo $_GET["id"]; ?>
 <br />

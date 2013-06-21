@@ -3,26 +3,26 @@ define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/../php/configuration.php'); //a file with configurations
 require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-api-class
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
-$questionToSend = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$_GET["id"]."'");
+$questionToSend = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$dbhandle->real_escape_string($_GET["id"])."'");
 while($questionrow = $questionToSend->fetch_assoc()) {
 $questionfile = "../../content/".$questionrow['questionID'].".txt"; //questionfile
-$questionSubject = $questionrow['subject'];
-$categories = $questionrow['questionCategories'];
-$questionIDfromDB = $questionrow['questionID'];
-$timeofsending = $questionrow['time-of-sending'];
+$questionSubject = strip_tags($questionrow['subject']);
+$categories = strip_tags($questionrow['questionCategories']);
+$questionIDfromDB = strip_tags($questionrow['questionID']);
+$timeofsending = strip_tags($questionrow['time-of-sending']);
 $questionverified = $questionrow['active'];
 $questionsent = $questionrow['sent'];
 };
 if ( $questionverified == '1' ) {
 if ( $questionsent != '1') {
-$writeSent = "UPDATE questions SET sent = '1' WHERE questionID = '".$_GET["id"]."'";
+$writeSent = "UPDATE questions SET sent = '1' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writeSent);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
-$agentspool = $dbhandle->query("SELECT * FROM agents WHERE active='1' ORDER BY RAND() LIMIT 0,5");
+$agentspool = $dbhandle->query("SELECT * FROM agents WHERE (active='1' AND blocked!='1') ORDER BY RAND() LIMIT 0,5");
 $agentsresult = array();
 $counter = 1;
 while ($agentrow = mysqli_fetch_array($agentspool)) {
-    $agentsresult["agent".$counter] =  $agentrow["email"];
+    $agentsresult["agent".$counter] = $agentrow["email"];
     $counter = $counter + 1;
 }
 $timetoanswer = time() + 3600;
@@ -30,8 +30,8 @@ $timedisplay = date('c',$timetoanswer);
 
 extract($agentsresult);
 
-$subject = "Test-Question: ".$_GET["id"]." Subject: ".$questionSubject;
-$msg = file_get_contents($questionfile);
+$subject = "Test-Question: ".strip_tags($_GET["id"])." Subject: ".strip_tags($questionSubject);
+$msg = strip_tags(file_get_contents($questionfile));
 $receipients = array(
 	'agent1' => $agent1,
     'agent2' => $agent2,
@@ -61,10 +61,10 @@ try {
   echo "\n\ncreateGroupPad Failed with message ". $e->getMessage();
 }
 
-$writePadData = "INSERT INTO answer_access (questionID, groupID, padID, timetoanswerSession) VALUES ('".$_GET["id"]."','".$groupID."','".$padID."','".$timetoanswer."') ON DUPLICATE KEY UPDATE groupID=VALUES(groupID), padID=VALUES(padID), timetoanswerSession=VALUES(timetoanswerSession)";
+$writePadData = "INSERT INTO answer_access (questionID, groupID, padID, timetoanswerSession) VALUES ('".$dbhandle->real_escape_string($_GET["id"])."','".$dbhandle->real_escape_string($groupID)."','".$dbhandle->real_escape_string($padID)."','".$dbhandle->real_escape_string($timetoanswer)."') ON DUPLICATE KEY UPDATE groupID=VALUES(groupID), padID=VALUES(padID), timetoanswerSession=VALUES(timetoanswerSession)";
 $dbhandle->query($writePadData);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
-$writeAnswerSystemData = "INSERT INTO answer_start_system (questionID) VALUES ('".$_GET["id"]."')";
+$writeAnswerSystemData = "INSERT INTO answer_start_system (questionID) VALUES ('".$dbhandle->real_escape_string($_GET["id"])."')";
 $dbhandle->query($writeAnswerSystemData);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
@@ -74,6 +74,10 @@ $headers = "From: no-reply@amored-police.org\r\n" .
 	"Reply-To: no-reply@amored-police.org\r\n" .
     "Content-type:  text/plain; charset=utf-8\r\n" ;
 foreach ($receipients as $agentcode => $agentaddress) {
+	$query_pcode = $dbhandle->query("SELECT * FROM agents WHERE email='".$agentaddress."' LIMIT 1");
+    while($pcode_row = $query_pcode->fetch_assoc()) {
+	$pcodesend = $pcode_row['pcode'];
+};
 try {
   $author = $instance->createAuthor($agentaddress); // This really needs explaining..
   $authorID = $author->authorID;
@@ -91,10 +95,12 @@ It has the subject: $questionSubject\n
 It is sorted to the following categories: $categories\n
 The Question is:\n\n$msg\n
 15 Minutes to answer this question with the other agents will start in UTC $timedisplay\n 
-Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/index.php?id=$questionIDfromDB&agentcode=$agentcode&authorID=$authorID\n";
+Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/index.php?id=$questionIDfromDB&agentcode=$agentcode&authorID=$authorID\n\n
+If you want to pause your account, follow this link: ".$GLOBALS["aphost"]."/agentstatus/change.php?email=".urlencode($agentaddress)."&pcode=$pcodesend&status=0\n
+If at any time you want to reactivate your account: ".$GLOBALS["aphost"]."/agentstatus/change.php?email=".urlencode($agentaddress)."&pcode=$pcodesend&status=1";
 // send mail
 mail($agentaddress, $subject, $message, $headers);
-$writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$authorID."', ".$agentcode."sessionID = '".$agentsessionID."' WHERE questionID = '".$_GET["id"]."'";
+$writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$dbhandle->real_escape_string($authorID)."', ".$dbhandle->real_escape_string($agentcode)."sessionID = '".$dbhandle->real_escape_string($agentsessionID)."' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writePadDataAgents);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 }

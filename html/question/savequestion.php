@@ -1,5 +1,5 @@
 <?php
-$content = $_POST['question'];
+$content = strip_tags($_POST['question']);
 $fw = "../../content/".$_GET["id"].".txt";
 
     $fp = fopen($GLOBALS["fw"],"w") or die ("Error opening file in write mode!");

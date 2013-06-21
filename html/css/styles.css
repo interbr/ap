@@ -7,21 +7,21 @@ textarea {
 	font-size: 100%;
 	-webkit-text-size-adjust: 100%;
 }
-body { margin:20px 0px; padding:0px; text-align:center; background: #000; font-size: 14px; }
+body { margin:20px 0px; padding:0px; text-align:center; background: #bbb; font-size: 14px; }
 .page { 
 	margin: 0 auto; 
 	padding: 20px 10px 20px 10px; 
 	width: 600px; 
 	background: #ddd;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+	border: 1px solid #fff;
+	
 }
 .textdiv {
 	background: #fff;
 	margin: 10px 20px 10px 20px;
 	padding: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
+	border: 1px solid #ccc;
+	
 	max-width: 540px;
 }
 #categorizeQuestion ul{

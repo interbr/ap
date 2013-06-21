@@ -2,7 +2,7 @@
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/configuration.php'); //a file with configurations
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
-$questionPreview = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$_GET["id"]."'");
+$questionPreview = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$dbhandle->real_escape_string($_GET["id"])."'");
 while($row = $questionPreview->fetch_assoc()) {
 $questionfile = "../../content/".$row['questionID'].".txt"; //questionfile
 $subject = $row['subject'];
@@ -12,20 +12,14 @@ $questionaddress = $row['email'];
 };
 $dbhandle->close();
 ?>
-<div class="textdiv" id="savedQuestionPrepareToSend">
-Your question is saved on server. Don't forget to send it.<br /><br />
-Your question is saved with ID: <?php echo $_GET["id"]; ?><br /><br />
-It has the subject:<br /><br />
-<?php echo $subject ?><br /><br />
-It has the Content:<br /><br />
-<?php echo nl2br( file_get_contents($questionfile) ); ?><br /><br />
-It's sorted to the Categories:<br /><br />
-<?php echo $categories ?><br /><br />
-It will be send with the following ID:<br /><br />
-<?php echo $questionIDfromDB ?><br /><br />
-The answer will be send to the following address:<br /><br />
-<?php echo $questionaddress ?><br /><br />
-<button id="clickSendQuestion">Verify Question</button>
+<div id="savedQuestionPrepareToVerify">
+<div class="textdiv">Your question is saved on server. Don't forget to send it.</div>
+<div class="textdiv"><i>Your question is saved with ID:</i> <?php echo strip_tags($_GET["id"]); ?></div>
+<div class="textdiv"><i>It has the subject:</i><br /><?php echo strip_tags($subject) ?></div>
+<div class="textdiv"><i>It has the Content:</i><br /><?php echo strip_tags(nl2br( file_get_contents($questionfile) ) ); ?></div>
+<div class="textdiv"><i>It's sorted to the Categories:</i><br /><?php echo strip_tags($categories) ?></div>
+<div class="textdiv"><i>The answer will be send to the following address:</i><br /><?php echo strip_tags($questionaddress) ?></div>
+<div class="textdiv"><button id="clickSendQuestion">Verify Question</button></div>
 </div>
 <script type="text/javascript">
 $('#clickSendQuestion').click(function(){
@@ -34,7 +28,7 @@ $('#clickSendQuestion').click(function(){
       			url: "verify/createactivation.php?id=<?php echo $_GET["id"]; ?>",
 				complete: function () {
 		$('#createActivationResult').load('verify/createactivationresult.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
-		$('#savedQuestionPrepareToSend').slideUp(1000);
+		$('#savedQuestionPrepareToVerify').slideUp(1000);
 		}
 		});
 		return false; 

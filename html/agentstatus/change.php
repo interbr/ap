@@ -1,23 +1,25 @@
 <?php 
 define('__ROOT__', dirname(dirname(__FILE__))); 
-require_once(__ROOT__.'/../../php/configuration.php'); //a file with configurations
+require_once(__ROOT__.'/../php/configuration.php'); //a file with configurations
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 if (isset($_GET['email']) && preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/',
  $_GET['email'])) {
  $email = strip_tags($_GET['email']);
 }
-if (isset($_GET['key']) && (strlen($_GET['key']) == 32))
+if (isset($_GET['pcode']) && (strlen($_GET['pcode']) == 32))
  //The Activation key will always be 32 since it is MD5 Hash
  {
- $key = strip_tags($_GET['key']);
+ $pcode = strip_tags($_GET['pcode']);
 }
-$questionID = strip_tags($_GET['id']);
-if (isset($email) && isset($key)) {
+if (isset($_GET['status']) && (strlen($_GET['status']) == 1))
+ {
+ $activestatuswanted = strip_tags($_GET['status']);
+}
 
- // Update the database to set the "activation" field to null
+if (isset($email) && isset($pcode) && isset($activestatuswanted)) {
 
- $query_activate_question = "SELECT * FROM question_verify WHERE(email ='".$dbhandle->real_escape_string($email)."' AND activationkey='".$dbhandle->real_escape_string($key)."')LIMIT 1";
- $dbhandle->query($query_activate_question);
+ $query_change_agent_status = "SELECT * FROM agents WHERE(email ='".$dbhandle->real_escape_string($email)."' AND pcode='".$dbhandle->real_escape_string($pcode)."')LIMIT 1";
+ $dbhandle->query($query_change_agent_status);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<head>
@@ -36,22 +38,29 @@ if (isset($email) && isset($key)) {
 <div class="textdiv"><?php
 		
  // Print a customized message:
- if (mysqli_affected_rows($dbhandle) == 1) //if update query was successfull
+ if (mysqli_affected_rows($dbhandle) == 1)
  {
- $query_activate_question2 = "UPDATE questions SET active='1' WHERE(questionID ='".$dbhandle->real_escape_string($questionID)."')LIMIT 1";
- $dbhandle->query($query_activate_question2);
- echo 'Your question is now active. You may now <br /><br /><a href="/question/verifiedquestion.php?id='.$questionID.'"><button>Send your question</button></a><br /><br />on the next page ..';
+	$query_active = $dbhandle->query("SELECT active FROM agents WHERE(email ='".$dbhandle->real_escape_string($email)."' AND pcode='".$dbhandle->real_escape_string($pcode)."')LIMIT 1");
+    while($active_row = $query_active->fetch_assoc()) {
+	$activestatus = $active_row['active'];
+	};
+	
+ if ( $activestatuswanted == $activestatus ) {
+ echo "You are already ".$activestatuswanted; }
+ else {
+ $query_change_agent_status2 = "UPDATE agents SET active='".$dbhandle->real_escape_string($activestatuswanted)."' WHERE(email ='".$dbhandle->real_escape_string($email)."' AND pcode='".$dbhandle->real_escape_string($pcode)."')LIMIT 1";
+ $dbhandle->query($query_change_agent_status2);
+ echo 'You are now '.$activestatuswanted;
+ };
 
  } else {
  echo 'Oops! Your question could not be activated. Please recheck the link or contact the system administrator.';
 
  }
-
- mysqli_close($dbhandle);
-
 } else {
  echo '<div>Error Occured.</div>';
 }
+mysqli_close($dbhandle);
 ?>
 </div>
 </div>

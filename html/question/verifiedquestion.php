@@ -2,7 +2,7 @@
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/configuration.php'); //a file with configurations
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
-$questionPreview = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$_GET["id"]."'");
+$questionPreview = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$dbhandle->real_escape_string($_GET["id"])."'");
 while($row = $questionPreview->fetch_assoc()) {
 $questionfile = "../../content/".$row['questionID'].".txt"; //questionfile
 $subject = $row['subject'];
@@ -22,29 +22,25 @@ $dbhandle->close();
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		</head>
 		<body> 
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
-<div class="textdiv" id="savedQuestionPrepareToSend">
-Your question is saved on server. Don't forget to send it.<br /><br />
-Your question is saved with ID: <?php echo $_GET["id"]; ?><br /><br />
-It has the subject:<br /><br />
-<?php echo $subject ?><br /><br />
-It has the Content:<br /><br />
-<?php echo nl2br( file_get_contents($questionfile) ); ?><br /><br />
-It's sorted to the Categories:<br /><br />
-<?php echo $categories ?><br /><br />
-It will be send with the following ID:<br /><br />
-<?php echo $questionIDfromDB ?><br /><br />
-The answer will be send to the following address:<br /><br />
-<?php echo $questionaddress ?><br /><br />
-<?php if ( $questionverified == '1' ) {
+<div id="savedQuestionPrepareToSend">
+<div class="textdiv">Your question is saved on server. Don't forget to send it.</div>
+<div class="textdiv"><i>Your question is saved with ID:</i> <?php echo strip_tags($_GET["id"]); ?></div>
+<div class="textdiv"><i>It has the subject:</i><br /><?php echo strip_tags($subject) ?></div>
+<div class="textdiv"><i>It has the Content:</i><br /><?php echo strip_tags(nl2br( file_get_contents($questionfile) ) ); ?></div>
+<div class="textdiv"><i>It's sorted to the Categories:</i><br /><?php echo strip_tags($categories) ?></div>
+<div class="textdiv"><i>The answer will be send to the following address:</i><br /><?php echo strip_tags($questionaddress) ?></div>
+<div class="textdiv">Please be careful! Your question will be sent randomly to 5 email-addresses chosen from the agent-database of this website. The answer might be obscene, immature or most important: wrong! This website-system takes no influence on quality or content of answers.</div>
+<div class="textdiv"><?php if ( $questionverified == '1' ) {
 echo "<button id=\"clickSendQuestion\">Send Question</button>"; }
 else {
 echo "Not varified"; }; ?>
+</div>
 </div>
 </div>
 <script type="text/javascript">
