@@ -17,9 +17,6 @@ $dbhandle->close();
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="description" content="Platform for people to write to and get questions answered by other people.">
-		<meta http-equiv="Pragma" content="no-cache">
-		<meta http-equiv="Cache-Control" content="no-cache">
-		<meta http-equiv="Expires" content="-1">
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="stylesheet" href="/css/mediaelementplayer.min.css" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
