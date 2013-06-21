@@ -18,7 +18,7 @@ if ( $questionsent != '1') {
 $writeSent = "UPDATE questions SET sent = '1' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writeSent);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
-$agentspool = $dbhandle->query("SELECT * FROM agents WHERE (active='1' AND blocked!='1') ORDER BY RAND() LIMIT 0,5");
+$agentspool = $dbhandle->query("SELECT * FROM agents WHERE (active='1') ORDER BY RAND() LIMIT 0,5");
 $agentsresult = array();
 $counter = 1;
 while ($agentrow = mysqli_fetch_array($agentspool)) {

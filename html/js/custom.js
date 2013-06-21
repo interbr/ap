@@ -1,0 +1,3 @@
+function playbell() {
+		player.play();
+		}

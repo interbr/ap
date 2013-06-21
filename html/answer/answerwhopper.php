@@ -42,8 +42,8 @@ echo "Not satisfied yet ..."; }; ?>
 			var loadlink = 'savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>';
 			$("#answerdiv").load(loadlink).fadeIn(1000);
 			}			
-		<?php if ( $answered == "1" ) { 
-				echo "$(document).ready(function() { closequestion(); });"; } else { echo ";"; }; ?>
+				<?php if ( $answered == "1" ) { 
+				echo "playbell(); $(document).ready(function() { closequestion(); });"; } else { echo ";"; }; ?>
 				
 			$('#clickSatisfiedAnswer_<?php echo $_GET["agentcode"]; ?>').click(function(){
 			$.ajax({
@@ -62,6 +62,7 @@ echo "Not satisfied yet ..."; }; ?>
       			type: "POST",
       			url: "savedAnswerProtect.php?id=<?php echo $_GET["id"]; ?>",
 				complete: function() {
+				playbell();
 				$('#answerdiv').load('savedanswerpreview.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>').fadeIn(1000);
 				}
 				});

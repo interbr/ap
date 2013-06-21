@@ -39,7 +39,7 @@ $agent5_text = $agent5Online == 1 ? "Ready!" : "Offline?";
 <?php if ( $onlinetotal >= "3" ) {
 echo "You are ready!<br /><br /><div id=\"readyAnswerButton\"><button id=\"clickStartAnswer\">Start answering.</button><br /></div>"; }
 else {
-echo "Not ready yet ..."; }; ?>
+echo "Not ready yet ..."; }; ?> 
 </div>
 <script type="text/javascript">
 		function startquestion() {
@@ -48,6 +48,7 @@ echo "Not ready yet ..."; }; ?>
       			type: "POST",
       			url: "setSessionCookie.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"]; ?>&groupID=<?php $_GET["groupID"]; ?>",
 				complete: function() {
+				playbell();
 				$("#answerdiv").load(loadlink).fadeIn(1000);
 				}
 				});
@@ -69,6 +70,7 @@ echo "Not ready yet ..."; }; ?>
 					type: 'POST',
 					url: "startAnswerAll.php?id=<?php echo $_GET["id"]; ?>",
 					complete: function() {
+					playbell();
 					$('#answerdiv').load('/answer/answer.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"] ?>').fadeIn(1000);
 				}
 				});

@@ -21,11 +21,13 @@ $dbhandle->close();
 		<meta http-equiv="Cache-Control" content="no-cache">
 		<meta http-equiv="Expires" content="-1">
 		<link rel="stylesheet" href="/css/styles.css">
+		<link rel="stylesheet" href="/css/mediaelementplayer.min.css" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		<script type="text/javascript" src="/js/etherpad-ap.js"></script>
+		<script type="text/javascript" src="/js/mediaelement-and-player.min.js"></script>
 		<script type="text/javascript">
 			function update() {	
 			$.ajax({
@@ -53,5 +55,9 @@ $dbhandle->close();
         <div class="page">
 		<div id="answerdiv"><div class="textdiv" id="online_status"></div></div>
         </div>
+		<div style="visibility: hidden;"><audio id="startbell" src="/js/sebell.mp3"></audio></div>
+		<script type="text/javascript">
+		var player = new MediaElementPlayer('#startbell', { startVolume: 0.2 } );
+		</script>
     </body>
 </html>
