@@ -34,6 +34,9 @@ $agentsAlreadySentArray = explode(",", $agentsAlreadySentResult);
 
 $forwardedAgentAddressQuery = $dbhandle->query("SELECT * FROM agents WHERE (active='1') AND (NOT FIND_IN_SET(email, '$agentsAlreadySentResult')) ORDER BY RAND() LIMIT 0,1");
 if (mysqli_affected_rows($dbhandle) == 1) {
+
+require_once (__ROOT__.'/../php/class.phpmailer.php');
+
 while($forwardedrow = $forwardedAgentAddressQuery->fetch_assoc()) {
 $forwardedAgentAddress = strip_tags($forwardedrow['email']);
 $forwardedAgentPcode = strip_tags($forwardedrow['pcode']);
@@ -71,27 +74,51 @@ $writeForwardedAgentData = "UPDATE answer_access SET $agentcodeForwarding = '".$
 $dbhandle->query($writeForwardedAgentData);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
-
-
-// mail settings
-$headers = "From: no-reply@amored-police.org\r\n" .
-	"Reply-To: no-reply@amored-police.org\r\n" .
-    "Content-type:  text/plain; charset=utf-8\r\n" ;
-
-$message = "You just received a forwarded question\n
-It has the subject: $questionSubject\n
-It is sorted to the following categories: $categories\n
-The Question is:\n\n$msg\n
-You and the other four agents who received this question will have 90 minutes to answer this question. Why not meet in 30 minutes (GMT $timetomeetdisplay)?\n
-GMT (Greenwich mean time) is i.e. Berlin-time -2, Chicago-time +6, Hong-Kong-time -8 ...\n 
-Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/index.php?id=$questionIDfromDB&agentcode=$agentcodeForwarding&authorID=$forwardedAuthorID\n
-If you have no time to answer the question, too: ".$GLOBALS["aphost"]."/forward/forward.php?id=$questionIDfromDB&agentcode=$agentcodeForwarding&authorID=$forwardedAuthorID\n\n
-If you want to pause your account, follow this link: ".$GLOBALS["aphost"]."/agentstatus/change.php?email=".urlencode($forwardedAgentAddress)."&pcode=$forwardedAgentPcode&status=0\n
-If at any time you want to reactivate your account: ".$GLOBALS["aphost"]."/agentstatus/change.php?email=".urlencode($forwardedAgentAddress)."&pcode=$forwardedAgentPcode&status=1\n\n
-If you want to delete your account: ".$GLOBALS["aphost"]."/agentstatus/deleteaccount.php?email=".urlencode($forwardedAgentAddress)."&pcode=$forwardedAgentPcode&delete=1\n\n
-For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org\n";
 // send mail
-mail($forwardedAgentAddress, $subject, $message, $headers);
+
+//Create a new PHPMailer instance
+$mail = new PHPMailer();
+// Set PHPMailer to use the sendmail transport
+$mail->IsSendmail();
+//Set who the message is to be sent from
+$mail->SetFrom('no-reply@amored-police.org', 'Amored Police question-answer-system');
+//Set an alternative reply-to address
+$mail->AddReplyTo('no-reply@amored-police.org','Amored Police question-answer-system');
+//Set who the message is to be sent to
+$mail->AddAddress($forwardedAgentAddress);
+//Set the subject line
+$mail->Subject = $subject;
+$mail->IsHTML(false);
+//Read an HTML message body from an external file, convert referenced images to embedded, convert HTML into a basic plain-text alternative body
+$mail->Body = 'You just received a forwarded question!
+
+It has the subject: '.$questionSubject.'
+It is sorted to the following categories: '.$categories.'
+
+The Question is:
+'.$msg.'
+
+You and the other four agents who received this question will have 90 minutes to answer this question. Why not meet in 30 minutes (GMT '.$timetomeetdisplay.')?
+GMT (Greenwich mean time) is i.e. Berlin-time -2, Chicago-time +6, Hong-Kong-time -8 ...
+
+Follow this link to answer the question: '.$GLOBALS["aphost"].'/answer/index.php?id='.$questionIDfromDB.'&agentcode='.$agentcodeForwarding.'&authorID='.$forwardedAuthorID.'
+
+If you have no time to answer the question, too: '.$GLOBALS["aphost"].'/forward/forward.php?id='.$questionIDfromDB.'&agentcode='.$agentcodeForwarding.'&authorID='.$forwardedAuthorID.'
+
+
+If you want to pause your account, follow this link: '.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=0
+If at any time you want to reactivate your account: '.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=1
+If you want to delete your account: '.$GLOBALS["aphost"].'/agentstatus/deleteaccount.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&delete=1
+
+For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
+
+//Send the message, check for errors
+if(!$mail->Send()) {
+  echo "Mailer Error: " . $mail->ErrorInfo;
+} else {
+  echo "Message sent!";
+}
+
 }
 else {
 echo "No agent found"; };
