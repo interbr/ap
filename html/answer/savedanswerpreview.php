@@ -13,7 +13,7 @@ $instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpa
 try {
   $padContents = $instance->getText($_GET["pad"]);
   $answerPreview = nl2br( $padContents->text );
-  echo "<div class=\"textdiv\">The Answer is as follows:<br /><br />$answerPreview<br /></div>";
+  echo "<div class=\"textdiv\">The Answer is as follows:<br /><br />$answerPreview</div>";
 } catch (Exception $e) {
   // the pad already exists or something else went wrong
   echo "<div class=\"textdiv\">getText Failed with message ". $e->getMessage()."</div>";

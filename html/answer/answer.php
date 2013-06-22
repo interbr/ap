@@ -41,7 +41,7 @@ $dbhandle->close();
 				  window.setTimeout(update, 4000);
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
-				  $("#savedAnswerWait").html('<div class="textdiv">Timeout contacting server..</div>');
+				  $("#savedAnswerWait").html('Timeout contacting server..');
 				  window.setTimeout(update, 8000);
 				}
 			});

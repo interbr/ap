@@ -37,7 +37,7 @@ $dbhandle->close();
 				  window.setTimeout(update, 4000);
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
-				  $("#online_status").html('<div class="textdiv">Timeout contacting server..</div>');
+				  $("#online_status").html('Timeout contacting server..');
 				  window.setTimeout(update, 8000);
 				}
 			});
@@ -50,6 +50,7 @@ $dbhandle->close();
 		<body> 
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
+		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 		<div id="answerdiv"><div class="textdiv" id="online_status"></div></div>
         </div>
 		<div style="visibility: hidden;"><audio id="startbell" src="/js/sebell.mp3"></audio></div>

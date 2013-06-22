@@ -28,9 +28,10 @@ $dbhandle->close();
 		<body> 
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
+		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 <div id="savedQuestionPrepareToSend">
 <div class="textdiv">Your question is saved on server. Don't forget to send it.</div>
-<div class="textdiv"><i>Your question is saved with ID:</i> <?php echo strip_tags($_GET["id"]); ?></div>
+<div class="textdiv"><i>Your question is saved with ID:</i><br /><?php echo strip_tags($_GET["id"]); ?></div>
 <div class="textdiv"><i>It has the subject:</i><br /><?php echo strip_tags($subject) ?></div>
 <div class="textdiv"><i>It has the Content:</i><br /><?php echo strip_tags(nl2br( file_get_contents($questionfile) ) ); ?></div>
 <div class="textdiv"><i>It's sorted to the Categories:</i><br /><?php echo strip_tags($categories) ?></div>

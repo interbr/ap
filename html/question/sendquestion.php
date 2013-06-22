@@ -70,6 +70,9 @@ $writeAnswerSystemData = "INSERT INTO answer_start_system (questionID) VALUES ('
 $dbhandle->query($writeAnswerSystemData);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
+$writeQuestionAnswerAgentsID = "INSERT INTO question_answer_agents (questionID) VALUES ('".$dbhandle->real_escape_string($_GET["id"])."')";
+$dbhandle->query($writeQuestionAnswerAgentsID);
+echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
 // mail settings
 $headers = "From: no-reply@amored-police.org\r\n" .
@@ -105,7 +108,8 @@ It is sorted to the following categories: $categories\n
 The Question is:\n\n$msg\n
 You and the other four agents who received this question will have 90 minutes to answer this question. Why not meet in 30 minutes (GMT $timetomeetdisplay)?\n
 GMT (Greenwich mean time) is i.e. Berlin-time -2, Chicago-time +6, Hong-Kong-time -8 ...\n 
-Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/index.php?id=$questionIDfromDB&agentcode=$agentcode&authorID=$authorID\n\n
+Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/index.php?id=$questionIDfromDB&agentcode=$agentcode&authorID=$authorID\n
+If you have no time to answer the question: ".$GLOBALS["aphost"]."/forward/forward.php?id=$questionIDfromDB&agentcode=$agentcode&authorID=$authorID\n\n
 If you want to pause your account, follow this link: ".$GLOBALS["aphost"]."/agentstatus/change.php?email=".urlencode($agentaddress)."&pcode=$pcodesend&status=0\n
 If at any time you want to reactivate your account: ".$GLOBALS["aphost"]."/agentstatus/change.php?email=".urlencode($agentaddress)."&pcode=$pcodesend&status=1\n\n
 If you want to delete your account: ".$GLOBALS["aphost"]."/agentstatus/deleteaccount.php?email=".urlencode($agentaddress)."&pcode=$pcodesend&delete=1\n\n
@@ -114,6 +118,9 @@ For questions regarding this question-answer-system or suggestions, please feel 
 mail($agentaddress, $subject, $message, $headers);
 $writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$dbhandle->real_escape_string($authorID)."', ".$dbhandle->real_escape_string($agentcode)."sessionID = '".$dbhandle->real_escape_string($agentsessionID)."' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writePadDataAgents);
+echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
+$writeQuestionAnswerAgents = "UPDATE question_answer_agents SET agents = IFNULL(CONCAT(agents, ',".$dbhandle->real_escape_string($agentaddress)."'), '".$dbhandle->real_escape_string($agentaddress)."') WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
+$dbhandle->query($writeQuestionAnswerAgents);
 echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 }
 }

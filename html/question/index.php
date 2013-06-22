@@ -26,6 +26,7 @@ require_once(__ROOT__.'/../php/question.php'); // a functions file
 		<body> 
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
+		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 		<div id="start" class="textdiv"><button id="clickOpenquestion">Open Question</button></div> <!-- get random ID from "question.php", preview ID and show button to write to .txt-file ID.txt -->
 		<div id="openQuestion"></div>
 		<div id="writeQuestion"></div>

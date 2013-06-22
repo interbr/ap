@@ -14,7 +14,7 @@ $dbhandle->close();
 ?>
 <div id="savedQuestionPrepareToVerify">
 <div class="textdiv">Your question is saved on server. Don't forget to send it.</div>
-<div class="textdiv"><i>Your question is saved with ID:</i> <?php echo strip_tags($_GET["id"]); ?></div>
+<div class="textdiv"><i>Your question is saved with ID:</i><br /><?php echo strip_tags($_GET["id"]); ?></div>
 <div class="textdiv"><i>It has the subject:</i><br /><?php echo strip_tags($subject) ?></div>
 <div class="textdiv"><i>It has the Content:</i><br /><?php echo strip_tags(nl2br( file_get_contents($questionfile) ) ); ?></div>
 <div class="textdiv"><i>It's sorted to the Categories:</i><br /><?php echo strip_tags($categories) ?></div>
