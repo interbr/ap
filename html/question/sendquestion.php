@@ -25,8 +25,10 @@ while ($agentrow = mysqli_fetch_array($agentspool)) {
     $agentsresult["agent".$counter] = $agentrow["email"];
     $counter = $counter + 1;
 }
-$timetoanswer = time() + 3600;
+$timetoanswer = time() + 5400;
 $timedisplay = date('c',$timetoanswer);
+$timetomeet = time() + 1800;
+$timetomeetdisplay = gmdate('D, H:i:s',$timetomeet);
 
 extract($agentsresult);
 
@@ -81,11 +83,18 @@ foreach ($receipients as $agentcode => $agentaddress) {
 try {
   $author = $instance->createAuthor($agentaddress); // This really needs explaining..
   $authorID = $author->authorID;
-echo "The AuthorID is now $authorID\n\n";
+  echo "The AuthorID is now $authorID\n\n";
 } catch (Exception $e) {
   // the pad already exists or something else went wrong
   echo "\n\ncreateAuthor Failed with message ". $e->getMessage();
 }
+// try {
+  // $authormap = $instance->createAuthorIfNotExistsFor($agentaddress, $agentcode); 
+  // $authorID = $authormap->authorID;
+  // echo "The AuthorID is now $authorID\n\n";
+// } catch (Exception $e) {
+  // echo "\n\ncreateAuthorIfNotExistsFor Failed with message ". $e->getMessage();
+// }
 $sessionID = $instance->createSession($groupID, $authorID, $timetoanswer);
 echo "New Session ID is $sessionID->sessionID\n\n";
 $agentsessionID = $sessionID->sessionID;
@@ -94,10 +103,13 @@ $message = "You just received a question\n
 It has the subject: $questionSubject\n
 It is sorted to the following categories: $categories\n
 The Question is:\n\n$msg\n
-15 Minutes to answer this question with the other agents will start in UTC $timedisplay\n 
+You and the other four agents who received this question will have 90 minutes to answer this question. Why not meet in 30 minutes (GMT $timetomeetdisplay)?\n
+GMT (Greenwich mean time) is i.e. Berlin-time -2, Chicago-time +6, Hong-Kong-time -8 ...\n 
 Follow this link to answer the question: ".$GLOBALS["aphost"]."/answer/index.php?id=$questionIDfromDB&agentcode=$agentcode&authorID=$authorID\n\n
 If you want to pause your account, follow this link: ".$GLOBALS["aphost"]."/agentstatus/change.php?email=".urlencode($agentaddress)."&pcode=$pcodesend&status=0\n
-If at any time you want to reactivate your account: ".$GLOBALS["aphost"]."/agentstatus/change.php?email=".urlencode($agentaddress)."&pcode=$pcodesend&status=1";
+If at any time you want to reactivate your account: ".$GLOBALS["aphost"]."/agentstatus/change.php?email=".urlencode($agentaddress)."&pcode=$pcodesend&status=1\n\n
+If you want to delete your account: ".$GLOBALS["aphost"]."/agentstatus/deleteaccount.php?email=".urlencode($agentaddress)."&pcode=$pcodesend&delete=1\n\n
+For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org\n";
 // send mail
 mail($agentaddress, $subject, $message, $headers);
 $writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$dbhandle->real_escape_string($authorID)."', ".$dbhandle->real_escape_string($agentcode)."sessionID = '".$dbhandle->real_escape_string($agentsessionID)."' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";

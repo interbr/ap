@@ -11,15 +11,15 @@ if (isset($_GET['pcode']) && (strlen($_GET['pcode']) == 32))
  {
  $pcode = strip_tags($_GET['pcode']);
 }
-if (isset($_GET['status']) && (strlen($_GET['status']) == 1))
+if (isset($_GET['delete']) && (strlen($_GET['delete']) == 1))
  {
- $activestatuswanted = strip_tags($_GET['status']);
+ $deletewanted = strip_tags($_GET['delete']);
 }
 
-if (isset($email) && isset($pcode) && isset($activestatuswanted)) {
+if (isset($email) && isset($pcode) && isset($deletewanted)) {
 
- $query_change_agent_status = "SELECT * FROM agents WHERE(email ='".$dbhandle->real_escape_string($email)."' AND pcode='".$dbhandle->real_escape_string($pcode)."')LIMIT 1";
- $dbhandle->query($query_change_agent_status);
+ $query_delete_agent_status = "SELECT * FROM agents WHERE(email ='".$dbhandle->real_escape_string($email)."' AND pcode='".$dbhandle->real_escape_string($pcode)."')LIMIT 1";
+ $dbhandle->query($query_delete_agent_status);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<head>
@@ -30,6 +30,7 @@ if (isset($email) && isset($pcode) && isset($activestatuswanted)) {
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 		</head>
 		<body>
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
@@ -38,23 +39,11 @@ if (isset($email) && isset($pcode) && isset($activestatuswanted)) {
 <div class="textdiv"><?php
 		
  // Print a customized message:
- if (mysqli_affected_rows($dbhandle) == 1)
- {
-	$query_active = $dbhandle->query("SELECT active FROM agents WHERE(email ='".$dbhandle->real_escape_string($email)."' AND pcode='".$dbhandle->real_escape_string($pcode)."')LIMIT 1");
-    while($active_row = $query_active->fetch_assoc()) {
-	$activestatus = $active_row['active'];
-	};
-	
- if ( $activestatuswanted == $activestatus ) {
- echo "You are already "; if ($activestatuswanted == '1') { echo "active"; } else { echo "paused"; }; }
- else {
- $query_change_agent_status2 = "UPDATE agents SET active='".$dbhandle->real_escape_string($activestatuswanted)."' WHERE(email ='".$dbhandle->real_escape_string($email)."' AND pcode='".$dbhandle->real_escape_string($pcode)."')LIMIT 1";
- $dbhandle->query($query_change_agent_status2);
- echo "You are now "; if ($activestatuswanted == '1') { echo "active"; } else { echo "paused"; };
- };
-
+ if (mysqli_affected_rows($dbhandle) == 1) {
+ echo "Do you really want to delete your account? If so please click:<br /><br /><button id=\"clickDeleteAccount\">Delete Account</button><br /><br />
+ You may also pause your account, only. To do this click the following:<br /><br /><a href=\"/agentstatus/change.php?email=".urlencode($email)."&pcode=$pcode&status=0\"><button>Pause your account</button></a>";
  } else {
- echo 'Oops! Your status could not be changed. Please recheck the link or contact the system administrator.';
+ echo 'Oops! Your account could not be found. Please recheck the link or contact the system administrator.';
 
  }
 } else {
@@ -64,5 +53,17 @@ mysqli_close($dbhandle);
 ?>
 </div>
 </div>
+<script type="text/javascript">
+$('#clickDeleteAccount').click(function(){
+ 			$.ajax({
+      			type: "POST",
+      			url: "deleteAccountFromDatabase.php?email=<?php echo urlencode($email); ?>&pcode=<?php echo $pcode; ?>&delete=1",
+				complete: function() {
+		location.reload();
+		}
+		});
+		return false; 
+		});
+</script>
 		</body>
 </html>

@@ -7,8 +7,10 @@ $agentcontinent = strip_tags($_POST["agentContinent"]);
 $wantedCategories =  strip_tags($_POST["agentWantedCategories"]);
 $unwantedCategories =  strip_tags($_POST["agentUnwantedCategories"]);
 $agentemail = strip_tags($_POST["agentaddress"]);
+$agenttzone = strip_tags($_POST["agenttimezone"]);
+$agenttime =  strip_tags(implode(",",$_POST["agenttime"]));
 $pcode = md5(uniqid(rand(), true));
-$query = "INSERT INTO agents (whyAgent, continent, wanted, unwanted, email, active, pcode) VALUES ('".$dbhandle->real_escape_string($whyAgent)."', '".$dbhandle->real_escape_string($agentcontinent)."', '".$dbhandle->real_escape_string($wantedCategories)."', '".$dbhandle->real_escape_string($unwantedCategories)."', '".$dbhandle->real_escape_string($agentemail)."', '1', '".$dbhandle->real_escape_string($pcode)."')";
+$query = "INSERT INTO agents (whyAgent, continent, wanted, unwanted, email, agenttzone, agenttime, active, pcode) VALUES ('".$dbhandle->real_escape_string($whyAgent)."', '".$dbhandle->real_escape_string($agentcontinent)."', '".$dbhandle->real_escape_string($wantedCategories)."', '".$dbhandle->real_escape_string($unwantedCategories)."', '".$dbhandle->real_escape_string($agentemail)."', '".$dbhandle->real_escape_string($agenttzone)."', '".$dbhandle->real_escape_string($agenttime)."', '1', '".$dbhandle->real_escape_string($pcode)."')";
 $dbhandle->query($query);
 if (mysql_errno() == 1062) {       
     print "<script type=\"text/javascript\">"; 

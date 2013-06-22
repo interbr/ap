@@ -1,3 +1,35 @@
+<?php
+$timezones = 
+array (
+  'Please choose' => 'none',
+  '(GMT-12:00) International Date Line West' => 'Pacific/Wake',
+  '(GMT-11:00) Samoa' => 'Pacific/Apia',
+  '(GMT-10:00) Hawaii' => 'Pacific/Honolulu',
+  '(GMT-09:00) Alaska' => 'America/Anchorage',
+  '(GMT-08:00) Pacific Time (US &amp; Canada); Tijuana' => 'America/Los_Angeles',
+  '(GMT-07:00) La Paz' => 'America/Chihuahua',
+  '(GMT-06:00) Central Time (US &amp; Canada)' => 'America/Chicago',
+  '(GMT-05:00) Bogota' => 'America/Bogota',
+  '(GMT-04:00) Caracas' => 'America/Caracas',
+  '(GMT-03:00) Brasilia' => 'America/Sao_Paulo',
+  '(GMT-02:00) Mid-Atlantic' => 'America/Noronha',
+  '(GMT-01:00) Azores' => 'Atlantic/Azores',
+  '(GMT) London' => 'Europe/London',
+  '(GMT+01:00) Berlin, Lagos' => 'Europe/Berlin',
+  '(GMT+02:00) Istanbul' => 'Europe/Istanbul',
+  '(GMT+03:00) Moscow' => 'Europe/Moscow',
+  '(GMT+04:00) Tbilisi' => 'Asia/Tbilisi',
+  '(GMT+05:00) Karachi' => 'Asia/Karachi',
+  '(GMT+06:00) Novosibirsk' => 'Asia/Novosibirsk',
+  '(GMT+07:00) Bangkok' => 'Asia/Bangkok',
+  '(GMT+08:00) Hong Kong' => 'Asia/Hong_Kong',
+  '(GMT+09:00) Seoul' => 'Asia/Seoul',
+  '(GMT+10:00) Sydney' => 'Australia/Sydney',
+  '(GMT+11:00) New Caledonia' => 'Asia/Magadan',
+  '(GMT+12:00) Fiji' => 'Pacific/Fiji',
+);
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<head>
 		<title>Help Desk for Earth' Peoples Problems (except IT) - github-project - amored-police</title>
@@ -9,6 +41,7 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 		<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/js/custom.js"></script>
 		</head>
 		<body> 
         <div class="page">
@@ -42,6 +75,36 @@
         <div><input type="radio" name="agentContinent" value="South-America" id="South-America" required /><label for="South-America">South-America</label></div>
     </li>
 </ul>
+</div>
+<div class="textdiv">Which Timezone are you in:</div>
+<div class="textdiv">
+	<select name="agenttimezone" class="timezoner" size="1">
+		<?php foreach($timezones as $tzone => $tzonesave){
+		echo "<option value=\"".$tzonesave."\">".$tzone."</option>";
+		} ?>
+    </select>
+	<br /><br />
+	Current time (GMT): <?php echo gmdate("H:i:s"); ?>
+</div>
+<div class="textdiv">When do you want to receive questions (in your local time):</div>
+<div class="textdiv">
+	<center>
+	<table>
+	<tr>
+	<td width="50px"><center><label for="0-6">0-6</label></center></td><td width="50px"><center><label for="6-10">6-10</label></center></td><td width="50px"><center><label for="10-12">10-12</label></center></td><td width="50px"><center><label for="12-15">12-15</label></center></td><td width="50px"><center><label for="15-18">15-18</label></center></td><td width="50px"><center><label for="18-20">18-20</label></center></td><td width="50px"><center><label for="20-22">20-22</label></center></td><td width="50px"><center><label for="22-0">22-0</label></center></td>
+	</tr>
+	<tr>
+	<td><center><input type="checkbox" name="agenttime[]" value="0-6" id="0-6" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="6-10" id="6-10" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="10-12" id="10-12" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="12-15" id="12-15" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="15-18" id="15-18" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="18-20" id="18-20" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="20-22" id="20-22" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="22-0" id="22-0" class="boxchecked" checked="checked" /></center></td>
+	</tr>
+	</table>
+	</center>
 </div>
 <div class="textdiv">Category you are good in:</div>
 <div class="textdiv">
@@ -125,7 +188,7 @@
     </li>
 </ul>
 </div>
-<div class="textdiv">The email to send the question to (Your email): <input name="agentaddress" type="email" id="agentaddress" required /></div>
+<div class="textdiv">The email to send questions to (Your email): <input name="agentaddress" type="email" id="agentaddress" required /></div>
 <div class="textdiv"><input id="submit" type="submit" name="submit" value="Signup" /></div>
 </form>
 </div>

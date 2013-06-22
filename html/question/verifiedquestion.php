@@ -46,7 +46,6 @@ echo "Not varified"; }; ?>
 <script type="text/javascript">
 $('#clickSendQuestion').click(function(){
  			$.ajax({
-				cache: false,
       			type: "POST",
       			url: "sendquestion.php?id=<?php echo $_GET["id"]; ?>",
 				complete: function() {

@@ -50,9 +50,6 @@ The email to send an answer to: <input name="questionaddress" type="email" id="q
 </form>
 </div>
 <script type="text/javascript">
-$.ajaxSetup ({
-    cache: false
-});
 $(document).ready(function(){
    $('.boxchecked').click(function () {
    var x = $('.boxchecked:checked').length;
