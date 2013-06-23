@@ -18,7 +18,6 @@ if ( $questionsent != '1') {
 require_once (__ROOT__.'/../php/class.phpmailer.php');
 $writeSent = "UPDATE questions SET sent = '1' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writeSent);
-echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 $agentspool = $dbhandle->query("SELECT * FROM agents WHERE (active='1') ORDER BY RAND() LIMIT 0,5");
 $agentsresult = array();
 $counter = 1;
@@ -48,32 +47,27 @@ $instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpa
 try {
   $createGroup = $instance->createGroup();
   $groupID = $createGroup->groupID;
-  echo "New GroupID is $groupID\n\n";
 } catch (Exception $e) {
   // the pad already exists or something else went wrong
-  echo "\n\ncreateGroup Failed with message ". $e->getMessage();
+  echo "Etherpad-Error (createGroup)";
 }
 
 /* Example: Create Group Pad */
 try {
   $newPad = $instance->createGroupPad($groupID,$_GET["id"],'This is our Answer: '); 
   $padID = $newPad->padID;
-  echo "Created new pad with padID: $padID\n\n";
 } catch (Exception $e) {
   // the pad already exists or something else went wrong
-  echo "\n\ncreateGroupPad Failed with message ". $e->getMessage();
+  echo "Etherpad-Error (createGroupPad)";
 }
 
 $writePadData = "INSERT INTO answer_access (questionID, groupID, padID, timetoanswerSession) VALUES ('".$dbhandle->real_escape_string($_GET["id"])."','".$dbhandle->real_escape_string($groupID)."','".$dbhandle->real_escape_string($padID)."','".$dbhandle->real_escape_string($timetoanswer)."') ON DUPLICATE KEY UPDATE groupID=VALUES(groupID), padID=VALUES(padID), timetoanswerSession=VALUES(timetoanswerSession)";
 $dbhandle->query($writePadData);
-echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 $writeAnswerSystemData = "INSERT INTO answer_start_system (questionID) VALUES ('".$dbhandle->real_escape_string($_GET["id"])."')";
 $dbhandle->query($writeAnswerSystemData);
-echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
 $writeQuestionAnswerAgentsID = "INSERT INTO question_answer_agents (questionID) VALUES ('".$dbhandle->real_escape_string($_GET["id"])."')";
 $dbhandle->query($writeQuestionAnswerAgentsID);
-echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 
 // mail settings
 
@@ -85,10 +79,9 @@ foreach ($receipients as $agentcode => $agentaddress) {
 try {
   $author = $instance->createAuthor($agentaddress); // This really needs explaining..
   $authorID = $author->authorID;
-  echo "The AuthorID is now $authorID\n\n";
 } catch (Exception $e) {
   // the pad already exists or something else went wrong
-  echo "\n\ncreateAuthor Failed with message ". $e->getMessage();
+  echo "Etherpad-Error (createAuthor)";
 }
 // try {
   // $authormap = $instance->createAuthorIfNotExistsFor($agentaddress, $agentcode); 
@@ -98,7 +91,6 @@ try {
   // echo "\n\ncreateAuthorIfNotExistsFor Failed with message ". $e->getMessage();
 // }
 $sessionID = $instance->createSession($groupID, $authorID, $timetoanswer);
-echo "New Session ID is $sessionID->sessionID\n\n";
 $agentsessionID = $sessionID->sessionID;
 
 // send mail
@@ -143,7 +135,7 @@ For questions regarding this question-answer-system or suggestions, please feel 
 if(!$mail->Send()) {
   echo "<div class=\"textdiv\">Mailer Error: " . $mail->ErrorInfo . "</div>";
 } else {
-  echo "<div class=\"textdiv\">Message sent!</div>";
+  echo "<div class=\"textdiv\">Message sent to ".$agentcode."!</div>";
 }
 $writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$dbhandle->real_escape_string($authorID)."', ".$dbhandle->real_escape_string($agentcode)."sessionID = '".$dbhandle->real_escape_string($agentsessionID)."' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writePadDataAgents);
