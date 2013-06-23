@@ -34,12 +34,16 @@ $mail->AddReplyTo('no-reply@amored-police.org','Amored Police question-answer-sy
 //Set who the message is to be sent to
 $mail->AddAddress($emailToVerify);
 //Set the subject line
-$mail->Subject = 'Question Confirmation';
+$mail->Subject = 'Question Confirmation (please verify your email)';
 $mail->IsHTML(false);
 //Read an HTML message body from an external file, convert referenced images to embedded, convert HTML into a basic plain-text alternative body
-$mail->Body = 'To activate and send your question, please click on this link:
+$mail->Body = 'You or somebody else wants to ask a question via '.$GLOBALS["aphost"].' with this email-address.
 
-'.$GLOBALS["aphost"].'/question/verify/verify.php?email='.urlencode($emailToVerify).'&key='.$activation.'&id='.$_GET["id"].'';
+To send the question to five randomly choosen agents now, please click on this link:
+
+'.$GLOBALS["aphost"].'/question/verify/verify.php?email='.urlencode($emailToVerify).'&key='.$activation.'&id='.$_GET["id"].'
+
+For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
 
 //Send the message, check for errors
 if(!$mail->Send()) {
