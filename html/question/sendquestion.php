@@ -125,7 +125,7 @@ while ($agentrow = mysqli_fetch_array($agentspool)) {
     $agentsresult["agent".$counter] = $agentrow["email"];
     $counter = $counter + 1;
 }
-$timenow = mktime(date(0, 0, 0, 0, 0, 0);
+$timenow = mktime(date("H"), 0, 0, 0, 0, 0);
 $timetoanswer = time() + 5400;
 $timedisplay = date('c',$timetoanswer);
 $timetomeet = time() + 1800;
