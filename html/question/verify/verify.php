@@ -33,27 +33,25 @@ if (isset($email) && isset($key)) {
 		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
         <div class="page">
 <div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
-<div class="textdiv"><?php
-		
+<?php		
  // Print a customized message:
  if (mysqli_affected_rows($dbhandle) == 1) //if update query was successfull
  {
  $query_activate_question2 = "UPDATE questions SET active='1' WHERE(questionID ='".$dbhandle->real_escape_string($questionID)."')LIMIT 1";
  $dbhandle->query($query_activate_question2);
- echo 'Your question is now active. You may now <br /><br /><a href="/question/verifiedquestion.php?id='.$questionID.'"><button>Send your question</button></a><br /><br />on the next page ..';
+ echo '<div class="textdiv"><i>Your question is active now. You may</i></div><div class="textdiv"><a href="/question/verifiedquestion.php?id='.$questionID.'"><button>Send your question</button></a></div><div class="textdiv"><i>on the next page ..</i></div>';
 
  } else {
- echo 'Oops! Your question could not be activated. Please recheck the link or contact the system administrator.';
+ echo '<div class="textdiv">Oops! Your question could not be activated. Please recheck the link or contact the system administrator.</div>';
 
  }
 
  mysqli_close($dbhandle);
 
 } else {
- echo '<div>Error Occured.</div>';
+ echo '<div class="textdiv">Error Occured.</div>';
 }
 ?>
-</div>
 </div>
 		</body>
 </html>

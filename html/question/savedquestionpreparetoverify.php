@@ -13,13 +13,13 @@ $questionaddress = $row['email'];
 $dbhandle->close();
 ?>
 <div id="savedQuestionPrepareToVerify">
-<div class="textdiv">Your question is saved on server. Don't forget to send it.</div>
+<div class="textdiv"><i>Your question is saved on server. Don't forget to send it.</i></div>
 <div class="textdiv"><i>Your question is saved with ID:</i><br /><?php echo strip_tags($_GET["id"]); ?></div>
 <div class="textdiv"><i>It has the subject:</i><br /><?php echo strip_tags($subject) ?></div>
 <div class="textdiv"><i>It has the Content:</i><br /><?php echo strip_tags(nl2br( file_get_contents($questionfile) ) ); ?></div>
 <div class="textdiv"><i>It's sorted to the Categories:</i><br /><?php echo strip_tags($categories) ?></div>
 <div class="textdiv"><i>The answer will be send to the following address:</i><br /><?php echo strip_tags($questionaddress) ?></div>
-<div class="textdiv"><button id="clickSendQuestion">Verify Question</button></div>
+<div class="textdiv"><button id="clickSendQuestion">Verify email-address</button></div>
 </div>
 <script type="text/javascript">
 $('#clickSendQuestion').click(function(){

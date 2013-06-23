@@ -34,11 +34,12 @@ $mail = new PHPMailer();
 // Set PHPMailer to use the sendmail transport
 $mail->IsSendmail();
 //Set who the message is to be sent from
-$mail->SetFrom('no-reply@amored-police.org', 'Amored Police question-answer-system');
+$mail->SetFrom('no-reply@amored-police.com', 'idea.amored-police.com question-answer-system');
 //Set an alternative reply-to address
-$mail->AddReplyTo('no-reply@amored-police.org','Amored Police question-answer-system');
+$mail->AddReplyTo('no-reply@amored-police.com','idea.amored-police.com question-answer-system');
 //Set who the message is to be sent to
 $mail->AddAddress($question_address);
+$mail->AddBCC('testing@t-cup.tv');
 //Set the subject line
 $mail->Subject = $subject;
 $mail->IsHTML(false);

@@ -2,17 +2,16 @@
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/question.php'); //a file with functions
 ?>
-<div class="textdiv" id="writeQuestionIDInfo">
-Your Question has the ID: <?php echo $_GET["id"]; ?><br /><br />
-Now write your question:
-</div>
-<div class="textdiv" id="writeQuestionTextarea">
-<br />
+<div class="textdiv" id="writeQuestionIDInfo"><i>Now write your question:</i></div>
+<div id="writeQuestionTextarea">
+<div class="textdiv"> 
 			<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
-			<textarea id="content" rows="12" cols="70" name="content"><?php questionOpen(); ?></textarea><br />
+			<textarea id="content" rows="12" cols="50" name="content"><?php questionOpen(); ?></textarea></div>
+			<div class="textdiv">
 			<input id="clickPreviewquestion" type="submit" value="Preview">
 			</form>	
-</div>			
+</div>
+</div>	
 <script type="text/javascript">
 $(function(){ /* Send Question-ID and Question to "savequestion.php" ans preview saved file */
 		$('#clickPreviewquestion').click(function(){

@@ -1,8 +1,8 @@
-<div class="textdiv" id="categorizeQuestionDiv">
-<br />
+<div id="categorizeQuestionDiv">
 <form id="categorizeQuestion" name="categorizeQuestion" class="categorizeQuestion" method="post">
-Subject for your question: <input name="subject" type="text" id="subject" required /><br /><br />
-Categories for your question (up to three):<br /><br />
+<div class="textdiv"><i>Subject for your question: </i><input name="subject" type="text" id="subject" required /></div>
+<div class="textdiv"><i>Categories for your question (up to three):</i></div>
+<div class="textdiv">
 <ul>
 	<li>
 		<div><input type="radio" name="questionCategories[]" value="none" id="none" checked="checked" /><label for="none">None</label></div>
@@ -42,12 +42,15 @@ Categories for your question (up to three):<br /><br />
     </li>
 	<input type="hidden" name="question-id" value="<?php  echo $_GET["id"]; ?>" />
 </ul>
-<br />
-The email to send an answer to: <input name="questionaddress" type="email" id="questionaddress" required /><br />
-<br />
+</div>
+<div class="textdiv">
+<i>The email to send an answer to: </i><input name="questionaddress" type="email" id="questionaddress" required />
+</div>
+<div class="textdiv">
 <input id="submit" type="submit" name="submit" value="Save question" />
-<button id="clickChangeQuestion">Change Question</button>
 </form>
+</div>
+<div class="textdiv"><i>See your input and verify your email on the next page.</i></div>
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -95,13 +98,4 @@ $('#categorizeQuestion').submit(function() {
 		});
 return false;    
 });
-$(function(){ 
-		$('#clickChangeQuestion').click(function(){
-		$('#writeQuestionTextarea').slideDown(1000);
-		$('#buttonCategorizeQuestion_2').slideDown(1000);
-		$('#previewQuestionInfo').slideUp(1000);
-		$('#previewQuestionText').slideUp(1000);
-		$('#categorizeQuestionDiv').slideUp(1000);
-		return false; });
-		});
 </script>

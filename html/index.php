@@ -1,3 +1,11 @@
+<?php 
+define('__ROOT__', dirname(dirname(__FILE__))); 
+require_once(__ROOT__.'/php/configuration.php'); //a file with configurations
+$dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
+$activeAgentsCount = $dbhandle->query("SELECT * FROM agents WHERE active='1'");
+$activeNumber = $activeAgentsCount->num_rows;
+$dbhandle->close();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<head>
 		<title>Help Desk for Earth' Peoples Problems (except IT) - github-project - amored-police</title>
@@ -17,6 +25,10 @@
 <div class="textdiv"><a href="/question"><button>Ask a question</button></a></div>
 <div class="textdiv">or</div>
 <div class="textdiv"><a href="/signup"><button>Sign up to be an Agent</button></div></a>
+<div class="textdiv">There are currently</div>
+<div class="textdiv"><?php echo $activeNumber; ?></div>
+<div class="textdiv">active help-desk-agents on this website!</div>
+<div class="textdiv"><a href="/about.php">About</a> | <a href="mailto:felix_longolius@amored-police.org">Contact</a></div>
 		</div>
 		</body>
 </html>
