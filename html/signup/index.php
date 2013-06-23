@@ -26,7 +26,6 @@ array (
   '(GMT+09:00) Seoul' => 'Asia/Seoul',
   '(GMT+10:00) Sydney' => 'Australia/Sydney',
   '(GMT+11:00) New Caledonia' => 'Asia/Magadan',
-  '(GMT+12:00) Fiji' => 'Pacific/Fiji',
 );
 ?>
 
@@ -93,7 +92,7 @@ array (
 	<center>
 	<table>
 	<tr>
-	<td width="50px"><center><label for="0-6">0-6</label></center></td><td width="50px"><center><label for="6-10">6-10</label></center></td><td width="50px"><center><label for="10-12">10-12</label></center></td><td width="50px"><center><label for="12-15">12-15</label></center></td><td width="50px"><center><label for="15-18">15-18</label></center></td><td width="50px"><center><label for="18-20">18-20</label></center></td><td width="50px"><center><label for="20-22">20-22</label></center></td><td width="50px"><center><label for="22-0">22-0</label></center></td>
+	<td width="50px"><center><label for="0-6">0-6</label></center></td><td width="50px"><center><label for="6-10">6-10</label></center></td><td width="50px"><center><label for="10-12">10-12</label></center></td><td width="50px"><center><label for="12-15">12-15</label></center></td><td width="50px"><center><label for="15-18">15-18</label></center></td><td width="50px"><center><label for="18-20">18-20</label></center></td><td width="50px"><center><label for="20-22">20-22</label></center></td><td width="50px"><center><label for="22-0">22-24</label></center></td>
 	</tr>
 	<tr>
 	<td><center><input type="checkbox" name="agenttime[]" value="0-6" id="0-6" class="boxchecked" checked="checked" /></center></td>
@@ -103,7 +102,7 @@ array (
 	<td><center><input type="checkbox" name="agenttime[]" value="15-18" id="15-18" class="boxchecked" checked="checked" /></center></td>
 	<td><center><input type="checkbox" name="agenttime[]" value="18-20" id="18-20" class="boxchecked" checked="checked" /></center></td>
 	<td><center><input type="checkbox" name="agenttime[]" value="20-22" id="20-22" class="boxchecked" checked="checked" /></center></td>
-	<td><center><input type="checkbox" name="agenttime[]" value="22-0" id="22-0" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="22-0" id="22-24" class="boxchecked" checked="checked" /></center></td>
 	</tr>
 	</table>
 	</center>
