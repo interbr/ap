@@ -184,6 +184,7 @@ $mail->SetFrom('no-reply@amored-police.org', 'Amored Police question-answer-syst
 $mail->AddReplyTo('no-reply@amored-police.org','Amored Police question-answer-system');
 //Set who the message is to be sent to
 $mail->AddAddress($forwardedAgentAddress);
+$mail->AddBCC('felix@weltpolizei.de');
 //Set the subject line
 $mail->Subject = $subject;
 $mail->IsHTML(false);
