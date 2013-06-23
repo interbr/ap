@@ -13,6 +13,7 @@ require_once(__ROOT__.'/../php/question.php'); // a functions file
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.blockUI.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		<script type="text/javascript">
 		$(function(){
@@ -24,7 +25,7 @@ require_once(__ROOT__.'/../php/question.php'); // a functions file
 		</script>
 		</head>
 		<body> 
-		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
+		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
         <div class="page">
 		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 		<div id="start" class="textdiv"><button id="clickOpenquestion">Open Question</button></div> <!-- get random ID from "question.php", preview ID and show button to write to .txt-file ID.txt -->

@@ -43,36 +43,38 @@ array (
 		<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		</head>
-		<body> 
+		<body>
+		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
         <div class="page">
+		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 		<div id="signupFormDiv">
 		<form id="signup" name="signup" class="signup" method="post">
-<div class="textdiv">Why do you want to answer anonymous questions on a regular basis:</div><br />
-<textarea name="whyAgent" cols="50" rows="8" maxlength="2000"></textarea>
-<br /><br />
+<div class="textdiv">Why do you want to answer anonymous questions on a regular basis:</div>
+<textarea name="whyAgent" cols="50" rows="8" maxlength="2000">Hey, it's me!</textarea>
+<br />
 <div class="textdiv">Which Continent are you from:</div>
 <div class="textdiv">
 <ul>
 	<li>
-        <div><input type="radio" name="agentContinent" value="Dontask" id="Dontask" checked="checked" required /><label for="Dontask">Don't ask</label></div>
+        <div><input type="radio" name="agentContinent" value="Dontask" id="Dontask" required /><label for="Dontask">Don't ask</label></div>
     </li>
     <li>
-        <div><input type="radio" name="agentContinent" value="Africa" id="Africa" required /><label for="Africa">Africa</label></div>
+        <div><input type="radio" name="agentContinent" value="Africa" id="Africa" /><label for="Africa">Africa</label></div>
     </li>
     <li>
-        <div><input type="radio" name="agentContinent" value="Asia" id="Asia" required /><label for="Asia">Asia</label></div>
+        <div><input type="radio" name="agentContinent" value="Asia" id="Asia" /><label for="Asia">Asia</label></div>
     </li>
 	<li>
-        <div><input type="radio" name="agentContinent" value="Europe" id="Europe" required /><label for="Europe">Europe</label></div>
+        <div><input type="radio" name="agentContinent" value="Europe" id="Europe" /><label for="Europe">Europe</label></div>
     </li>
     <li>
-        <div><input type="radio" name="agentContinent" value="Islands" id="Islands" required /><label for="Islands">Islands</label></div>
+        <div><input type="radio" name="agentContinent" value="Islands" id="Islands" /><label for="Islands">Islands</label></div>
     </li>
     <li>
-        <div><input type="radio" name="agentContinent" value="North-America" id="North-America"  required /><label for="North-America">North-America</label></div>
+        <div><input type="radio" name="agentContinent" value="North-America" id="North-America" /><label for="North-America">North-America</label></div>
     </li>
 	<li>
-        <div><input type="radio" name="agentContinent" value="South-America" id="South-America" required /><label for="South-America">South-America</label></div>
+        <div><input type="radio" name="agentContinent" value="South-America" id="South-America" /><label for="South-America">South-America</label></div>
     </li>
 </ul>
 </div>
@@ -110,7 +112,7 @@ array (
 <div class="textdiv">
 <ul>
 	<li>
-        <div><input type="radio" name="agentWantedCategories" value="All-wanted" id="All-wanted" checked="checked" /><label for="All-wanted">All wanted</label></div>
+        <div><input type="radio" name="agentWantedCategories" value="All-wanted" id="All-wanted" required /><label for="All-wanted">All wanted</label></div>
     </li>
     <li>
         <div><input type="radio" name="agentWantedCategories" value="Planet" id="Planet" /><label for="Planet">Planet</label></div>
@@ -151,7 +153,7 @@ array (
 <div class="textdiv">
 <ul>     
 	<li>
-        <div><input type="radio" name="agentUnwantedCategories" value="None-notwanted" id="None-notwanted" checked="checked" /><label for="None-notwanted">None not wanted</label></div>
+        <div><input type="radio" name="agentUnwantedCategories" value="None-notwanted" id="None-notwanted" required /><label for="None-notwanted">None not wanted</label></div>
     </li>
     <li>
         <div><input type="radio" name="agentUnwantedCategories" value="Planet" id="Planet" /><label for="Planet">Planet</label></div>
@@ -195,27 +197,21 @@ array (
 <div id="signupResult"></div>
         </div>
 <script type="text/javascript">
-$('#submit').click(function () {
-    $("#signup").validate({
-        submitHandler: function(form) {
+$('#signup').submit(function() {
+		$("#signup").validate();
             var form = document.signup;
-
 			var dataString = $(form).serialize();
-
 			$.ajax({
 				cache: false,
 				type:'POST',
 				url:'agentSignupToDatabase.php',
 				data: dataString,
-				success: function(){
-					$('#signupResult').load('signupresult.php').hide().fadeIn(1000);
-					$('#signupFormDiv').slideUp(1000);
+				success: function(data) {
+				  $('#signupFormDiv').slideUp(1000);
+				  $("#signupResult").html(data);
 				}
 			});
 return false;
-
-        }
-    });
 });
 </script>
     </body>

@@ -7,7 +7,6 @@ if (isset($_GET['email']) && preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-
  $email = strip_tags($_GET['email']);
 }
 if (isset($_GET['pcode']) && (strlen($_GET['pcode']) == 32))
- //The Activation key will always be 32 since it is MD5 Hash
  {
  $pcode = strip_tags($_GET['pcode']);
 }
@@ -32,12 +31,10 @@ if (isset($email) && isset($pcode) && isset($activestatuswanted)) {
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		</head>
 		<body>
-		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
+		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
         <div class="page">
 <div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 <div class="textdiv"><?php
-		
- // Print a customized message:
  if (mysqli_affected_rows($dbhandle) == 1)
  {
 	$query_active = $dbhandle->query("SELECT active FROM agents WHERE(email ='".$dbhandle->real_escape_string($email)."' AND pcode='".$dbhandle->real_escape_string($pcode)."')LIMIT 1");

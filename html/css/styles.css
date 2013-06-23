@@ -24,6 +24,10 @@ body { margin:20px 0px; padding:0px; text-align:center; background: #bbb; font-s
 	
 	max-width: 540px;
 }
+.aptitle { color: #fff; font-size: 18px; font-family: courier; }
+.aptitle a { color: #fff; text-decoration: underline; }
+.aptitle a:hover { text-decoration: underline overline; }
+.aptitle a:focus { outline: none; }
 #categorizeQuestion ul{
     width:400px;
     margin:0px auto;

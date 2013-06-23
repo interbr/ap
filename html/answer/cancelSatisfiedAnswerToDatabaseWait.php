@@ -6,8 +6,5 @@ $questionid = $_GET["id"];
 $agentcode =  $_GET["agentcode"];
 $query = "INSERT INTO answer_whopper (questionID, $agentcode) VALUES ('".$questionid."', '0') ON DUPLICATE KEY UPDATE $agentcode=VALUES($agentcode)";
 $dbhandle->query($query);
-echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 $dbhandle->close();
-
-echo var_export($_POST);
 ?>

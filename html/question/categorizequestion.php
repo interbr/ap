@@ -1,7 +1,7 @@
 <div class="textdiv" id="categorizeQuestionDiv">
 <br />
 <form id="categorizeQuestion" name="categorizeQuestion" class="categorizeQuestion" method="post">
-Subject for your question: <input name="subject" type="text" id="subject" /><br /><br />
+Subject for your question: <input name="subject" type="text" id="subject" required /><br /><br />
 Categories for your question (up to three):<br /><br />
 <ul>
 	<li>
@@ -78,9 +78,8 @@ $("input[type=checkbox][name='questionCategories[]']").click(function() {
     $("input[type=checkbox][name='questionCategories[]']").not(":checked").attr("disabled",bol);
 
 });
-$('#submit').click(function () {
-    $("#categorizeQuestion").validate({
-        submitHandler: function(form) {
+$('#categorizeQuestion').submit(function() {
+			$("#categorizeQuestion").validate();
             var form = document.categorizeQuestion;
 			var dataString = $(form).serialize();
 			$.ajax({
@@ -94,10 +93,7 @@ $('#submit').click(function () {
 				$('#previewQuestionSlide').slideUp(1000);
 			}
 		});
-return false;
-
-        }
-    });
+return false;    
 });
 $(function(){ 
 		$('#clickChangeQuestion').click(function(){

@@ -23,6 +23,7 @@ $dbhandle->close();
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.blockUI.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		</head>
 		<body> 
@@ -46,11 +47,13 @@ echo "Not varified"; }; ?>
 </div>
 <script type="text/javascript">
 $('#clickSendQuestion').click(function(){
+		$.blockUI({ message: 'sending ...' });
  			$.ajax({
       			type: "POST",
       			url: "sendquestion.php?id=<?php echo $_GET["id"]; ?>",
-				complete: function() {
-		$('#savedQuestionPrepareToSend').load('questionsentresult.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
+				success: function(data) {
+		$.unblockUI();
+		$('#savedQuestionPrepareToSend').html(data);
 		}
 		});
 		return false; 

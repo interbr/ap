@@ -7,7 +7,6 @@ if (isset($_GET['email']) && preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-
  $email = strip_tags($_GET['email']);
 }
 if (isset($_GET['pcode']) && (strlen($_GET['pcode']) == 32))
- //The Activation key will always be 32 since it is MD5 Hash
  {
  $pcode = strip_tags($_GET['pcode']);
 }
@@ -33,12 +32,10 @@ if (isset($email) && isset($pcode) && isset($deletewanted)) {
 		<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 		</head>
 		<body>
-		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
+		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
         <div class="page">
 <div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 <div class="textdiv"><?php
-		
- // Print a customized message:
  if (mysqli_affected_rows($dbhandle) == 1) {
  echo "Do you really want to delete your account? If so please click:<br /><br /><button id=\"clickDeleteAccount\">Delete Account</button><br /><br />
  You may also pause your account, only. To do this click the following:<br /><br /><a href=\"/agentstatus/change.php?email=".urlencode($email)."&pcode=$pcode&status=0\"><button>Pause your account</button></a>";

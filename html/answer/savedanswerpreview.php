@@ -16,7 +16,7 @@ try {
   echo "<div class=\"textdiv\">The Answer is as follows:<br /><br />$answerPreview</div>";
 } catch (Exception $e) {
   // the pad already exists or something else went wrong
-  echo "<div class=\"textdiv\">getText Failed with message ". $e->getMessage()."</div>";
+  echo "<div class=\"textdiv\">Etherpad-Error (getText Failed)</div>";
 }
 ?>
 <div class="textdiv" id="sendAnswer"></div>

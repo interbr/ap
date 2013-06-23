@@ -16,7 +16,6 @@ $dbhandle->close();
 try {
   $instance->setPassword($padToClose,'88888888');
 } catch (Exception $e) {
-  // the pad already exists or something else went wrong
-  echo "\n\nsetPassword Failed with message ". $e->getMessage();
+  echo "Etherpad-Error (protect)";
 }
 ?>

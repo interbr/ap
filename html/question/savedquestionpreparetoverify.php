@@ -23,10 +23,12 @@ $dbhandle->close();
 </div>
 <script type="text/javascript">
 $('#clickSendQuestion').click(function(){
+		$.blockUI({ message: 'loading ...' });
  			$.ajax({
       			type: "POST",
       			url: "verify/createactivation.php?id=<?php echo $_GET["id"]; ?>",
 				complete: function () {
+		$.unblockUI();
 		$('#createActivationResult').load('verify/createactivationresult.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
 		$('#savedQuestionPrepareToVerify').slideUp(1000);
 		}

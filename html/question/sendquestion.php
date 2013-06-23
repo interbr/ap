@@ -141,22 +141,20 @@ For questions regarding this question-answer-system or suggestions, please feel 
 
 //Send the message, check for errors
 if(!$mail->Send()) {
-  echo "Mailer Error: " . $mail->ErrorInfo;
+  echo "<div class=\"textdiv\">Mailer Error: " . $mail->ErrorInfo . "</div>";
 } else {
-  echo "Message sent!";
+  echo "<div class=\"textdiv\">Message sent!</div>";
 }
 $writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$dbhandle->real_escape_string($authorID)."', ".$dbhandle->real_escape_string($agentcode)."sessionID = '".$dbhandle->real_escape_string($agentsessionID)."' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writePadDataAgents);
-echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 $writeQuestionAnswerAgents = "UPDATE question_answer_agents SET agents = IFNULL(CONCAT(agents, ',".$dbhandle->real_escape_string($agentaddress)."'), '".$dbhandle->real_escape_string($agentaddress)."') WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writeQuestionAnswerAgents);
-echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 }
 }
 else {
-echo "Already sent"; };
+echo "<div class=\"textdiv\">Already sent</div>"; };
 }
 else {
-echo "Not varified"; };
+echo "<div class=\"textdiv\">Not varified</div>"; };
 $dbhandle->close();
 ?>

@@ -7,7 +7,6 @@ if (isset($_GET['email']) && preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-
  $email = strip_tags($_GET['email']);
 }
 if (isset($_GET['pcode']) && (strlen($_GET['pcode']) == 32))
- //The Activation key will always be 32 since it is MD5 Hash
  {
  $pcode = strip_tags($_GET['pcode']);
 }
