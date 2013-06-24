@@ -13,3 +13,21 @@ The used mediaelement.js-elements:
 /html/css/mediaplayer.min.css
 /html/css/controls.svg
 have the MIT-license (https://github.com/johndyer/mediaelement/)
+
+The used phpmailer-class: /php/class.phpmailer.php
+has the LGPL-license (https://github.com/PHPMailer/PHPMailer/)
+
+The used jquery.js: /html/js/jquery-x.x.x-min.js
+has the MIT-license (https://jquery.org)
+
+The used jquery.js-plugin BlockUI: /html/js/jquery.blockUI.js
+has the MIT- and GPL-licenses (http://www.malsup.com/jquery/block/)
+
+The used jquery.js-plugin Validate: /html/js/jquery.validate.min.js
+has the MIT-license (http://jqueryvalidation.org/)
+
+The used PHP Etherpad Lite Client: /php/answering-system.php
+has the Apache-license (https://github.com/TomNomNom/etherpad-lite-client)
+
+The used Etherpad Lite jquery-plugin: /html/js/etherpad-ap.js
+has the Apache-license (https://github.com/ether/etherpad-lite-jquery-plugin)
