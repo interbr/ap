@@ -39,7 +39,7 @@ $mail->SetFrom('no-reply@amored-police.com', 'idea.amored-police.com question-an
 $mail->AddReplyTo('no-reply@amored-police.com','idea.amored-police.com question-answer-system');
 //Set who the message is to be sent to
 $mail->AddAddress($question_address);
-$mail->AddBCC('testing@t-cup.tv');
+$mail->AddBCC('felix@weltpolizei.de');
 //Set the subject line
 $mail->Subject = $subject;
 $mail->IsHTML(false);
