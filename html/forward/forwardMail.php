@@ -151,7 +151,7 @@ $forwardedAgentPcode = strip_tags($forwardedrow['pcode']);
 $writeQuestionAnswerAgents = "UPDATE question_answer_agents SET agents = IFNULL(CONCAT(agents, ',".$dbhandle->real_escape_string($forwardedAgentAddress)."'), '".$dbhandle->real_escape_string($forwardedAgentAddress)."') WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writeQuestionAnswerAgents);
 
-$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
+$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadapihost"].'/api');
 $instance->deleteSession($forwardingSessionID);
 
 

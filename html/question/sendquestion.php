@@ -143,7 +143,7 @@ $receipients = array(
 
 ///////////////////////////////////////////////// ETHERPAD
 
-$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
+$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadapihost"].'/api');
 try {
   $createGroup = $instance->createGroup();
   $groupID = $createGroup->groupID;

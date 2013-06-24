@@ -9,7 +9,7 @@ Question was:<br /><br />
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-api-class
 require_once(__ROOT__.'/../php/configuration.php');
-$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
+$instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadapihost"].'/api');
 try {
   $padContents = $instance->getText($_GET["pad"]);
   $answerPreview = nl2br( $padContents->text );
