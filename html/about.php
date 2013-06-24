@@ -27,6 +27,7 @@
 <div class="textdiv">When an agent follows the link from the sent question-email, the agent can meet the other 4 on a website with a realtime-textprocessing software (etherpad-lite).</div>
 <div class="textdiv">If the agent has no time, another link in the email allows to forward the question to a new agent from the database.</div>
 <div class="textdiv">Thank you for testing, suggestions, amore!</div>
+<div class="textdiv">Program-code-site: <a href="https://github.com/interbr/amored-police">at github</a></div>
 <div class="textdiv"><a href="/">Start</a> | <a href="mailto:felix_longolius@amored-police.org">Contact</a></div>
 		</div>
 		</body>
