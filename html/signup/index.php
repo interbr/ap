@@ -47,7 +47,6 @@ array (
         <div class="page">
 		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 		<div id="signupFormDiv">
-		<div id="error"><span></span></div>
 		<form id="signup" name="signup" class="signup" method="post">
 <div class="textdiv">Why do you want to answer anonymous questions on a regular basis:</div>
 <textarea name="whyAgent" cols="50" rows="8" maxlength="2000">Hey, it's me!</textarea>
@@ -198,16 +197,6 @@ array (
         </div>
 <script type="text/javascript">
 		$("#signup").validate({
-		invalidHandler: function(event, validator) {
-    var errors = validator.numberOfInvalids();
-    if (errors) {
-      var message = errors == 1
-        ? 'You missed 1 field. It has been highlighted'
-        : 'You missed ' + errors + ' fields. They have been highlighted';
-      $("#error span").html(message);
-      $("#error").show();
-    } else {
-      $("div.error").hide();
 		submitHandler: function(form) {
             var form = document.signup;
 			var dataString = $(form).serialize();
@@ -221,9 +210,8 @@ array (
 				  $("#signupResult").html(data);
 				}
 			});
-			};
-			}}
-return false;
+			return false;
+			}
 });
 </script>
     </body>
