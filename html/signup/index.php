@@ -47,6 +47,7 @@ array (
         <div class="page">
 		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 		<div id="signupFormDiv">
+		<div id="error"><span></span></div>
 		<form id="signup" name="signup" class="signup" method="post">
 <div class="textdiv">Why do you want to answer anonymous questions on a regular basis:</div>
 <textarea name="whyAgent" cols="50" rows="8" maxlength="2000">Hey, it's me!</textarea>
@@ -102,7 +103,7 @@ array (
 	<td><center><input type="checkbox" name="agenttime[]" value="15-18" id="15-18" class="boxchecked" checked="checked" /></center></td>
 	<td><center><input type="checkbox" name="agenttime[]" value="18-20" id="18-20" class="boxchecked" checked="checked" /></center></td>
 	<td><center><input type="checkbox" name="agenttime[]" value="20-22" id="20-22" class="boxchecked" checked="checked" /></center></td>
-	<td><center><input type="checkbox" name="agenttime[]" value="22-0" id="22-24" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="22-24" id="22-24" class="boxchecked" checked="checked" /></center></td>
 	</tr>
 	</table>
 	</center>
@@ -196,8 +197,18 @@ array (
 <div id="signupResult"></div>
         </div>
 <script type="text/javascript">
-$('#signup').submit(function() {
-		$("#signup").validate();
+		$("#signup").validate({
+		invalidHandler: function(event, validator) {
+    var errors = validator.numberOfInvalids();
+    if (errors) {
+      var message = errors == 1
+        ? 'You missed 1 field. It has been highlighted'
+        : 'You missed ' + errors + ' fields. They have been highlighted';
+      $("#error span").html(message);
+      $("#error").show();
+    } else {
+      $("div.error").hide();
+		submitHandler: function(form) {
             var form = document.signup;
 			var dataString = $(form).serialize();
 			$.ajax({
@@ -210,6 +221,8 @@ $('#signup').submit(function() {
 				  $("#signupResult").html(data);
 				}
 			});
+			};
+			}}
 return false;
 });
 </script>
