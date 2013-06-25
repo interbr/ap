@@ -47,3 +47,8 @@ body { margin:20px 0px; padding:0px; text-align:center; background: #bbb; font-s
 
 #answerSystemDiv { margin: 0 auto; width: 540px; height: 400px; }
 #answerPad { width: 540px; height: 300px; }
+
+label.error { 
+	float: right; 
+	color: red; 
+}

@@ -196,12 +196,11 @@ array (
 <div id="signupResult"></div>
         </div>
 <script type="text/javascript">
-$('#signup').submit(function() {
-		$("#signup").validate({
-		success: "valid"});
+		var validator = $("#signup").validate({
+		submitHandler: function(form) {
             var form = document.signup;
 			var dataString = $(form).serialize();
-			$.ajax({
+			ajax({
 				cache: false,
 				type:'POST',
 				url:'agentSignupToDatabase.php',
@@ -211,7 +210,8 @@ $('#signup').submit(function() {
 				  $("#signupResult").html(data);
 				}
 			});
-return false;
+			return false;
+			}
 });
 </script>
     </body>
