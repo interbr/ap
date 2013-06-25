@@ -196,8 +196,9 @@ array (
 <div id="signupResult"></div>
         </div>
 <script type="text/javascript">
+$('#signup').submit(function() {
 		$("#signup").validate({
-		submitHandler: function(form) {
+		success: "valid"});
             var form = document.signup;
 			var dataString = $(form).serialize();
 			$.ajax({
@@ -210,8 +211,7 @@ array (
 				  $("#signupResult").html(data);
 				}
 			});
-			return false;
-			}
+return false;
 });
 </script>
     </body>
