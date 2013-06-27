@@ -197,6 +197,7 @@ array (
 <div id="signupResult"></div>
         </div>
 <script type="text/javascript">
+		$( document ).ready(function() {
 		$('#signup').submit(function() {
 		$("#signup").validate();
 		$.blockUI({ message: '<br />sending ...<br /><br />' });
@@ -214,6 +215,7 @@ array (
 				}
 			});
 return false;
+});
 });
 </script>
     </body>
