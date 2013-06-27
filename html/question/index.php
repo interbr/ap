@@ -77,7 +77,7 @@ $timenowp11c = mktime(gmdate("H")+11, 0, 0, 0, 0, 0);
 $timenowp11 = gmdate("H", $timenowp11c);
 if($timenowp11 >= 0 && $timenowp11 < 6) { $timenowp11q = '0-6'; } else if($timenowp11 >= 6 && $timenowp11 < 10) { $timenowp11q = '6-10'; } else if($timenowp11 >= 10 && $timenowp11 < 12) { $timenowp11q = '10-12'; } else if($timenowp11 >= 12 && $timenowp11 < 15) { $timenowp11q = '12-15'; } else if($timenowp11 >= 15 && $timenowp11 < 18) { $timenowp11q = '15-18'; } else if($timenowp11 >= 18 && $timenowp11 < 20) { $timenowp11q = '18-20'; } else if($timenowp11 >= 20 && $timenowp11 < 22) { $timenowp11q = '20-22'; } else if($timenowp11 >= 22 && $timenowp11 < 24) { $timenowp11q = '22-24'; } ;
 
-$activeAgentsCount = $dbhandle->query("SELECT * FROM agents WHERE active='1' AND busy='0' 
+$activeAgentsCount = $dbhandle->query("SELECT * FROM agents WHERE active='1' AND busy='0' AND 
 agenttime LIKE CASE WHEN agenttzone = 'none' THEN '%never%'
 WHEN agenttzone = 'Europe/London' THEN '%{$timenow0q}%'
 WHEN agenttzone = 'Pacific/Wake' THEN '%{$timenowm12q}%'
