@@ -113,8 +113,8 @@ $dbhandle->close();
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="description" content="Platform for people to write to and get questions answered by other people.">
 		<link rel="stylesheet" href="/css/styles.css">
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
 		</head>
 		<body>
 		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />

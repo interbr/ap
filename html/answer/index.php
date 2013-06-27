@@ -19,8 +19,8 @@ $dbhandle->close();
 		<meta name="description" content="Platform for people to write to and get questions answered by other people.">
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="stylesheet" href="/css/mediaelementplayer.min.css" />
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		<script type="text/javascript" src="/js/etherpad-ap.js"></script>
