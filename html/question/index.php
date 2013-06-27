@@ -136,7 +136,7 @@ $dbhandle->close();
 		<div id="start" class="textdiv"><?php if ($activeNumber > '11') {
 		echo '<button id="clickOpenquestion">Open Question</button></div>'; }
 		else {
-		echo 'Please excuse the system! There are only '.$activeNumber.' agents available.<br /><br />We need at least 12 to offer answers<br /><br />Think about making someone</div><div class="textdiv"><a href="/signup"><button>Signup to be an Agent</button></a></div><div class="textdiv">to make this system work again</div>'; }; ?>
+		echo 'Please excuse the system! There are only '.$activeNumber.' agents available.<br /><br />We need at least 12 to offer answers<br /><br />Think about making someone</div><div class="textdiv"><a href="/signup"><button>Sign up to be an Agent</button></a></div><div class="textdiv">to make this system work again</div>'; }; ?>
 		<div id="openQuestion"></div>
 		<div id="writeQuestion"></div>
 		<div id="previewQuestion"></div>
