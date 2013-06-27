@@ -24,7 +24,7 @@ try {
   $answer = 'Error in answering system';
 }
 
-$subject = "Answer to Test-Question: ".$_GET["id"]." Subject: ".$questionSubject;
+$subject = "Answer to Question: ".$questionSubject;
 $msg = file_get_contents($questionfile);
 
 // send mail

@@ -18,9 +18,10 @@ $dbhandle->query($writeVerificSent);
 
             $query_insert_verify = "INSERT INTO question_verify ( questionID, email, activationkey) VALUES ( '".$dbhandle->real_escape_string($_GET["id"])."', '".$dbhandle->real_escape_string($emailToVerify)."' , '".$dbhandle->real_escape_string($activation)."')";
 			$dbhandle->query($query_insert_verify);
-			echo $dbhandle->errno . ": " . $dbhandle->error . "\n";
 			mysqli_close($dbhandle);
 			
+$msg = strip_tags(file_get_contents($questionToVerify));
+
 			// send mail
 
 //Create a new PHPMailer instance
@@ -43,6 +44,9 @@ $mail->Body = 'You or somebody else wants to ask a question via '.$GLOBALS["apho
 To send the question to five randomly choosen agents now, please click on this link:
 
 '.$GLOBALS["aphost"].'/question/verify/verify.php?email='.urlencode($emailToVerify).'&key='.$activation.'&id='.$_GET["id"].'
+
+By the way, your question is:
+$msg
 
 For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
 

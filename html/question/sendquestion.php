@@ -92,7 +92,7 @@ $timenowp11c = mktime(gmdate("H")+11, 0, 0, 0, 0, 0);
 $timenowp11 = gmdate("H", $timenowp11c);
 if($timenowp11 >= 0 && $timenowp11 < 6) { $timenowp11q = '0-6'; } else if($timenowp11 >= 6 && $timenowp11 < 10) { $timenowp11q = '6-10'; } else if($timenowp11 >= 10 && $timenowp11 < 12) { $timenowp11q = '10-12'; } else if($timenowp11 >= 12 && $timenowp11 < 15) { $timenowp11q = '12-15'; } else if($timenowp11 >= 15 && $timenowp11 < 18) { $timenowp11q = '15-18'; } else if($timenowp11 >= 18 && $timenowp11 < 20) { $timenowp11q = '18-20'; } else if($timenowp11 >= 20 && $timenowp11 < 22) { $timenowp11q = '20-22'; } else if($timenowp11 >= 22 && $timenowp11 < 24) { $timenowp11q = '22-24'; } ;
 
-$agentspool = $dbhandle->query("SELECT * FROM agents WHERE (active='1') AND 
+$agentspool = $dbhandle->query("SELECT * FROM agents WHERE (active='1') AND (busy='0') AND (blocked='0') AND 
 agenttime LIKE CASE WHEN agenttzone = 'none' THEN '%never%'
 WHEN agenttzone = 'Europe/London' THEN '%{$timenow0q}%'
 WHEN agenttzone = 'Pacific/Wake' THEN '%{$timenowm12q}%'
@@ -132,7 +132,7 @@ $timetomeetdisplay = gmdate('D, H:i:s',$timetomeet);
 
 extract($agentsresult);
 
-$subject = "Test-Question: ".strip_tags($_GET["id"])." Subject: ".strip_tags($questionSubject);
+$subject = "Question: ".strip_tags($questionSubject);
 $msg = strip_tags(file_get_contents($questionfile));
 $receipients = array(
 	'agent1' => $agent1,
@@ -223,7 +223,7 @@ GMT (Greenwich mean time) is i.e. Berlin-time -2, Chicago-time +6, Hong-Kong-tim
 
 Follow this link to answer the question: '.$GLOBALS["aphost"].'/answer/index.php?id='.$questionIDfromDB.'&agentcode='.$agentcode.'&authorID='.$authorID.'
 
-If you have no time to answer the question: '.$GLOBALS["aphost"].'/forward/forward.php?id='.$questionIDfromDB.'&agentcode='.$agentcode.'&authorID='.$authorID.'
+If you have no time to answer the question: '.$GLOBALS["aphost"].'/forward/forward.php?id='.$questionIDfromDB.'&agentcode='.$agentcode.'&email='.urlencode($agentaddress).'&authorID='.$authorID.'
 
 
 If you want to pause your account, follow this link: '.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($agentaddress).'&pcode='.$pcodesend.'&status=0
@@ -242,6 +242,8 @@ $writePadDataAgents = "UPDATE answer_access SET $agentcode = '".$dbhandle->real_
 $dbhandle->query($writePadDataAgents);
 $writeQuestionAnswerAgents = "UPDATE question_answer_agents SET agents = IFNULL(CONCAT(agents, ',".$dbhandle->real_escape_string($agentaddress)."'), '".$dbhandle->real_escape_string($agentaddress)."') WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writeQuestionAnswerAgents);
+$setAgentBusy = "UPDATE agents SET busy = '1', last_questionID = '".$dbhandle->real_escape_string($questionIDfromDB)."' WHERE email = '".$dbhandle->real_escape_string($agentaddress)."'";
+$dbhandle->query($setAgentBusy);
 }
 }
 else {

@@ -1,1 +1,1 @@
-<div class="textdiv">Thank You!</div>
+<div class="textdiv">Thank You! You were sent an email with an activation-link.</div>

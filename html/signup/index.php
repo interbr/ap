@@ -1,7 +1,7 @@
 <?php
 $timezones = 
 array (
-  'Please choose' => 'none',
+  'Please choose' => '',
   '(GMT-12:00) International Date Line West' => 'Pacific/Wake',
   '(GMT-11:00) Samoa' => 'Pacific/Apia',
   '(GMT-10:00) Hawaii' => 'Pacific/Honolulu',
@@ -40,6 +40,7 @@ array (
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 		<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.blockUI.js"></script>
 		<script type="text/javascript" src="/js/custom.js"></script>
 		</head>
 		<body>
@@ -79,7 +80,7 @@ array (
 </div>
 <div class="textdiv">Which Timezone are you in:</div>
 <div class="textdiv">
-	<select name="agenttimezone" class="timezoner" size="1">
+	<select name="agenttimezone" class="timezoner" size="1" required >
 		<?php foreach($timezones as $tzone => $tzonesave){
 		echo "<option value=\"".$tzonesave."\">".$tzone."</option>";
 		} ?>
@@ -196,22 +197,23 @@ array (
 <div id="signupResult"></div>
         </div>
 <script type="text/javascript">
-		var validator = $("#signup").validate({
-		submitHandler: function(form) {
+		$('#signup').submit(function() {
+		$("#signup").validate();
+		$.blockUI({ message: '<br />sending ...<br /><br />' });
             var form = document.signup;
 			var dataString = $(form).serialize();
-			ajax({
+			$.ajax({
 				cache: false,
 				type:'POST',
 				url:'agentSignupToDatabase.php',
 				data: dataString,
 				success: function(data) {
+				$.unblockUI();
 				  $('#signupFormDiv').slideUp(1000);
 				  $("#signupResult").html(data);
 				}
 			});
-			return false;
-			}
+return false;
 });
 </script>
     </body>

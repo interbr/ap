@@ -15,6 +15,7 @@ $questionsent = $questionrow['sent'];
 };
 if ( $questionverified == '1' ) {
 $agentcodeForwarding = strip_tags($_GET["agentcode"]);
+$emailForwarding = strip_tags($_GET["email"]);
 $authorIDForwarding = strip_tags($_GET["authorID"]);
 $agentForwarding = $dbhandle->query("SELECT * FROM answer_access WHERE questionID='".$dbhandle->real_escape_string($_GET["id"])."' AND $agentcodeForwarding='".$dbhandle->real_escape_string($authorIDForwarding)."'");
 if (mysqli_affected_rows($dbhandle) == 1) {
@@ -109,7 +110,7 @@ if($timenowp11 >= 0 && $timenowp11 < 6) { $timenowp11q = '0-6'; } else if($timen
 
 
 $forwardedAgentAddressQuery = $dbhandle->query("SELECT * FROM agents 
-WHERE active='1' 
+WHERE (active='1') AND (busy='0') AND (blocked='0')
 AND (NOT FIND_IN_SET(email, '$agentsAlreadySentResult')) AND 
 agenttime LIKE CASE WHEN agenttzone = 'none' THEN '%never%'
 WHEN agenttzone = 'Europe/London' THEN '%{$timenow0q}%'
@@ -166,12 +167,15 @@ $timedisplay = date('c',$timetoanswer);
 $timetomeet = strtotime('-60 minutes', $timetoanswer);
 $timetomeetdisplay = gmdate('D, H:i:s',$timetomeet);
 
-$subject = "Forwarded Test-Question: ".strip_tags($_GET["id"])." Subject: ".strip_tags($questionSubject);
+$subject = "Forwarded Question: ".strip_tags($questionSubject);
 $msg = strip_tags(file_get_contents($questionfile));
 
 $writeForwardedAgentData = "UPDATE answer_access SET $agentcodeForwarding = '".$dbhandle->real_escape_string($forwardedAuthorID)."', $forwardingSessionIDCol = '".$dbhandle->real_escape_string($forwardedAgentSessionID)."' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writeForwardedAgentData);
-
+$setAgentNotBusy = "UPDATE agents SET busy = '0' WHERE email = '".$dbhandle->real_escape_string($emailForwarding)."'";
+$dbhandle->query($setAgentNotBusy);
+$setAgentBusy = "UPDATE agents SET busy = '1', last_questionID = '".$dbhandle->real_escape_string($questionIDfromDB)."' WHERE email = '".$dbhandle->real_escape_string($forwardedAgentAddress)."'";
+$dbhandle->query($setAgentBusy);
 // send mail
 
 //Create a new PHPMailer instance
@@ -179,9 +183,9 @@ $mail = new PHPMailer();
 // Set PHPMailer to use the sendmail transport
 $mail->IsSendmail();
 //Set who the message is to be sent from
-$mail->SetFrom('no-reply@amored-police.org', 'Amored Police question-answer-system');
+$mail->SetFrom('no-reply@amored-police.org', 'idea.amored-police.com question-answer-system');
 //Set an alternative reply-to address
-$mail->AddReplyTo('no-reply@amored-police.org','Amored Police question-answer-system');
+$mail->AddReplyTo('no-reply@amored-police.org','idea.amored-police.com question-answer-system');
 //Set who the message is to be sent to
 $mail->AddAddress($forwardedAgentAddress);
 $mail->AddBCC('felix@weltpolizei.de');
@@ -202,7 +206,7 @@ GMT (Greenwich mean time) is i.e. Berlin-time -2, Chicago-time +6, Hong-Kong-tim
 
 Follow this link to answer the question: '.$GLOBALS["aphost"].'/answer/index.php?id='.$questionIDfromDB.'&agentcode='.$agentcodeForwarding.'&authorID='.$forwardedAuthorID.'
 
-If you have no time to answer the question, too: '.$GLOBALS["aphost"].'/forward/forward.php?id='.$questionIDfromDB.'&agentcode='.$agentcodeForwarding.'&authorID='.$forwardedAuthorID.'
+If you have no time to answer the question, too: '.$GLOBALS["aphost"].'/forward/forward.php?id='.$questionIDfromDB.'&agentcode='.$agentcodeForwarding.'&email='.urlencode($forwardedAgentAddress).'&authorID='.$forwardedAuthorID.'
 
 
 If you want to pause your account, follow this link: '.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=0
@@ -216,6 +220,7 @@ if(!$mail->Send()) {
 } else {
   echo "Question forwarded!";
 }
+
 
 }
 else {

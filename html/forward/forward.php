@@ -21,7 +21,7 @@
 $(document).ready(function(){
 			$.ajax({
 				type:'POST',
-				url:'forwardMail.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&authorID=<?php echo $_GET["authorID"]; ?>',
+				url:'forwardMail.php?id=<?php echo $_GET["id"]; ?>&agentcode=<?php echo $_GET["agentcode"]; ?>&email=<?php echo $_GET["email"]; ?>&authorID=<?php echo $_GET["authorID"]; ?>',
 				success: function(data) {
 				  $("#forwardResult").html(data);
 				}
