@@ -14,6 +14,7 @@ $questionverified = $questionrow['active'];
 $questionsent = $questionrow['sent'];
 };
 if ( $questionverified == '1' ) {
+if ( $questionsent == '0' ) {
 $agentcodeForwarding = strip_tags($_GET["agentcode"]);
 $emailForwarding = strip_tags($_GET["email"]);
 $authorIDForwarding = strip_tags($_GET["authorID"]);
@@ -231,6 +232,9 @@ echo "Question is old and not valid anymore"; };
 }
 else {
 echo "No question found"; };
+}
+else {
+echo "Question answered already"; };
 }
 else {
 echo "Forwarding not possible"; };
