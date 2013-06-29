@@ -16,6 +16,8 @@ if ( $answersent != '1') {
 require_once (__ROOT__.'/../php/class.phpmailer.php');
 $writeSent = "UPDATE questions SET answer_sent = '1' WHERE questionID = '".$_GET["id"]."'";
 $dbhandle->query($writeSent);
+$setAgentsAvailable = "UPDATE agents SET busy = '0' WHERE busy = '1' AND last_questionID = '".$dbhandle->real_escape_string($questionIDfromDB)."'";
+$dbhandle->query($setAgentsAvailable);
 $instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadapihost"].'/api');
 try {
   $padContents = $instance->getText($_GET["pad"]);

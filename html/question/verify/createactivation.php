@@ -46,7 +46,7 @@ To send the question to five randomly choosen agents now, please click on this l
 '.$GLOBALS["aphost"].'/question/verify/verify.php?email='.urlencode($emailToVerify).'&key='.$activation.'&id='.$_GET["id"].'
 
 By the way, your question is:
-$msg
+'.$msg.'
 
 For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
 
