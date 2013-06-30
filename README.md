@@ -10,7 +10,7 @@ All the five can meet on a website with an [etherpad-lite](http://etherpad.org/)
 
 If there is no answer in 90 minutes an excuse is sent.
 
-To level the propability that three people find together to answer, questions can be forwarded by clicking in the question-email.
+To level the propability that at least three people find together to answer, questions can be forwarded by clicking a link in the question-email.
 
 #Status:
 ##Help me coding this beast!
