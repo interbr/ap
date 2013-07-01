@@ -14,6 +14,10 @@ To level the propability that at least three people find together to answer, que
 
 #Status:
 ##Help me coding this beast!
+Currently my skills don't allow to code a component as it should work that I call the "[answer-whopper](https://github.com/interbr/amored-police/blob/master/html/answer/answerwhopper.php)".
+It's checking if the help-desk-agents are satisfied with the answer yet and it offers to send the answer when 3 of 5 agents are click a button "Are you satisfied".
+Some nodejs would improve the component, that is currently making ajax-calls every 4 seconds to reload a php-file checking the "satisfied"-status to a database.
+
 Test-Version at [idea.amored-police.com](https://idea.amored-police.com)
 
 There you're welcome to sign up to answer questions.
