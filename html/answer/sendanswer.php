@@ -20,14 +20,17 @@ $setAgentsAvailable = "UPDATE agents SET busy = '0' WHERE busy = '1' AND last_qu
 $dbhandle->query($setAgentsAvailable);
 $instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadapihost"].'/api');
 try {
-  $padContents = $instance->getText($_GET["pad"]);
-  $answer = $padContents->text;
+  $padContents = $instance->getHTML($_GET["pad"]);
+  $answer = strip_tags($padContents->html, '<p><br>');
 } catch (Exception $e) {
   $answer = 'Error in answering system';
 }
 
+$writeAnswerToDatabase = "UPDATE questions SET answerText = '".$dbhandle->real_escape_string($answer)."' WHERE questionID = '".$dbhandle->real_escape_string($questionIDfromDB)."'";
+$dbhandle->query($writeAnswerToDatabase);
+
 $subject = "Answer to Question: ".$questionSubject;
-$msg = file_get_contents($questionfile);
+$msg = strip_tags(file_get_contents($questionfile));
 
 // send mail
 
@@ -55,7 +58,10 @@ The Question was:
 '.$msg.'
 
 The answer is:
-'.$answer.'';
+'.html_entity_decode(htmlspecialchars_decode(preg_replace('#<br\s*?/?>#i', "\n", $answer)), ENT_QUOTES, 'cp1252').'
+
+If you want to allow to publish the question and answer, please click the following link:
+'.$GLOBALS["aphost"].'/publish/publish.php?email='.urlencode($question_address).'&id='.$questionIDfromDB.'';
 
 //Send the message, check for errors
 if(!$mail->Send()) {
