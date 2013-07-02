@@ -1,7 +1,7 @@
 <?php
 define('__ROOT__', dirname(dirname(__FILE__))); 
-require_once(__ROOT__.'/configuration.php'); //a file with configurations
-require_once (__ROOT__.'/class.phpmailer.php');
+require_once(__ROOT__.'/php/configuration.php'); //a file with configurations
+require_once (__ROOT__.'/php/class.phpmailer.php');
 
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $timeold = strtotime("+5 minutes");
