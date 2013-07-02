@@ -14,14 +14,14 @@ if (mysqli_affected_rows($dbhandle) > 0) {
 foreach($oldQuestionResult as $questionID) {
 $checkOldQuestionExcuseQ = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$dbhandle->real_escape_string($questionID)."' AND excuse = '0' AND sent = '1' AND answer_sent = '0'");
 while($excuserow = $checkOldQuestionExcuseQ->fetch_assoc()) {
-$questionfile = "../content/".$excuserow['questionID'].".txt"; //questionfile
+$questionText = strip_tags($excuserow['questionText']);
 $questionEmail = strip_tags($excuserow['email']);
 $questionSubject = strip_tags($excuserow['subject']);
 };
 if (mysqli_affected_rows($dbhandle) > 0) {
 
-$subject = "Sorry, Test-Question not answered: ".strip_tags($questionID)." Subject: ".strip_tags($questionSubject);
-$msg = strip_tags(file_get_contents($questionfile));
+$subject = "Sorry, Question not answered: ".strip_tags($questionSubject);
+$msg = $questionText;
 
 // send mail
 $mail = new PHPMailer();
@@ -36,7 +36,7 @@ $mail->Body = 'Sorry, this is to inform you that your question with subject: '.$
 wasn\'t answered.
 
 The Question was:
-'.$msg.'
+'.utf8_decode($msg).'
 
 Five agents who received this question had 90 minutes to answer the question.
 
