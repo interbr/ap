@@ -1,14 +1,18 @@
 <?php 
-$fy = "../../content/".$_GET["id"].".txt"; //questionfile
-?>
-<div class="textdiv">
-Question was:<br /><br />
-<?php echo nl2br( file_get_contents($GLOBALS["fy"]) ); ?>
-</div>
-<?php 
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-api-class
 require_once(__ROOT__.'/../php/configuration.php');
+$dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
+$questionToPreviewQuery = $dbhandle->query("SELECT questionText FROM questions WHERE questionID='".$dbhandle->real_escape_string($_GET["id"])."'");
+while($questionPreviewRow = $questionToPreviewQuery->fetch_assoc()) {
+$questionText = $questionPreviewRow['questionText'];
+};
+?>
+<div class="textdiv">
+Question was:<br /><br />
+<?php echo strip_tags($questionText, '<p><br>'); ?>
+</div>
+<?php 
 $instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadapihost"].'/api');
 try {
   $padContents = $instance->getHTML($_GET["pad"]);

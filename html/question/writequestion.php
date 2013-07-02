@@ -1,12 +1,8 @@
-<?php 
-define('__ROOT__', dirname(dirname(__FILE__))); 
-require_once(__ROOT__.'/../php/question.php'); //a file with functions
-?>
 <div class="textdiv" id="writeQuestionIDInfo"><i>Now write your question:</i></div>
 <div id="writeQuestionTextarea">
 <div class="textdiv"> 
 			<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
-			<textarea id="content" rows="12" cols="50" name="content"><?php questionOpen(); ?></textarea></div>
+			<textarea id="content" rows="12" cols="50" name="content">This is my question: </textarea></div>
 			<div class="textdiv">
 			<input id="clickPreviewquestion" type="submit" value="Preview">
 			</form>	

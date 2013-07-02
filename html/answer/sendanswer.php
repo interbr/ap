@@ -5,7 +5,7 @@ require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-ap
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $questionToSend = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$_GET["id"]."'");
 while($questionrow = $questionToSend->fetch_assoc()) {
-$questionfile = "../../content/".$questionrow['questionID'].".txt"; //questionfile
+$questionText = $questionrow['questionText'];
 $questionSubject = $questionrow['subject'];
 $categories = $questionrow['questionCategories'];
 $questionIDfromDB = $questionrow['questionID'];
@@ -30,7 +30,7 @@ $writeAnswerToDatabase = "UPDATE questions SET answerText = '".$dbhandle->real_e
 $dbhandle->query($writeAnswerToDatabase);
 
 $subject = "Answer to Question: ".$questionSubject;
-$msg = strip_tags(file_get_contents($questionfile));
+$msg = strip_tags($questionText, '<p><br>');
 
 // send mail
 
@@ -55,7 +55,7 @@ The question had the subject: '.$questionSubject.'
 It was sorted to the following categories: '.$categories.'
 
 The Question was:
-'.$msg.'
+'.utf8_decode($msg).'
 
 The answer is:
 '.html_entity_decode(htmlspecialchars_decode(preg_replace('#<br\s*?/?>#i', "\n", $answer)), ENT_QUOTES, 'cp1252').'

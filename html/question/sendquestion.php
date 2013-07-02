@@ -5,7 +5,7 @@ require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-ap
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $questionToSend = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$dbhandle->real_escape_string($_GET["id"])."'");
 while($questionrow = $questionToSend->fetch_assoc()) {
-$questionfile = "../../content/".$questionrow['questionID'].".txt"; //questionfile
+$questionText = $questionrow['questionText'];
 $questionSubject = strip_tags($questionrow['subject']);
 $categories = strip_tags($questionrow['questionCategories']);
 $questionIDfromDB = strip_tags($questionrow['questionID']);
@@ -133,7 +133,7 @@ $timetomeetdisplay = gmdate('D, H:i:s',$timetomeet);
 extract($agentsresult);
 
 $subject = "Question: ".strip_tags($questionSubject)." -- Please answer quick or forward!";
-$msg = strip_tags(file_get_contents($questionfile));
+$msg = strip_tags($questionText, '<p><br>');
 $receipients = array(
 	'agent1' => $agent1,
     'agent2' => $agent2,
@@ -216,7 +216,7 @@ It has the subject: '.$questionSubject.'
 It is sorted to the following categories: '.$categories.'
 
 The Question is:
-'.$msg.'
+'.utf8_decode($msg).'
 
 You and the other four agents who received this question will have 90 minutes to answer this question. Why not meet in 30 minutes (GMT '.$timetomeetdisplay.')?
 GMT (Greenwich mean time) is i.e. Berlin-time -2, Chicago-time +6, Hong-Kong-time -8 ...

@@ -146,3 +146,7 @@ $dbhandle->close();
         </div>
     </body>
 </html>
+<?php
+session_start();
+$_SESSION['questionID'] = $idNum;
+?>

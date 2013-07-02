@@ -4,7 +4,7 @@ require_once(__ROOT__.'/../../php/configuration.php'); //a file with configurati
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $questionToVerifyQuery = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$dbhandle->real_escape_string($_GET["id"])."'");
 while($questionverifyrow = $questionToVerifyQuery->fetch_assoc()) {
-$questionToVerify = "../../../content/".$questionverifyrow['questionID'].".txt"; //questionfile
+$questionText = $questionverifyrow['questionText'];
 $emailToVerify = $questionverifyrow['email'];
 $questionSubjectToVerify = $questionverifyrow['subject'];
 $verificationsent = $questionverifyrow['verific_sent'];
@@ -20,7 +20,7 @@ $dbhandle->query($writeVerificSent);
 			$dbhandle->query($query_insert_verify);
 			mysqli_close($dbhandle);
 			
-$msg = strip_tags(file_get_contents($questionToVerify));
+$msg = strip_tags($questionText, '<p><br>');
 
 			// send mail
 
@@ -46,7 +46,7 @@ To send the question to five randomly choosen agents now, please click on this l
 '.$GLOBALS["aphost"].'/question/verify/verify.php?email='.urlencode($emailToVerify).'&key='.$activation.'&id='.$_GET["id"].'
 
 By the way, your question is:
-'.$msg.'
+'.utf8_decode($msg).'
 
 For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
 

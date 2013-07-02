@@ -1,8 +1,13 @@
 <?php
-$content = strip_tags($_POST['question']);
-$fw = "../../content/".$_GET["id"].".txt";
+define('__ROOT__', dirname(dirname(__FILE__))); 
+require_once(__ROOT__.'/../php/configuration.php'); //a file with configurations
+$content = strip_tags(nl2br($_POST['question']), '<p><br>');
 
-    $fp = fopen($GLOBALS["fw"],"w") or die ("Error opening file in write mode!");
-    fputs($fp,$content); // write textarea-content (question) to questionfile
-    fclose($fp) or die ("Error closing file!"); 
+$dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
+session_start();
+$questionID = $_SESSION['questionID'];
+$openSaveQuestionQuery = "INSERT INTO questions (questionID, questionText) VALUES ('".$dbhandle->real_escape_string($questionID)."', '".$dbhandle->real_escape_string($content)."') ON DUPLICATE KEY UPDATE questionText=VALUES(questionText)";
+$dbhandle->query($openSaveQuestionQuery);
+$dbhandle->close();
+
 ?> 

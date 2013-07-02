@@ -6,7 +6,7 @@ $instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpa
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $questionPreview = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$_GET["id"]."'");
 while($row = $questionPreview->fetch_assoc()) {
-$questionfile = "../../content/".$row['questionID'].".txt"; //questionfile
+$questionText = $row['questionText'];
 $subject = $row['subject'];
 $categories = $row['questionCategories'];
 $questionIDfromDB = $row['questionID'];
@@ -55,7 +55,7 @@ $dbhandle->close();
 Your question you were asked randomly has the subject:<br /><br />
 <?php echo $subject ?><br /><br />
 It has the Content:<br /><br />
-<?php echo nl2br( file_get_contents($questionfile) ); ?><br /><br />
+<?php echo strip_tags($questionText, '<p><br>'); ?><br /><br />
 <!--It's sorted to the Categories:<br /><br />
 <?php echo $categories ?><br /><br /> -->
 		</div>
