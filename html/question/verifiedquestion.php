@@ -27,7 +27,7 @@ $dbhandle->close();
 		<script type="text/javascript" src="/js/custom.js"></script>
 		</head>
 		<body> 
-		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
+		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
         <div class="page">
 		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
 <div id="savedQuestionPrepareToSend">
