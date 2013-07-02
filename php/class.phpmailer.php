@@ -422,7 +422,7 @@ class PHPMailer {
    * What to use in the X-Mailer header
    * @var string NULL for default, whitespace for None, or actual string to use
    */
-  public $XMailer         = '';
+  public $XMailer         = ' ';
 
   /////////////////////////////////////////////////
   // PROPERTIES, PRIVATE AND PROTECTED
