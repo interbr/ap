@@ -133,7 +133,7 @@ $timetomeetdisplay = gmdate('D, H:i:s',$timetomeet);
 extract($agentsresult);
 
 $subject = "Question: ".strip_tags($questionSubject)." -- Please answer quick or forward!";
-$msg = strip_tags($questionText, '<p><br>');
+$msg = strip_tags($questionText);
 $receipients = array(
 	'agent1' => $agent1,
     'agent2' => $agent2,
@@ -221,14 +221,19 @@ The Question is:
 You and the other four agents who received this question will have 90 minutes to answer this question. Why not meet in 30 minutes (GMT '.$timetomeetdisplay.')?
 GMT (Greenwich mean time) is i.e. Berlin-time -2, Chicago-time +6, Hong-Kong-time -8 ...
 
-Follow this link to answer the question: '.$GLOBALS["aphost"].'/answer/index.php?id='.$questionIDfromDB.'&agentcode='.$agentcode.'&authorID='.$authorID.'
+Follow this link to answer the question: 
+'.$GLOBALS["aphost"].'/answer/index.php?id='.$questionIDfromDB.'&agentcode='.$agentcode.'&authorID='.$authorID.'
 
-If you have no time to answer the question: '.$GLOBALS["aphost"].'/forward/forward.php?id='.$questionIDfromDB.'&agentcode='.$agentcode.'&email='.urlencode($agentaddress).'&authorID='.$authorID.'
+If you have no time to answer the question, forward it!: 
+'.$GLOBALS["aphost"].'/forward/forward.php?id='.$questionIDfromDB.'&agentcode='.$agentcode.'&email='.urlencode($agentaddress).'&authorID='.$authorID.'
 
 
-If you want to pause your account, follow this link: '.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($agentaddress).'&pcode='.$pcodesend.'&status=0
-If at any time you want to reactivate your account: '.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($agentaddress).'&pcode='.$pcodesend.'&status=1
-If you want to delete your account: '.$GLOBALS["aphost"].'/agentstatus/deleteaccount.php?email='.urlencode($agentaddress).'&pcode='.$pcodesend.'&delete=1
+If you want to pause your account, follow this link: 
+'.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($agentaddress).'&pcode='.$pcodesend.'&status=0
+If at any time you want to reactivate your account: 
+'.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($agentaddress).'&pcode='.$pcodesend.'&status=1
+If you want to delete your account: 
+'.$GLOBALS["aphost"].'/agentstatus/deleteaccount.php?email='.urlencode($agentaddress).'&pcode='.$pcodesend.'&delete=1
 
 For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
 

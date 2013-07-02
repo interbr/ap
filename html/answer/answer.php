@@ -5,12 +5,6 @@ require_once(__ROOT__.'/../php/answering-system.php'); //a file with etherpad-ap
 $instance = new EtherpadLiteClient($GLOBALS["etherpadapikey"], $GLOBALS["etherpadhost"].'/api');
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $questionPreview = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$_GET["id"]."'");
-while($row = $questionPreview->fetch_assoc()) {
-$questionText = $row['questionText'];
-$subject = $row['subject'];
-$categories = $row['questionCategories'];
-$questionIDfromDB = $row['questionID'];
-};
 $padAuthorAccess = $dbhandle->query("SELECT * FROM answer_access WHERE questionID='".$_GET["id"]."'");
 while($row = $padAuthorAccess->fetch_assoc()) {
 $groupID = $row['groupID'];
@@ -50,15 +44,6 @@ $dbhandle->close();
 				update();
 			});
 		</script>
-
-		<div class="textdiv" id="start">
-Your question you were asked randomly has the subject:<br /><br />
-<?php echo $subject ?><br /><br />
-It has the Content:<br /><br />
-<?php echo strip_tags($questionText, '<p><br>'); ?><br /><br />
-<!--It's sorted to the Categories:<br /><br />
-<?php echo $categories ?><br /><br /> -->
-		</div>
 		<div class="textdiv" id="answerSystemDiv">
 		<div id="answerPad"></div>
 		</div>

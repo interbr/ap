@@ -35,7 +35,9 @@ echo "<div id=\"cancelSatisfiedAnswerButton\"><button id=\"clickCancelSatisfiedA
 <?php if ( $satisfaction >= "3" ) {
 echo "You are satisfied!<br /><br /><div id=\"previewAnswerButton\"><button id=\"clickPreviewAnswer\">".$_GET["agentcode"].": Stop answering. Preview.</button><br /></div>"; }
 else {
-echo "Not satisfied yet ..."; }; ?>
+echo "Not satisfied yet ..."; }; ?><br /><br />
+<i>When at least 3 of 5 agents have marked "satisfied",<br />the answer can be saved.<br />
+You will hear a sound when the answer is saved</i>
 </div>
 		<script type="text/javascript">
 		function closequestion() {

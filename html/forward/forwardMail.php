@@ -11,10 +11,10 @@ $categories = strip_tags($questionrow['questionCategories']);
 $questionIDfromDB = strip_tags($questionrow['questionID']);
 $timeofsending = strip_tags($questionrow['time-of-sending']);
 $questionverified = $questionrow['active'];
-$questionsent = $questionrow['sent'];
+$answersent = $questionrow['answer_sent'];
 };
 if ( $questionverified == '1' ) {
-if ( $questionsent == '1' ) {
+if ( $answersent == '0' ) {
 $agentcodeForwarding = strip_tags($_GET["agentcode"]);
 $emailForwarding = strip_tags($_GET["email"]);
 $authorIDForwarding = strip_tags($_GET["authorID"]);
@@ -169,7 +169,7 @@ $timetomeet = strtotime('-60 minutes', $timetoanswer);
 $timetomeetdisplay = gmdate('D, H:i:s',$timetomeet);
 
 $subject = "Forwarded Question: ".strip_tags($questionSubject)." -- Please answer quick or forward again!";
-$msg = strip_tags($questionText, '<p><br>');
+$msg = strip_tags($questionText);
 
 $writeForwardedAgentData = "UPDATE answer_access SET $agentcodeForwarding = '".$dbhandle->real_escape_string($forwardedAuthorID)."', $forwardingSessionIDCol = '".$dbhandle->real_escape_string($forwardedAgentSessionID)."' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
 $dbhandle->query($writeForwardedAgentData);
@@ -205,14 +205,19 @@ The Question is:
 You and the other four agents who received this question will have 90 minutes to answer this question. Why not meet in 30 minutes (GMT '.$timetomeetdisplay.')?
 GMT (Greenwich mean time) is i.e. Berlin-time -2, Chicago-time +6, Hong-Kong-time -8 ...
 
-Follow this link to answer the question: '.$GLOBALS["aphost"].'/answer/index.php?id='.$questionIDfromDB.'&agentcode='.$agentcodeForwarding.'&authorID='.$forwardedAuthorID.'
+Follow this link to answer the question:
+'.$GLOBALS["aphost"].'/answer/index.php?id='.$questionIDfromDB.'&agentcode='.$agentcodeForwarding.'&authorID='.$forwardedAuthorID.'
 
-If you have no time to answer the question, too: '.$GLOBALS["aphost"].'/forward/forward.php?id='.$questionIDfromDB.'&agentcode='.$agentcodeForwarding.'&email='.urlencode($forwardedAgentAddress).'&authorID='.$forwardedAuthorID.'
+If you have no time to answer the question, too:
+'.$GLOBALS["aphost"].'/forward/forward.php?id='.$questionIDfromDB.'&agentcode='.$agentcodeForwarding.'&email='.urlencode($forwardedAgentAddress).'&authorID='.$forwardedAuthorID.'
 
 
-If you want to pause your account, follow this link: '.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=0
-If at any time you want to reactivate your account: '.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=1
-If you want to delete your account: '.$GLOBALS["aphost"].'/agentstatus/deleteaccount.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&delete=1
+If you want to pause your account, follow this link:
+'.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=0
+If at any time you want to reactivate your account:
+'.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=1
+If you want to delete your account:
+'.$GLOBALS["aphost"].'/agentstatus/deleteaccount.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&delete=1
 
 For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
 

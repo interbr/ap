@@ -8,7 +8,7 @@ $openQuestionQuery = $dbhandle->query("SELECT * FROM questions WHERE questionID=
 ?>
 <div id="previewQuestionSlide">
 <div class="textdiv" id="previewQuestionInfo"><i>Your question will be:</i></div>
-<div class="textdiv" id="previewQuestionText">
+<div class="textdiv" style="text-align: left;" id="previewQuestionText">
 <?php while($openSaveRow = $openQuestionQuery->fetch_assoc()) { echo $openSaveRow["questionText"]; }; ?> <!-- preview questionfile-content with linebreaks -->
 </div>
 <div class="textdiv" id="buttonCategorizeQuestion">

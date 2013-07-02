@@ -39,7 +39,9 @@ $agent5_text = $agent5Online == 1 ? "Ready!" : "Offline?";
 <?php if ( $onlinetotal >= "3" ) {
 echo "You are ready!<br /><br /><div id=\"readyAnswerButton\"><button id=\"clickStartAnswer\">Start answering.</button><br /></div>"; }
 else {
-echo "Not ready yet ..."; }; ?> 
+echo "Not ready yet ..."; }; ?><br /><br />
+<i>When at least 3 of 5 agents are marked ready, the answer can begin.<br />
+You will hear a sound when the answer begins</i>
 </div>
 <script type="text/javascript">
 		function startquestion() {

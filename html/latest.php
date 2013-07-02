@@ -23,8 +23,8 @@ $dbhandle->close();
 <div class="textdiv">Last answered questions that are allowed to publish?</div>
 <?php while($publishQuestionRow = $resultQuestion->fetch_assoc()) { ?>
 <div class="textdiv"><b>Question:</b> <?php echo $publishQuestionRow["subject"]; ?><br /><br />
-<?php $questionText = $publishQuestionRow['questionText']; echo strip_tags($questionText, '<p><br>'); ?><br /><br />
-<b>Answer:</b><br /><br /><?php echo $publishQuestionRow["answerText"]; ?>
+<div style="text-align: left"><?php $questionText = $publishQuestionRow['questionText']; echo strip_tags($questionText, '<p><br>'); ?></div><br /><br />
+<b>Answer:</b><br /><br /><div style="text-align: left"><?php echo $publishQuestionRow["answerText"]; ?></div>
 </div>
 <?php 
 };

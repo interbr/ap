@@ -34,7 +34,7 @@ $dbhandle->close();
 <div class="textdiv"><i>Your question is saved on server. Don't forget to send it.</i></div>
 <div class="textdiv"><i>Your question is saved with ID:</i><br /><?php echo strip_tags($_GET["id"]); ?></div>
 <div class="textdiv"><i>It has the subject:</i><br /><?php echo strip_tags($subject) ?></div>
-<div class="textdiv"><i>It has the Content:</i><br /><?php echo strip_tags($questionText, '<p><br>'); ?></div>
+<div class="textdiv"><i>It has the Content:</i><br /><br /><div  style="text-align: left;"><?php echo strip_tags($questionText, '<p><br>'); ?></div></div>
 <div class="textdiv"><i>It's sorted to the Categories:</i><br /><?php echo strip_tags($categories) ?></div>
 <div class="textdiv"><i>The answer will be send to the following address:</i><br /><?php echo strip_tags($questionaddress) ?></div>
 <div class="textdiv"><b>Please be careful! Your question will be sent randomly to 5 email-addresses chosen from the agent-database of this website. The answer might be obscene, immature or most important: wrong! This website-system takes no influence on quality or content of answers.</b></div>

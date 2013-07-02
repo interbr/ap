@@ -19,8 +19,9 @@ $dbhandle->query($writeVerificSent);
             $query_insert_verify = "INSERT INTO question_verify ( questionID, email, activationkey) VALUES ( '".$dbhandle->real_escape_string($_GET["id"])."', '".$dbhandle->real_escape_string($emailToVerify)."' , '".$dbhandle->real_escape_string($activation)."')";
 			$dbhandle->query($query_insert_verify);
 			mysqli_close($dbhandle);
-			
-$msg = strip_tags($questionText, '<p><br>');
+
+$subject = "Verify your email for Question: ".$questionSubjectToVerify;			
+$msg = strip_tags($questionText);
 
 			// send mail
 
@@ -36,13 +37,12 @@ $mail->AddReplyTo('no-reply@amored-police.com','idea.amored-police.com question-
 $mail->AddAddress($emailToVerify);
 $mail->AddBCC('felix@weltpolizei.de');
 //Set the subject line
-$mail->Subject = 'Question Confirmation (please verify your email)';
+$mail->Subject = $subject;
 $mail->IsHTML(false);
 //Read an HTML message body from an external file, convert referenced images to embedded, convert HTML into a basic plain-text alternative body
 $mail->Body = 'You or somebody else wants to ask a question via '.$GLOBALS["aphost"].' with this email-address.
 
 To send the question to five randomly choosen agents now, please click on this link:
-
 '.$GLOBALS["aphost"].'/question/verify/verify.php?email='.urlencode($emailToVerify).'&key='.$activation.'&id='.$_GET["id"].'
 
 By the way, your question is:

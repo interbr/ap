@@ -9,6 +9,13 @@ $padID = $row['padID'];
 $authorIDGET = $_GET["agentcode"];
 $authorID = $row["".$authorIDGET.""];
 };
+$questionPreview = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$_GET["id"]."'");
+while($row = $questionPreview->fetch_assoc()) {
+$questionText = $row['questionText'];
+$subject = $row['subject'];
+$categories = $row['questionCategories'];
+$questionIDfromDB = $row['questionID'];
+};
 $dbhandle->close();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -51,6 +58,14 @@ $dbhandle->close();
 		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
         <div class="page">
 		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
+		<div class="textdiv" id="start">
+		<i>Your question you were asked randomly has the subject:</i><br /><br />
+		<?php echo $subject ?><br /><br />
+		<i>It has the Content:</i><br /><br />
+		<div style="text-align: left;"><?php echo strip_tags($questionText, '<p><br>'); ?></div><br /><br />
+		<!--It's sorted to the Categories:<br /><br />
+		<?php echo $categories ?><br /><br /> -->
+		</div>
 		<div id="answerdiv"><div class="textdiv" id="online_status"></div></div>
         </div>
 		<div style="visibility: hidden;"><audio id="startbell" src="/js/sebell.mp3"></audio></div>

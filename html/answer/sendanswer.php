@@ -30,7 +30,7 @@ $writeAnswerToDatabase = "UPDATE questions SET answerText = '".$dbhandle->real_e
 $dbhandle->query($writeAnswerToDatabase);
 
 $subject = "Answer to Question: ".$questionSubject;
-$msg = strip_tags($questionText, '<p><br>');
+$msg = strip_tags($questionText);
 
 // send mail
 
