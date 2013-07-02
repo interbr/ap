@@ -17,15 +17,21 @@ $answered = $row['answered'];
 $dbhandle->close();
 $status = array($agent1Status,$agent2Status,$agent3Status,$agent4Status,$agent5Status);
 $satisfaction = array_sum($status);
+
+$agent1status_text = $agent1Status == 1 ? "<span style=\"color: #00ff00;\">Satisfied!</span>" : "<span style=\"color: #ff0000;\">Not Satisfied.</span>";
+$agent2status_text = $agent2Status == 1 ? "<span style=\"color: #00ff00;\">Satisfied!</span>" : "<span style=\"color: #ff0000;\">Not Satisfied.</span>";
+$agent3status_text = $agent3Status == 1 ? "<span style=\"color: #00ff00;\">Satisfied!</span>" : "<span style=\"color: #ff0000;\">Not Satisfied.</span>";
+$agent4status_text = $agent4Status == 1 ? "<span style=\"color: #00ff00;\">Satisfied!</span>" : "<span style=\"color: #ff0000;\">Not Satisfied.</span>";
+$agent5status_text = $agent5Status == 1 ? "<span style=\"color: #00ff00;\">Satisfied!</span>" : "<span style=\"color: #ff0000;\">Not Satisfied.</span>";
 ?>
 <div class="textdiv">
 <center>
 <table>
-<tr><td>Agent1 = </td><td><?php echo $agent1Status; ?></td><td><?php if ( $agentcode == "agent1" ) { echo " You!"; }; ?></td></tr>
-<tr><td>Agent2 = </td><td><?php echo $agent2Status; ?></td><td><?php if ( $agentcode == "agent2" ) { echo " You!"; }; ?></td></tr>
-<tr><td>Agent3 = </td><td><?php echo $agent3Status; ?></td><td><?php if ( $agentcode == "agent3" ) { echo " You!"; }; ?></td></tr>
-<tr><td>Agent4 = </td><td><?php echo $agent4Status; ?></td><td><?php if ( $agentcode == "agent4" ) { echo " You!"; }; ?></td></tr>
-<tr><td>Agent5 = </td><td><?php echo $agent5Status; ?></td><td><?php if ( $agentcode == "agent5" ) { echo " You!"; }; ?></td></tr>
+<tr><td>Agent1 = </td><td><?php echo $agent1status_text; ?></td><td><?php if ( $agentcode == "agent1" ) { echo " You!"; }; ?></td></tr>
+<tr><td>Agent2 = </td><td><?php echo $agent2status_text; ?></td><td><?php if ( $agentcode == "agent2" ) { echo " You!"; }; ?></td></tr>
+<tr><td>Agent3 = </td><td><?php echo $agent3status_text; ?></td><td><?php if ( $agentcode == "agent3" ) { echo " You!"; }; ?></td></tr>
+<tr><td>Agent4 = </td><td><?php echo $agent4status_text; ?></td><td><?php if ( $agentcode == "agent4" ) { echo " You!"; }; ?></td></tr>
+<tr><td>Agent5 = </td><td><?php echo $agent5status_text; ?></td><td><?php if ( $agentcode == "agent5" ) { echo " You!"; }; ?></td></tr>
 </table>
 </center><br />
 <?php if ( $currentAgentStatus != "1" ) {

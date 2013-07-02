@@ -18,11 +18,11 @@ $dbhandle->close();
 $onlinearray = array($agent1Online,$agent2Online,$agent3Online,$agent4Online,$agent5Online);
 $onlinetotal = array_sum($onlinearray);
 
-$agent1_text = $agent1Online == 1 ? "Ready!" : "Offline?";
-$agent2_text = $agent2Online == 1 ? "Ready!" : "Offline?";
-$agent3_text = $agent3Online == 1 ? "Ready!" : "Offline?";
-$agent4_text = $agent4Online == 1 ? "Ready!" : "Offline?";
-$agent5_text = $agent5Online == 1 ? "Ready!" : "Offline?";
+$agent1_text = $agent1Online == 1 ? "<span style=\"color: #00ff00;\">Ready!</span>" : "Offline?";
+$agent2_text = $agent2Online == 1 ? "<span style=\"color: #00ff00;\">Ready!</span>" : "Offline?";
+$agent3_text = $agent3Online == 1 ? "<span style=\"color: #00ff00;\">Ready!</span>" : "Offline?";
+$agent4_text = $agent4Online == 1 ? "<span style=\"color: #00ff00;\">Ready!</span>" : "Offline?";
+$agent5_text = $agent5Online == 1 ? "<span style=\"color: #00ff00;\">Ready!</span>" : "Offline?";
 
 ?>
 <div>
