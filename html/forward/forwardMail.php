@@ -213,9 +213,11 @@ If you have no time to answer the question, too:
 
 
 If you want to pause your account, follow this link:
-'.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=0
+'.$GLOBALS["aphost"].'/agentstatus/changeactive.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=0
 If at any time you want to reactivate your account:
-'.$GLOBALS["aphost"].'/agentstatus/change.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=1
+'.$GLOBALS["aphost"].'/agentstatus/changeactive.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&status=1
+If you want to change your settings (i.e. availability):
+'.$GLOBALS["aphost"].'/agentstatus/settings.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&settings=1
 If you want to delete your account:
 '.$GLOBALS["aphost"].'/agentstatus/deleteaccount.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&delete=1
 

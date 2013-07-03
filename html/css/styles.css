@@ -35,7 +35,7 @@ body { margin:20px 0px; padding:0px; text-align:center; background: #bbb; font-s
 	text-align: left;
 	list-style: none;
 }
-#signupFormDiv ul{
+#signupFormDiv ul, #changeFormDiv ul{
     width:400px;
     margin:0px auto;
 	text-align: left;

@@ -30,8 +30,35 @@ array (
 define('__ROOT__', dirname(dirname(__FILE__))); 
 require_once(__ROOT__.'/../php/configuration.php'); //a file with configurations
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
+
+if (isset($_GET['email']) && preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/',
+ $_GET['email'])) {
+ $email = strip_tags($_GET['email']);
+}
+if (isset($_GET['pcode']) && (strlen($_GET['pcode']) == 32))
+ {
+ $pcode = strip_tags($_GET['pcode']);
+}
+if (isset($_GET['settings']) && (strlen($_GET['settings']) == 1))
+ {
+ $settingsWanted = strip_tags($_GET['settings']);
+}
+
+if (isset($email) && isset($pcode) && isset($settingsWanted)) {
+
+$changeSettingsQuery = $dbhandle->query("SELECT * FROM agents WHERE(email ='".$dbhandle->real_escape_string($email)."' AND pcode='".$dbhandle->real_escape_string($pcode)."')LIMIT 1");
+if (mysqli_affected_rows($dbhandle) == 1) {
+while($changeSettingsRow = $changeSettingsQuery->fetch_assoc()) {
+$getContinent = strip_tags($changeSettingsRow['continent']);
+$getWanted = strip_tags($changeSettingsRow['wanted']);
+$getUnwanted = strip_tags($changeSettingsRow['unwanted']);
+$getAgenttzone = strip_tags($changeSettingsRow['agenttzone']);
+$getAgenttime = strip_tags($changeSettingsRow['agenttime']);
+};
+};
 $getCategories = $dbhandle->query("SELECT * FROM question_categories WHERE(status='1')");
 $getContinents = $dbhandle->query("SELECT * FROM agents_continents");
+};
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -52,26 +79,31 @@ $getContinents = $dbhandle->query("SELECT * FROM agents_continents");
 		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
         <div class="page">
 		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
-		<div id="signupFormDiv">
-		<form id="signup" name="signup" class="signup" method="post">
-<div class="textdiv">Why do you want to answer anonymous questions on a regular basis:</div>
-<textarea name="whyAgent" cols="50" rows="8" maxlength="2000">Hey, it's me!</textarea>
-<br />
+		<div id="changeFormDiv">
+		<form id="change" name="change" class="change" method="post">
 <div class="textdiv">Which Continent are you from:</div>
 <div class="textdiv">
 <ul>
 	<?php foreach($getContinents as $getContinentsValue){
+		if ($getContinent == $getContinentsValue["continent"]) {
+		echo 	"<li>
+				<div><input type=\"radio\" name=\"agentContinent\" value=\"".$getContinentsValue["continent"]."\" id=\"".$getContinentsValue["continent"]."\" required checked /><label for=\"".$getContinentsValue["continent"]."\">".$getContinentsValue["continent"]."</label></div>
+				</li>"; }
+		else{
 		echo 	"<li>
 				<div><input type=\"radio\" name=\"agentContinent\" value=\"".$getContinentsValue["continent"]."\" id=\"".$getContinentsValue["continent"]."\" required /><label for=\"".$getContinentsValue["continent"]."\">".$getContinentsValue["continent"]."</label></div>
-				</li>"; }
-	?>
+				</li>"; };
+		} ?>
 </ul>
 </div>
 <div class="textdiv">Which Timezone are you in:</div>
 <div class="textdiv">
 	<select name="agenttimezone" class="timezoner" size="1" required >
 		<?php foreach($timezones as $tzone => $tzonesave){
-		echo "<option value=\"".$tzonesave."\">".$tzone."</option>";
+		if ($tzonesave == $getAgenttzone ) {
+		echo "<option selected value=\"".$tzonesave."\">".$tzone."</option>"; }
+		else{
+		echo "<option value=\"".$tzonesave."\">".$tzone."</option>"; };
 		} ?>
     </select>
 	<br /><br />
@@ -85,14 +117,14 @@ $getContinents = $dbhandle->query("SELECT * FROM agents_continents");
 	<td width="50px"><center><label for="0-6">0-6</label></center></td><td width="50px"><center><label for="6-10">6-10</label></center></td><td width="50px"><center><label for="10-12">10-12</label></center></td><td width="50px"><center><label for="12-15">12-15</label></center></td><td width="50px"><center><label for="15-18">15-18</label></center></td><td width="50px"><center><label for="18-20">18-20</label></center></td><td width="50px"><center><label for="20-22">20-22</label></center></td><td width="50px"><center><label for="22-0">22-24</label></center></td>
 	</tr>
 	<tr>
-	<td><center><input type="checkbox" name="agenttime[]" value="0-6" id="0-6" class="boxchecked" checked="checked" /></center></td>
-	<td><center><input type="checkbox" name="agenttime[]" value="6-10" id="6-10" class="boxchecked" checked="checked" /></center></td>
-	<td><center><input type="checkbox" name="agenttime[]" value="10-12" id="10-12" class="boxchecked" checked="checked" /></center></td>
-	<td><center><input type="checkbox" name="agenttime[]" value="12-15" id="12-15" class="boxchecked" checked="checked" /></center></td>
-	<td><center><input type="checkbox" name="agenttime[]" value="15-18" id="15-18" class="boxchecked" checked="checked" /></center></td>
-	<td><center><input type="checkbox" name="agenttime[]" value="18-20" id="18-20" class="boxchecked" checked="checked" /></center></td>
-	<td><center><input type="checkbox" name="agenttime[]" value="20-22" id="20-22" class="boxchecked" checked="checked" /></center></td>
-	<td><center><input type="checkbox" name="agenttime[]" value="22-24" id="22-24" class="boxchecked" checked="checked" /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="0-6" id="0-6" class="boxchecked" <?php if (strpos($getAgenttime,'0-6') !== false) { echo 'checked="checked"';} ?> /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="6-10" id="6-10" class="boxchecked" <?php if (strpos($getAgenttime,'6-10') !== false) { echo 'checked="checked"';} ?> /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="10-12" id="10-12" class="boxchecked" <?php if (strpos($getAgenttime,'10-12') !== false) { echo 'checked="checked"';} ?>/></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="12-15" id="12-15" class="boxchecked" <?php if (strpos($getAgenttime,'12-15') !== false) { echo 'checked="checked"';} ?> /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="15-18" id="15-18" class="boxchecked" <?php if (strpos($getAgenttime,'15-18') !== false) { echo 'checked="checked"';} ?> /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="18-20" id="18-20" class="boxchecked" <?php if (strpos($getAgenttime,'18-20') !== false) { echo 'checked="checked"';} ?> /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="20-22" id="20-22" class="boxchecked" <?php if (strpos($getAgenttime,'20-22') !== false) { echo 'checked="checked"';} ?> /></center></td>
+	<td><center><input type="checkbox" name="agenttime[]" value="22-24" id="22-24" class="boxchecked" <?php if (strpos($getAgenttime,'22-24') !== false) { echo 'checked="checked"';} ?> /></center></td>
 	</tr>
 	</table>
 	</center>
@@ -101,45 +133,58 @@ $getContinents = $dbhandle->query("SELECT * FROM agents_continents");
 <div class="textdiv">
 <ul>
 	<?php foreach($getCategories as $getCategoriesWanted){
+		if ($getWanted == $getCategoriesWanted["category"]) {
+		echo 	"<li>
+				<div><input type=\"radio\" name=\"agentWantedCategories\" value=\"".$getCategoriesWanted["category"]."\" id=\"".$getCategoriesWanted["category"]."\" required checked /><label for=\"".$getCategoriesWanted["category"]."\">".$getCategoriesWanted["category"]."</label></div>
+				</li>"; }
+		else{
 		echo 	"<li>
 				<div><input type=\"radio\" name=\"agentWantedCategories\" value=\"".$getCategoriesWanted["category"]."\" id=\"".$getCategoriesWanted["category"]."\" required /><label for=\"".$getCategoriesWanted["category"]."\">".$getCategoriesWanted["category"]."</label></div>
-				</li>";}
-	?>
+				</li>"; };
+		} ?>
 </ul>
 </div>
 <div class="textdiv">Category you don't want to answer:</div>
 <div class="textdiv">
 <ul>     
 	<?php foreach($getCategories as $getCategoriesUnwanted){
+		if ($getUnwanted == $getCategoriesUnwanted["category"]) {
+		echo 	"<li>
+				<div><input type=\"radio\" name=\"agentUnwantedCategories\" value=\"".$getCategoriesUnwanted["category"]."\" id=\"".$getCategoriesUnwanted["category"]."\" required checked /><label for=\"".$getCategoriesUnwanted["category"]."\">".$getCategoriesUnwanted["category"]."</label></div>
+				</li>"; }
+		else{
 		echo 	"<li>
 				<div><input type=\"radio\" name=\"agentUnwantedCategories\" value=\"".$getCategoriesUnwanted["category"]."\" id=\"".$getCategoriesUnwanted["category"]."\" required /><label for=\"".$getCategoriesUnwanted["category"]."\">".$getCategoriesUnwanted["category"]."</label></div>
-				</li>";}
+				</li>"; };
+		} 
 		 mysqli_close($dbhandle);
-	?>
+		 ?>
 </ul>
 </div>
-<div class="textdiv">The email to send questions to (Your email): <input name="agentaddress" type="email" id="agentaddress" required /></div>
-<div class="textdiv"><input id="submit" type="submit" name="submit" value="Signup" /></div>
+<input type="hidden" name="originalmail" value="<?php  echo $email; ?>" />
+<input type="hidden" name="pcode" value="<?php  echo $pcode; ?>" />
+<div class="textdiv">The email to send questions to (Your email): <input name="agentaddress" type="email" id="agentaddress" value="<?php echo $email; ?>" required /></div>
+<div class="textdiv"><input id="submit" type="submit" name="submit" value="Change" /></div>
 </form>
 </div>
-<div id="signupResult"></div>
+<div id="changeResult"></div>
         </div>
 <script type="text/javascript">
 		$( document ).ready(function() {
-		$('#signup').submit(function() {
-		$("#signup").validate();
+		$('#change').submit(function() {
+		$("#change").validate();
 		$.blockUI({ message: '<br />sending ...<br /><br />' });
-            var form = document.signup;
+            var form = document.change;
 			var dataString = $(form).serialize();
 			$.ajax({
 				cache: false,
 				type:'POST',
-				url:'agentSignupToDatabase.php',
+				url:'agentChangeToDatabase.php',
 				data: dataString,
 				success: function(data) {
 				$.unblockUI();
-				  $('#signupFormDiv').slideUp(1000);
-				  $("#signupResult").html(data);
+				  $('#changeFormDiv').slideUp(1000);
+				  $("#changeResult").html(data);
 				}
 			});
 return false;

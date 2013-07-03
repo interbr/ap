@@ -38,7 +38,7 @@ if (isset($email) && isset($pcode) && isset($deletewanted)) {
 <div class="textdiv"><?php
  if (mysqli_affected_rows($dbhandle) == 1) {
  echo "Do you really want to delete your account? If so please click:<br /><br /><button id=\"clickDeleteAccount\">Delete Account</button><br /><br />
- You may also pause your account, only. To do this click the following:<br /><br /><a href=\"/agentstatus/change.php?email=".urlencode($email)."&pcode=$pcode&status=0\"><button>Pause your account</button></a>";
+ You may also pause your account, only. To do this click the following:<br /><br /><a href=\"/agentstatus/changeactive.php?email=".urlencode($email)."&pcode=$pcode&status=0\"><button>Pause your account</button></a>";
  } else {
  echo 'Oops! Your account could not be found. Please recheck the link or contact the system administrator.';
 
