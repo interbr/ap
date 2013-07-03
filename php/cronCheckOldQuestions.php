@@ -12,7 +12,7 @@ while ($oldQuestionRow = mysqli_fetch_array($checkOldQuestions)) {
 }
 if (mysqli_affected_rows($dbhandle) > 0) {
 foreach($oldQuestionResult as $questionID) {
-$checkOldQuestionExcuseQ = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$dbhandle->real_escape_string($questionID)."' AND excuse = '0' AND sent = '1' AND answer_sent = '0'");
+$checkOldQuestionExcuseQ = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$questionID."' AND excuse = '0' AND sent = '1' AND answer_sent = '0'");
 while($excuserow = $checkOldQuestionExcuseQ->fetch_assoc()) {
 $questionText = strip_tags($excuserow['questionText']);
 $questionEmail = strip_tags($excuserow['email']);
