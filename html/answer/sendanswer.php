@@ -51,7 +51,7 @@ $mail->IsHTML(false);
 //Read an HTML message body from an external file, convert referenced images to embedded, convert HTML into a basic plain-text alternative body
 $mail->Body = 'You just received an answer
 
-The question had the subject: '.$questionSubject.'
+The question had the subject: '.utf8_decode($questionSubject).'
 It was sorted to the following categories: '.$categories.'
 
 The Question was:
