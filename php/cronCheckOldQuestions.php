@@ -6,9 +6,13 @@ require_once (__ROOT__.'/php/class.phpmailer.php');
 $dbhandle = new mysqli('localhost', 'ap-db-client', $GLOBALS["dbpw"], 'amored-police');
 $timeold = strtotime("+5 minutes");
 $checkOldQuestions = $dbhandle->query("SELECT * FROM answer_access WHERE old = '0' AND timetoanswerSession < $timeold");
-
-foreach($checkOldQuestions as $questionID) {
-$checkOldQuestionExcuseQ = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$dbhandle->real_escape_string($questionID["questionID"])."' AND excuse = '0' AND sent = '1' AND answer_sent = '0'");
+$oldQuestionResult = array();
+while ($oldQuestionRow = mysqli_fetch_array($checkOldQuestions)) {
+    $oldQuestionResult[] = strip_tags($oldQuestionRow['questionID']);
+}
+if (mysqli_affected_rows($dbhandle) > 0) {
+foreach($oldQuestionResult as $questionID) {
+$checkOldQuestionExcuseQ = $dbhandle->query("SELECT * FROM questions WHERE questionID='".$dbhandle->real_escape_string($questionID)."' AND excuse = '0' AND sent = '1' AND answer_sent = '0'");
 while($excuserow = $checkOldQuestionExcuseQ->fetch_assoc()) {
 $questionText = strip_tags($excuserow['questionText']);
 $questionEmail = strip_tags($excuserow['email']);
@@ -51,5 +55,6 @@ $setAgentsAvailable = "UPDATE agents SET busy = '0' WHERE busy = '1' AND last_qu
 $dbhandle->query($setAgentsAvailable);
 $dbhandle->close();
 echo $questionID; }
+}
 }
 ?>
