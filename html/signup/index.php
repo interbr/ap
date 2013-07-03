@@ -102,7 +102,7 @@ $getContinents = $dbhandle->query("SELECT * FROM agents_continents");
 <ul>
 	<?php foreach($getCategories as $getCategoriesWanted){
 		echo 	"<li>
-				<div><input type=\"radio\" name=\"agentWantedCategories\" value=\"".$getCategoriesWanted["category"]."\" id=\"".$getCategoriesWanted["category"]."\" required /><label for=\"".$getCategoriesWanted["category"]."\">".$getCategoriesWanted["category"]."</label></div>
+				<div><input type=\"radio\" name=\"agentWantedCategories\" value=\"".$getCategoriesWanted["category"]."\" id=\"awc-".$getCategoriesWanted["category"]."\" required /><label for=\"awc-".$getCategoriesWanted["category"]."\">".$getCategoriesWanted["category"]."</label></div>
 				</li>";}
 	?>
 </ul>
@@ -112,7 +112,7 @@ $getContinents = $dbhandle->query("SELECT * FROM agents_continents");
 <ul>     
 	<?php foreach($getCategories as $getCategoriesUnwanted){
 		echo 	"<li>
-				<div><input type=\"radio\" name=\"agentUnwantedCategories\" value=\"".$getCategoriesUnwanted["category"]."\" id=\"".$getCategoriesUnwanted["category"]."\" required /><label for=\"".$getCategoriesUnwanted["category"]."\">".$getCategoriesUnwanted["category"]."</label></div>
+				<div><input type=\"radio\" name=\"agentUnwantedCategories\" value=\"".$getCategoriesUnwanted["category"]."\" id=\"anc-".$getCategoriesUnwanted["category"]."\" required /><label for=\"anc-".$getCategoriesUnwanted["category"]."\">".$getCategoriesUnwanted["category"]."</label></div>
 				</li>";}
 		 mysqli_close($dbhandle);
 	?>

@@ -135,11 +135,11 @@ $getContinents = $dbhandle->query("SELECT * FROM agents_continents");
 	<?php foreach($getCategories as $getCategoriesWanted){
 		if ($getWanted == $getCategoriesWanted["category"]) {
 		echo 	"<li>
-				<div><input type=\"radio\" name=\"agentWantedCategories\" value=\"".$getCategoriesWanted["category"]."\" id=\"".$getCategoriesWanted["category"]."\" required checked /><label for=\"".$getCategoriesWanted["category"]."\">".$getCategoriesWanted["category"]."</label></div>
+				<div><input type=\"radio\" name=\"agentWantedCategories\" value=\"".$getCategoriesWanted["category"]."\" id=\"awc-".$getCategoriesWanted["category"]."\" required checked /><label for=\"awc-".$getCategoriesWanted["category"]."\">".$getCategoriesWanted["category"]."</label></div>
 				</li>"; }
 		else{
 		echo 	"<li>
-				<div><input type=\"radio\" name=\"agentWantedCategories\" value=\"".$getCategoriesWanted["category"]."\" id=\"".$getCategoriesWanted["category"]."\" required /><label for=\"".$getCategoriesWanted["category"]."\">".$getCategoriesWanted["category"]."</label></div>
+				<div><input type=\"radio\" name=\"agentWantedCategories\" value=\"".$getCategoriesWanted["category"]."\" id=\"awc-".$getCategoriesWanted["category"]."\" required /><label for=\"awc-".$getCategoriesWanted["category"]."\">".$getCategoriesWanted["category"]."</label></div>
 				</li>"; };
 		} ?>
 </ul>
@@ -150,11 +150,11 @@ $getContinents = $dbhandle->query("SELECT * FROM agents_continents");
 	<?php foreach($getCategories as $getCategoriesUnwanted){
 		if ($getUnwanted == $getCategoriesUnwanted["category"]) {
 		echo 	"<li>
-				<div><input type=\"radio\" name=\"agentUnwantedCategories\" value=\"".$getCategoriesUnwanted["category"]."\" id=\"".$getCategoriesUnwanted["category"]."\" required checked /><label for=\"".$getCategoriesUnwanted["category"]."\">".$getCategoriesUnwanted["category"]."</label></div>
+				<div><input type=\"radio\" name=\"agentUnwantedCategories\" value=\"".$getCategoriesUnwanted["category"]."\" id=\"anc-".$getCategoriesUnwanted["category"]."\" required checked /><label for=\"anc-".$getCategoriesUnwanted["category"]."\">".$getCategoriesUnwanted["category"]."</label></div>
 				</li>"; }
 		else{
 		echo 	"<li>
-				<div><input type=\"radio\" name=\"agentUnwantedCategories\" value=\"".$getCategoriesUnwanted["category"]."\" id=\"".$getCategoriesUnwanted["category"]."\" required /><label for=\"".$getCategoriesUnwanted["category"]."\">".$getCategoriesUnwanted["category"]."</label></div>
+				<div><input type=\"radio\" name=\"agentUnwantedCategories\" value=\"".$getCategoriesUnwanted["category"]."\" id=\"anc-".$getCategoriesUnwanted["category"]."\" required /><label for=\"anc-".$getCategoriesUnwanted["category"]."\">".$getCategoriesUnwanted["category"]."</label></div>
 				</li>"; };
 		} 
 		 mysqli_close($dbhandle);
