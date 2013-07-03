@@ -20,7 +20,7 @@ $dbhandle->query($writeVerificSent);
 			$dbhandle->query($query_insert_verify);
 			mysqli_close($dbhandle);
 
-$subject = "Verify your email for Question: ".$questionSubjectToVerify;			
+$subject = "Verify your email for Question: ".utf8_decode($questionSubjectToVerify);			
 $msg = strip_tags($questionText);
 
 			// send mail

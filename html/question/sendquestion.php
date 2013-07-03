@@ -132,7 +132,7 @@ $timetomeetdisplay = gmdate('D, H:i:s',$timetomeet);
 
 extract($agentsresult);
 
-$subject = "Question: ".strip_tags($questionSubject)." -- Please answer quick or forward!";
+$subject = "Question: ".strip_tags(utf8_decode($questionSubject))." -- Please answer quick or forward!";
 $msg = strip_tags($questionText);
 $receipients = array(
 	'agent1' => $agent1,

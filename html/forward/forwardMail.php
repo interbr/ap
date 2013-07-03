@@ -168,7 +168,7 @@ $timedisplay = date('c',$timetoanswer);
 $timetomeet = strtotime('-60 minutes', $timetoanswer);
 $timetomeetdisplay = gmdate('D, H:i:s',$timetomeet);
 
-$subject = "Forwarded Question: ".strip_tags($questionSubject)." -- Please answer quick or forward again!";
+$subject = "Forwarded Question: ".strip_tags(utf8_decode($questionSubject))." -- Please answer quick or forward again!";
 $msg = strip_tags($questionText);
 
 $writeForwardedAgentData = "UPDATE answer_access SET $agentcodeForwarding = '".$dbhandle->real_escape_string($forwardedAuthorID)."', $forwardingSessionIDCol = '".$dbhandle->real_escape_string($forwardedAgentSessionID)."' WHERE questionID = '".$dbhandle->real_escape_string($_GET["id"])."'";
