@@ -128,7 +128,7 @@ $dbhandle->close();
 <div class="textdiv">There are currently</div>
 <div class="textdiv"><?php echo $activeNumber; ?></div>
 <div class="textdiv">active help-desk-agents on this website!</div>
-<div class="textdiv"><a href="/about.php">About</a> | <a href="mailto:felix_longolius@amored-police.org">Contact</a></div>
+<div class="textdiv"><a href="/about.php">About</a> | <a href="mailto:felix_longolius@amored-police.org">Contact</a> | <a href="/latest.php">Latest</a></div>
 		</div>
 		</body>
 </html>

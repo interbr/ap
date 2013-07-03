@@ -20,7 +20,7 @@ $dbhandle->close();
 		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
         <div class="page">
 <div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
-<div class="textdiv">Last answered questions that are allowed to publish?</div>
+<div class="textdiv">Last answered questions that were allowed to be published ..</div>
 <?php while($publishQuestionRow = $resultQuestion->fetch_assoc()) { ?>
 <div class="textdiv"><b>Question:</b> <?php echo $publishQuestionRow["subject"]; ?><br /><br />
 <div style="text-align: left"><?php $questionText = $publishQuestionRow['questionText']; echo strip_tags($questionText, '<p><br>'); ?></div><br /><br />
