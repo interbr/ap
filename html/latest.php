@@ -29,7 +29,7 @@ $dbhandle->close();
 <?php 
 };
 ?> 
-<div class="textdiv"><a href="/about.php">About</a> | <a href="mailto:felix_longolius@amored-police.org">Contact</a></div>
+<div class="textdiv"><a href="/">Start</a> | <a href="/about.php">About</a> | <a href="mailto:felix_longolius@amored-police.org">Contact</a></div>
 		</div>
 		</body>
 </html>
