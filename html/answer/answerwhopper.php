@@ -38,11 +38,11 @@ $agent5status_text = $agent5Status == 1 ? "<span style=\"color: #00ff00;\">Satis
 echo "<div id=\"satisfiedAnswerButton\"><button id=\"clickSatisfiedAnswer_".$_GET["agentcode"]."\">".$_GET["agentcode"].": Satisfied?</button><br /></div><br />"; }
 else {
 echo "<div id=\"cancelSatisfiedAnswerButton\"><button id=\"clickCancelSatisfiedAnswer_".$_GET["agentcode"]."\">".$_GET["agentcode"].": Mark \"Not satisfied\"?</button><br /></div><br />"; }; ?>
-<?php if ( $satisfaction >= "3" ) {
+<?php if ( $satisfaction >= "2" ) {
 echo "You are satisfied!<br /><br /><div id=\"previewAnswerButton\"><button id=\"clickPreviewAnswer\">".$_GET["agentcode"].": Stop answering. Preview.</button><br /></div>"; }
 else {
 echo "Not satisfied yet ..."; }; ?><br /><br />
-<i>When at least 3 of 5 agents have marked "satisfied",<br />the answer can be saved.<br />
+<i>When at least 2 of 5 agents have marked "satisfied",<br />the answer can be saved.<br />
 You will hear a sound when the answer is saved</i>
 </div>
 		<script type="text/javascript">
