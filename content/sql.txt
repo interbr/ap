@@ -1,0 +1,219 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.4.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Oct 11, 2013 at 11:50 AM
+-- Server version: 5.5.32-MariaDB-1~squeeze
+-- PHP Version: 5.4.19-1~dotdeb.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `amored-police`
+--
+CREATE DATABASE IF NOT EXISTS `amored-police` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `amored-police`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `agents`
+--
+
+CREATE TABLE IF NOT EXISTS `agents` (
+  `unique-id` int(12) NOT NULL AUTO_INCREMENT,
+  `whyAgent` varchar(2000) DEFAULT NULL,
+  `continent` varchar(30) NOT NULL,
+  `wanted` varchar(30) DEFAULT NULL,
+  `unwanted` varchar(30) DEFAULT NULL,
+  `email` varchar(254) NOT NULL,
+  `agenttzone` varchar(30) DEFAULT NULL,
+  `agenttime` varchar(60) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT '0',
+  `blocked` tinyint(1) DEFAULT '0',
+  `busy` tinyint(1) DEFAULT '0',
+  `pcode` varchar(32) DEFAULT 'd58e3c2213fae1c64931a249ac320c7a',
+  `last_questionID` varchar(12) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`unique-id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `agents_continents`
+--
+
+CREATE TABLE IF NOT EXISTS `agents_continents` (
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  `continent` varchar(30) NOT NULL,
+  `count` int(12) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `agents_continents`
+--
+
+INSERT INTO `agents_continents` (`id`, `continent`, `count`) VALUES
+(1, 'Africa', 0),
+(2, 'Asia', 0),
+(3, 'Europe', 0),
+(4, 'Islands', 0),
+(5, 'South-America', 0),
+(6, 'North-America', 0),
+(7, 'Do not ask', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `answer_access`
+--
+
+CREATE TABLE IF NOT EXISTS `answer_access` (
+  `questionID` varchar(12) NOT NULL,
+  `groupID` varchar(18) NOT NULL,
+  `padID` varchar(31) NOT NULL,
+  `timetoanswerSession` varchar(10) NOT NULL,
+  `old` tinyint(1) NOT NULL DEFAULT '0',
+  `agent1` varchar(18) DEFAULT NULL,
+  `agent2` varchar(18) DEFAULT NULL,
+  `agent3` varchar(18) DEFAULT NULL,
+  `agent4` varchar(18) DEFAULT NULL,
+  `agent5` varchar(18) DEFAULT NULL,
+  `agent1sessionID` varchar(18) DEFAULT NULL,
+  `agent2sessionID` varchar(18) DEFAULT NULL,
+  `agent3sessionID` varchar(18) DEFAULT NULL,
+  `agent4sessionID` varchar(18) DEFAULT NULL,
+  `agent5sessionID` varchar(18) DEFAULT NULL,
+  `padPassword` varchar(12) DEFAULT NULL,
+  UNIQUE KEY `questionID` (`questionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `answer_start_system`
+--
+
+CREATE TABLE IF NOT EXISTS `answer_start_system` (
+  `questionID` varchar(12) NOT NULL,
+  `agent1` int(1) DEFAULT NULL,
+  `agent2` int(1) DEFAULT NULL,
+  `agent3` int(1) DEFAULT NULL,
+  `agent4` int(1) DEFAULT NULL,
+  `agent5` int(1) DEFAULT NULL,
+  `ready` tinyint(1) DEFAULT NULL,
+  UNIQUE KEY `questionID` (`questionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `answer_whopper`
+--
+
+CREATE TABLE IF NOT EXISTS `answer_whopper` (
+  `questionID` varchar(12) NOT NULL,
+  `agent1` tinyint(1) DEFAULT NULL,
+  `agent2` tinyint(1) DEFAULT NULL,
+  `agent3` tinyint(1) DEFAULT NULL,
+  `agent4` tinyint(1) DEFAULT NULL,
+  `agent5` tinyint(1) DEFAULT NULL,
+  `answered` tinyint(1) DEFAULT NULL,
+  UNIQUE KEY `question-id` (`questionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
+
+CREATE TABLE IF NOT EXISTS `questions` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `time-of-sending` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `subject` varchar(255) DEFAULT NULL,
+  `questionCategories` varchar(255) DEFAULT NULL,
+  `questionID` varchar(12) DEFAULT NULL,
+  `questionText` text,
+  `answerText` text,
+  `email` varchar(254) DEFAULT NULL,
+  `verific_sent` tinyint(1) DEFAULT '0',
+  `active` tinyint(1) DEFAULT '0',
+  `sent` tinyint(1) DEFAULT '0',
+  `answer_sent` tinyint(1) DEFAULT '0',
+  `excuse` tinyint(1) NOT NULL DEFAULT '0',
+  `publish` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `questionID` (`questionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_answer_agents`
+--
+
+CREATE TABLE IF NOT EXISTS `question_answer_agents` (
+  `questionID` varchar(12) NOT NULL,
+  `agents` text,
+  UNIQUE KEY `questionID` (`questionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `question_categories` (
+  `category-id` int(3) NOT NULL AUTO_INCREMENT,
+  `category` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`category-id`),
+  UNIQUE KEY `category-id` (`category-id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=121 ;
+
+--
+-- Dumping data for table `question_categories`
+--
+
+INSERT INTO `question_categories` (`category-id`, `category`, `status`) VALUES
+(10, 'All', 1),
+(20, 'Planet', 1),
+(30, 'World', 1),
+(40, 'Hygiene', 1),
+(50, 'Philosophy', 1),
+(60, 'Psychology', 1),
+(70, 'Food', 1),
+(80, 'Gardening-and-Agriculture', 1),
+(90, 'Occupation', 1),
+(100, 'Flowers', 1),
+(110, 'Peace', 1),
+(120, 'Freedom', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_verify`
+--
+
+CREATE TABLE IF NOT EXISTS `question_verify` (
+  `questionID` varchar(12) NOT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `activationkey` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`questionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
