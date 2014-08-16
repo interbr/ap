@@ -18,8 +18,4 @@ Currently my skills don't allow to code a component as it should work that I cal
 It's checking if the help-desk-agents are satisfied with the answer yet and it offers to send the answer when 3 of 5 agents click a button "Are you satisfied".
 Some nodejs would improve the component, that is currently making ajax-calls every 4 seconds to reload a php-file checking the "satisfied"-status to a database.
 
-Test-Version at [idea.amored-police.com](https://idea.amored-police.com)
-
-There you're welcome to sign up to answer questions.
-
-For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org
+For questions regarding this question-answer-system or suggestions, please feel free to write to felix@weltpolizei.de
