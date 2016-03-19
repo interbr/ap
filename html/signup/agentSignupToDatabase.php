@@ -46,7 +46,7 @@ If you want to change your settings (i.e. availability) (activate first):
 At anytime you may pause or delete your account with the following link:
 '.$GLOBALS["aphost"].'/agentstatus/deleteaccount.php?email='.urlencode($agentemail).'&pcode='.$pcode.'&delete=1
 
-For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
+For questions regarding this question-answer-system or suggestions, please feel free to write to felix@weltpolizei.de';
 
 if(!$mail->Send()) {
   echo "Ooops, we think there was an error!";
