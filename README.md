@@ -10,7 +10,7 @@ aa                                   six?
 a
 # a Platform for people to write to and get questions answered by other people.
 aa                                                                                   intertested on a 5 to 1 = 6 continent basis
-https://popoc.amored-police.org
+https://www.amored-police.org
 
 and uip again only exposed to a small number of persons.
 SIX CONTINENTS NA SA AS EU AFRICA ISLANDS
