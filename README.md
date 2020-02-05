@@ -15,4 +15,4 @@ If there is no answer in 90 minutes an excuse is sent is not working by the code
 To level the propability that at least three people find together to answer, questions can be forwarded by clicking a link in the question-email.
 
 # Status:
-Have you seen this yet: https://vimeo.com/388338637 ? An installation manual will follow with this wednesday.
+Have you seen this yet: https://vimeo.com/388338637 ? An installation manual will follow with this wednesday. Sligtly updated program code will follow this wednesday (placeholders for recurring texts).
