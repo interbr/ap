@@ -16,3 +16,5 @@ To level the propability that at least three people find together to answer, que
 
 # Status:
 Have you seen this yet: https://vimeo.com/388338637 ? An installation manual will follow with this wednesday. Sligtly updated program code will follow this wednesday (placeholders for recurring texts).
+
+Cleared text with being a role-model in mind. See version in advance: https://ip.weltpolizei.de/Bildschirmfoto-20200205204359-1717x2095.png
