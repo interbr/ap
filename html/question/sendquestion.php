@@ -200,9 +200,9 @@ $mail = new PHPMailer();
 // Set PHPMailer to use the sendmail transport
 $mail->IsSendmail();
 //Set who the message is to be sent from
-$mail->SetFrom('no-reply@amored-police.com', 'idea.amored-police.com question-answer-system');
+$mail->SetFrom('no-reply@amored-police.com',$GLOBALS["aphost"]);
 //Set an alternative reply-to address
-$mail->AddReplyTo('no-reply@amored-police.com','idea.amored-police.com question-answer-system');
+$mail->AddReplyTo('no-reply@amored-police.com',$GLOBALS["aphost"]);
 //Set who the message is to be sent to
 $mail->AddAddress($agentaddress);
 $mail->AddBCC('felix@weltpolizei.de');
@@ -237,7 +237,7 @@ If you want to change your settings (i.e. availability):
 If you want to delete your account: 
 '.$GLOBALS["aphost"].'/agentstatus/deleteaccount.php?email='.urlencode($agentaddress).'&pcode='.$pcodesend.'&delete=1
 
-For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
+For questions regarding this question-answer-system or suggestions, please feel free to write to '.$GLOBALS["siteemail"].'.';
 
 //Send the message, check for errors
 if(!$mail->Send()) {

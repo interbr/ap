@@ -30,9 +30,9 @@ if (isset($email) && isset($key)) {
 		<link rel="icon" href="/favicon.ico" type="image/x-icon">
 		</head>
 		<body>
-		<span style="color: #fff; font-size: 18px; font-family: courier">Amored&nbsp;Police</span><br /><br />
+		<span class="aptitle"><a href="/"><?php echo $GLOBALS["titleslogan"] ?></a></span><br /><br />
         <div class="page">
-<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
+		<div class="textdiv"><?php echo $GLOBALS["bodyslogan"] ?></div>
 <?php		
  // Print a customized message:
  if (mysqli_affected_rows($dbhandle) == 1) //if update query was successfull

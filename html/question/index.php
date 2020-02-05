@@ -109,7 +109,7 @@ $dbhandle->close();
 ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<head>
-		<title>Help Desk for Earth' Peoples Problems (except IT) - github-project - amored-police</title>
+		<title><?php echo $GLOBALS["sitetitle"] ?></title>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="description" content="Platform for people to write to and get questions answered by other people.">
@@ -130,13 +130,13 @@ $dbhandle->close();
 		</script>
 		</head>
 		<body> 
-		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
+		<span class="aptitle"><a href="/"><?php echo $GLOBALS["titleslogan"] ?></a></span><br /><br />
         <div class="page">
-		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
-		<div id="start" class="textdiv"><?php if ($activeNumber > '11') {
+		<div class="textdiv"><?php echo $GLOBALS["bodyslogan"] ?></div>
+		<div id="start" class="textdiv"><?php if ($activeNumber >= $activeAgentsReq ) {
 		echo '<button id="clickOpenquestion">Open Question</button></div>'; }
 		else {
-		echo 'Please excuse the system! There are only '.$activeNumber.' agents available.<br /><br />We need at least 12 to offer answers<br /><br />Think about making someone</div><div class="textdiv"><a href="/signup"><button>Sign up to be an Agent</button></a></div><div class="textdiv">to make this system work again</div>'; }; ?>
+		echo 'Please excuse the system! There are only '.$activeNumber.' agents available.<br /><br />We need at least '.$activeAgentsReq.' to offer answers<br /><br />Think about making someone</div><div class="textdiv"><a href="/signup"><button>Sign up to be an Agent</button></a></div><div class="textdiv">to make this system work again</div>'; }; ?>
 		<div id="openQuestion"></div>
 		<div id="writeQuestion"></div>
 		<div id="previewQuestion"></div>

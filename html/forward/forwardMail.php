@@ -221,7 +221,7 @@ If you want to change your settings (i.e. availability):
 If you want to delete your account:
 '.$GLOBALS["aphost"].'/agentstatus/deleteaccount.php?email='.urlencode($forwardedAgentAddress).'&pcode='.$forwardedAgentPcode.'&delete=1
 
-For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
+For questions regarding this question-answer-system or suggestions, please feel free to write to '.$GLOBALS["siteemail"].'.';
 
 if(!$mail->Send()) {
   echo "Mailer Error: " . $mail->ErrorInfo;

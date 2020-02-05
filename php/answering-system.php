@@ -9,7 +9,7 @@ class EtherpadLiteClient {
   const CODE_INVALID_FUNCTION   = 3;
   const CODE_INVALID_API_KEY    = 4;
 
-  protected $apiKey = "uWCqxbEXfd9ujGzinDcY4kagzgshEV9h";
+  protected $apiKey = "a15308949fcadb31b43c589fd0fb2f6025f75979edb5a8ee5d16f62a6938cfc8";
   protected $baseUrl = "http://localhost:9001/api";
   
   public function __construct($apiKey, $baseUrl = null){

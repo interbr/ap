@@ -84,13 +84,13 @@ class PHPMailer {
    * Sets the From email address for the message.
    * @var string
    */
-  public $From              = 'root@localhost';
+  public $From              = 'felix@weltpolizei.de';
 
   /**
    * Sets the From name of the message.
    * @var string
    */
-  public $FromName          = 'Root User';
+  public $FromName          = 'Felix Longolius, Hamburg';
 
   /**
    * Sets the Sender email (Return-Path) of the message.
@@ -170,7 +170,7 @@ class PHPMailer {
    * Method to send mail: ("mail", "sendmail", or "smtp").
    * @var string
    */
-  public $Mailer            = 'mail';
+  public $Mailer            = 'sendmail';
 
   /**
    * Sets the path of the sendmail program.

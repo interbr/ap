@@ -39,9 +39,9 @@ $mail = new PHPMailer();
 // Set PHPMailer to use the sendmail transport
 $mail->IsSendmail();
 //Set who the message is to be sent from
-$mail->SetFrom('no-reply@amored-police.com', 'idea.amored-police.com question-answer-system');
+$mail->SetFrom('no-reply@amored-police.com',$GLOBALS["aphost"]);
 //Set an alternative reply-to address
-$mail->AddReplyTo('no-reply@amored-police.com','idea.amored-police.com question-answer-system');
+$mail->AddReplyTo('no-reply@amored-police.com',$GLOBALS["aphost"]);
 //Set who the message is to be sent to
 $mail->AddAddress($question_address);
 $mail->AddBCC('felix@weltpolizei.de');
@@ -61,7 +61,9 @@ The answer is:
 '.html_entity_decode(htmlspecialchars_decode(preg_replace('#<br\s*?/?>#i', "\n", $answer)), ENT_QUOTES, 'cp1252').'
 
 If you want to allow to publish the question and answer, please click the following link:
-'.$GLOBALS["aphost"].'/publish/publish.php?email='.urlencode($question_address).'&id='.$questionIDfromDB.'';
+'.$GLOBALS["aphost"].'/publish/publish.php?email='.urlencode($question_address).'&id='.$questionIDfromDB.'
+
+For questions regarding this question-answer-system or suggestions, please feel free to write to '.$GLOBALS["siteemail"].'.';
 
 //Send the message, check for errors
 if(!$mail->Send()) {

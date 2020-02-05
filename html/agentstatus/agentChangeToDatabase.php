@@ -44,7 +44,7 @@ At anytime you may pause or delete your account with the following link:
 Activate your account again at any time with the following link:
 '.$GLOBALS["aphost"].'/agentstatus/changeactive.php?email='.urlencode($agentemail).'&pcode='.$pcode.'&status=1
 
-For questions regarding this question-answer-system or suggestions, please feel free to write to felix@weltpolizei.de';
+For questions regarding this question-answer-system or suggestions, please feel free to write to '.$GLOBALS["siteemail"].'.';
 
 if(!$mail->Send()) {
   echo "Ooops, we think there was an error!";

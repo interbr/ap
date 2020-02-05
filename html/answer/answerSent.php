@@ -18,7 +18,7 @@ $(function(){
 		$('#clickSendAnswer').click(function(){
  			$.ajax({
       			type: "POST",
-      			url: "sendanswer.php?id=<?php echo $_GET["id"]; ?>&pad=<?php echo $_GET["pad"]; ?>",
+      			url: "sendanswer.php?id=<?php echo $_GET['id']; ?>&pad=<?php echo $_GET['pad']; ?>",
 				success: function() {
 				$("#sendAnswer").load('answerSent.php?id=<?php echo $_GET["id"]; ?>').hide().fadeIn(1000);
 				}

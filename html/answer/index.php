@@ -20,7 +20,7 @@ $dbhandle->close();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<head>
-		<title>Help Desk for Earth' Peoples Problems (except IT) - github-project - amored-police</title>
+		<title><?php echo $GLOBALS["sitetitle"] ?></title>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="description" content="Platform for people to write to and get questions answered by other people.">
@@ -55,9 +55,9 @@ $dbhandle->close();
 		</script>
 		</head>
 		<body> 
-		<span class="aptitle"><a href="/">Amored&nbsp;Police</a></span><br /><br />
-        <div class="page">
-		<div class="textdiv">Help-Desk for Earth' Peoples Problems (except IT)</div>
+		<span class="aptitle"><a href="/"><?php echo $GLOBALS["titleslogan"] ?></a></span><br /><br />
+        	<div class="page">
+		<div class="textdiv"><?php echo $GLOBALS["bodyslogan"] ?></div>
 		<div class="textdiv" id="start">
 		<i>Your question you were asked randomly has the subject:</i><br /><br />
 		<?php echo $subject ?><br /><br />

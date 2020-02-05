@@ -30,9 +30,9 @@ $mail = new PHPMailer();
 // Set PHPMailer to use the sendmail transport
 $mail->IsSendmail();
 //Set who the message is to be sent from
-$mail->SetFrom('no-reply@amored-police.com', 'idea.amored-police.com question-answer-system');
+$mail->SetFrom('no-reply@amored-police.org',$GLOBALS["aphost"]);
 //Set an alternative reply-to address
-$mail->AddReplyTo('no-reply@amored-police.com','idea.amored-police.com question-answer-system');
+$mail->AddReplyTo('no-reply@amored-police.org',$GLOBALS["aphost"]);
 //Set who the message is to be sent to
 $mail->AddAddress($emailToVerify);
 $mail->AddBCC('felix@weltpolizei.de');
@@ -48,7 +48,7 @@ To send the question to five randomly choosen agents now, please click on this l
 By the way, your question is:
 '.utf8_decode($msg).'
 
-For questions regarding this question-answer-system or suggestions, please feel free to write to felix_longolius@amored-police.org';
+For questions regarding this question-answer-system or suggestions, please feel free to write to '.$GLOBALS["siteemail"].'.';
 
 //Send the message, check for errors
 if(!$mail->Send()) {
