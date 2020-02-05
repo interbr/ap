@@ -8,7 +8,7 @@ Questions are only exposed to a small number of persons.
 
 Currently each question is sent to five persons via email. Three of them have time find a collective answer.
 
-All the five can meet on a website with assembled software connected by a software-assembler (neet guy).
+All the five can meet on a website with assembled software.
 
 If there is no answer in 90 minutes an excuse is sent is not working by the code in this basis.
 
