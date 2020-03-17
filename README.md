@@ -4,6 +4,4 @@
 
 There might have been benefits in one person trying to handle a project as this. Little more: https://weltpolizei.de
 
-March, 17 2020
-
 https://vimeo.com/388338637
