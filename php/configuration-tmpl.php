@@ -1,4 +1,4 @@
-<!-- It works with etherpad Version 1.5.7 and nodejs 0.12.18 and nginx with the addition to a common php-site below. "sendmail" is set to be used and needed. Working with php7. Mysql-initialation with /content/sql.txt. Databasename set to be used is amored-police, database-user ap-db-client, don't you try to find someone who translates this and then read it? READ? You are a computerspecialist!  https://twitter.com/Weltpolizei/status/1222995546820030479 -->
+<!-- It works with etherpad Version 1.5.7 and nodejs 0.12.18 and nginx with the addition to a common php-site below. "sendmail" is set to be used and needed. Working with php7. Mysql-initialation with /content/sql.txt. Databasename set to be used is amored-police, database-user ap-db-client -->
 
 <?php
 $dbpw = '';
@@ -36,8 +36,5 @@ location ^~ /pad {
                 }
 
 https://github.com/ether/etherpad-lite/wiki/How-to-deploy-Etherpad-Lite-as-a-service
-
-https://www.deezer.com/de/album/935820
-https://www.deezer.com/de/profile/217026135
 
 -->
