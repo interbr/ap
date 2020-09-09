@@ -44,8 +44,8 @@ $mail->SetFrom('no-reply@amored-police.com',$GLOBALS["aphost"]);
 $mail->AddReplyTo('no-reply@amored-police.com',$GLOBALS["aphost"]);
 //Set who the message is to be sent to
 $mail->AddAddress($question_address);
-if ( $GLOBALS["sentInBCC"] == '1' )
-  $mail->AddBCC($GLOBALS["sentInBCCAddress"]);
+if ( $GLOBALS["sentInBCC"] == '1' ) {
+  $mail->AddBCC($GLOBALS["sentInBCCAddress"]); }
 //Set the subject line
 $mail->Subject = $subject;
 $mail->IsHTML(false);
