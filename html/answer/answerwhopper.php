@@ -38,7 +38,7 @@ $agent5status_text = $agent5Status == 1 ? "<span style=\"color: #00ff00;\">Satis
 echo "<div id=\"satisfiedAnswerButton\"><button id=\"clickSatisfiedAnswer_".$_GET["agentcode"]."\">".$_GET["agentcode"].": Satisfied?</button><br /></div><br />"; }
 else {
 echo "<div id=\"cancelSatisfiedAnswerButton\"><button id=\"clickCancelSatisfiedAnswer_".$_GET["agentcode"]."\">".$_GET["agentcode"].": Mark \"Not satisfied\"?</button><br /></div><br />"; }; ?>
-<?php if ( $satisfaction >= "3" ) {
+<?php if ( $satisfaction >= "4" ) {
 echo "You are satisfied!<br /><br /><div id=\"previewAnswerButton\"><button id=\"clickPreviewAnswer\">".$_GET["agentcode"].": Stop answering. Preview.</button><br /></div>"; }
 else {
 echo "Not satisfied yet ..."; }; ?><br /><br />
