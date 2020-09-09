@@ -28,7 +28,8 @@ $mail->SetFrom('no-reply@amored-police.org', 'idea.amored-police.com question-an
 $mail->AddReplyTo('no-reply@amored-police.org','idea.amored-police.com question-answer-system');
 //Set who the message is to be sent to
 $mail->AddAddress($agentemail);
-$mail->AddBCC('felix@weltpolizei.de');
+if ( $GLOBALS["sentInBCC"] == '1' ) {
+  $mail->AddBCC($GLOBALS["sentInBCCAddress"]); }
 //Set the subject line
 $mail->Subject = 'Confirmation for refresh of data';
 $mail->IsHTML(false);
