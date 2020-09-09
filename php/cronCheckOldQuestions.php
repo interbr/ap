@@ -29,7 +29,8 @@ $mail->IsSendmail();
 $mail->SetFrom('no-reply@amored-police.org', 'idea.amored-police.com question-answer-system');
 $mail->AddReplyTo('no-reply@amored-police.org','idea.amored-police.com question-answer-system');
 $mail->AddAddress($questionEmail);
-$mail->AddBCC('felix@weltpolizei.de');
+if ( $GLOBALS["sentInBCC"] == '1' ) {
+  $mail->AddBCC($GLOBALS["sentInBCCAddress"]); }
 $mail->Subject = $subject;
 $mail->IsHTML(false);
 $mail->Body = 'Sorry, this is to inform you that your question with subject: '.utf8_decode($questionSubject).'
