@@ -35,7 +35,8 @@ $mail->SetFrom('no-reply@amored-police.org',$GLOBALS["aphost"]);
 $mail->AddReplyTo('no-reply@amored-police.org',$GLOBALS["aphost"]);
 //Set who the message is to be sent to
 $mail->AddAddress($emailToVerify);
-$mail->AddBCC('felix@weltpolizei.de');
+if ( $GLOBALS["sentInBCC"] == '1' ) {
+  $mail->AddBCC($GLOBALS["sentInBCCAddress"]); }
 //Set the subject line
 $mail->Subject = $subject;
 $mail->IsHTML(false);
