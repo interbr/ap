@@ -14,6 +14,9 @@ $titleslogan = 'Amored Police';
 $bodyslogan = 'Help-Desk for Earth\' Peoples Problems (except IT)';
 $contactemail = ''; //Email in footer
 $siteemail = ''; //Email in Emails by the system
+
+$sentInBCC = ''; //'1' or null
+$sentInBCCAddress = ''; //an Email-address
 ?>
 
 <!--
