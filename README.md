@@ -1,4 +1,3 @@
-![This is an image](https://worldwideweb.interlectual.org/ap.png)
 # Help Desk for Earth' Peoples Problems (except IT)
 
 ## Platform for people to write to and get questions answered by other people.
